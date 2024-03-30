@@ -1,0 +1,39 @@
+id,Name,Director,Year,Genre,Stars
+,Dune (2021),Denis Villeneuve,2021,"[Action, Adventure, Drama]",Timothee Chalamet
+,Dune: Part Two,Denis Villeneuve,2024,"[Action, Adventure, Drama]",Timothee Chalamet
+,Interstellar,Christopher Nolan,2014,"[Adventure, Drama, Sci-Fi]",Matthew McConaughey
+,Inception,Christopher Nolan,2010,"[Action, Adventure, Sci-Fi]",Leonardo DiCaprio
+,Tenet,Christopher Nolan,2020,"[Action, Sci-Fi, Thriller]",John David Washington
+,The Martian,Ridley Scott,2015,"[Adventure, Drama, Sci-Fi]",Matt Damon
+,Batman Begins,Christopher Nolan,2005,"[Action, Thriller]",Christian Bale
+,Godzilla,Gareth Edwards,2014,"[Action, Adventure, Sci-Fi]",Elizabeth Olsen
+,Guardians of the Galaxy,James Gunn,2014,"[Sci-Fi, Adventure]",Chris Pratt
+,Avatar,James Cameron,2009,"[Sci-Fi, Adventure]",Sam Worthington
+,Titanic,"
+James Cameron",1997,"[Romance, Drama, Tragedy]",Leonardo DiCaprio
+,Everything Everywhere All at Once,"[Daniel Kwan, Daniel Scheinert]",2022,"[Action, Adventure, Comedy]",Michelle Yeoh
+,Past Lives,Celine Song,2023,"[Romance, Drama]",Greta Lee
+,The Matrix,"[Lana Wachowski, Lily Wachowski]",1999,"[Sci-Fi, Action]",Keanu Reeves
+,The Creator,Gareth Edwards,2023,"[Action, Adventure, Drama]",John David Washington
+,Avengers: Endgame,"[Anthony Russo, Joe Russo]",2019,"[Action, Adventure, Drama]",Robert Downey Jr.
+,Jaws,Steven Spielberg,1975,"[Thriller, Adventure]",Richard Dreyfuss
+,Saving Private Ryan,Steven Spielberg,1998,"[Drama, War]",Tom Hanks
+,Spider-Man: Across the Spider-Verse,"[Joaquim Dos Santos, Kemp Powers, Justin K. Thompson]",2023,"[Animation, Action, Adventure]",Shameik Moore
+,Fight Club,David Fincher,1999,"[Thriller, Crime]",Brad Pitt
+,Jurrasic Park,Steven Spielberg,1993,"[Action, Adventure]",Sam Neill
+,Raiders of the Lost Ark,Steven Spielberg,1981,"[Action, Adventure]",Harrison Ford
+,E.T,Steven Spielberg,1982,"[Adventure, Sci-Fi]",Henry Thomas
+,Catch Me If You Can,Steven Spielberg,2002,"[Crime, Drama]",Leonardo DiCaprio
+,Good Will Hunting,Gus Van Sant,1997,"[Drama, Romance]",Matt Damon
+,Shin Godzilla,Hideaki Anno,2016,"[Action, Drama]",Hiroki Hasegawa
+,Godzilla Minus One,Takashi Yamazaki,2023,"[Action, Adventure]",Sakura Ando
+,Se7en,David Fincher,1995,"[Crime, Thriller]",Brad Pitt
+,Bad Boys,Michael Bay,1995,"[Action, Comedy]",Lisa Boyle
+,Django Unchained,Quentin Tarantino,2012,"[Action, Western, Drama]",Jamie Foxx
+,Once Upon A Time In Hollywood,Quentin Tarantino,2019,"[Comedy, Drama]",Leonardo DiCaprio
+,Pulp Fiction,Quentin Tarantino,1994,"[Crime, Thriller]",John Travolta
+,Shutter Island,Martin Scorsese,2010,"[Thriller, Mystery]",Leonardo DiCaprio
+,Avatar,James Cameron,2009,"[Action, Adventure, Fantasy]",Sam Worthington
+,Your Name,Makoto Shinkai,2016,"[Animation, Drama, Fantasy]","[Ryunosuke Kamiki, Mone Kamishiraishi] "
+,Suzume,Makoto Shinkai,2022,"[Animation, Action, Adventure]","[Nanoka Hara, Hokuto Matsumura]"
+,Rush Hour,Brett Ratner,1998,"[Action, Comedy, Crime]","[Jackie Chan, Chris Tucker]"
