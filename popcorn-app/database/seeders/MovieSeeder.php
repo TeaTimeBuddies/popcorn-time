@@ -18,8 +18,8 @@ class MovieSeeder extends Seeder
     }
 
     /*
-    * Load the CSV file into the database
-    */
+     * Load the CSV file into the database
+     */
     private function loadCSV(): void
     {
         $file = fopen('database/popcorn_time.csv', 'r');
