@@ -1,0 +1,14 @@
+# Ignore artifacts:
+build
+coverage
+bootstrap
+vendor
+node_modules
+artisan
+storage/framework
+public
+.env
+README.md
+composer.lock
+composer.json
+config

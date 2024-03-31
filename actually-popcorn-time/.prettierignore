@@ -1,0 +1,14 @@
+# Ignore artifacts:
+build
+coverage
+node_modules
+vite.config.ts
+tailwind.config.js
+.eslintrc.cjs
+README.md
+package.json
+package-lock.json
+tsconfig.node.json
+tsconfig.json
+src/vite-env.d.ts
+index.html
