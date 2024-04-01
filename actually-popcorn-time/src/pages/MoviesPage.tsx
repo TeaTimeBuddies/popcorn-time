@@ -1,19 +1,7 @@
-import { ReactNode } from "react";
+import GeneralLayout from "../layouts/GeneralLayout";
 
-type MoviesPageProps = {
-  title?: string;
-  children?: ReactNode;
-};
-
-const MoviesPage = ({ title = "Title", children }: MoviesPageProps) => {
-  return (
-    <div>
-      <h1>{title}</h1>
-      <p>{children}</p>
-
-      <span></span>
-    </div>
-  );
+const MoviesPage = () => {
+  return <GeneralLayout title="Movie List"></GeneralLayout>;
 };
 
 export default MoviesPage;
