@@ -12,5 +12,11 @@ class Movie extends Model
     use HasFactory;
     use HasApiTokens, Notifiable;
 
+    protected $casts = [
+        'director' => 'array',
+        'genre' => 'array',
+        'stars' => 'array',
+    ];
+
     protected $fillable = ['title', 'director', 'stars', 'year', 'genre'];
 }

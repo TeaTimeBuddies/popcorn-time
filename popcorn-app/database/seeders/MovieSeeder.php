@@ -31,10 +31,10 @@ class MovieSeeder extends Seeder
             Movie::create([
                 // 'id'
                 'title' => $data[1],
-                'director' => $data[2],
+                'director' => explode(',', trim($data[2], '[]')),
                 'year' => $data[3],
-                'genre' => $data[4],
-                'stars' => $data[5],
+                'genre' => explode(',', trim($data[4], '[]')),
+                'stars' => explode(',', trim($data[5], '[]')),
             ]);
         }
 
