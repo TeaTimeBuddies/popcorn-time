@@ -14,9 +14,10 @@ const TableHeaders = ["", "Title", "Director", "Year", "Genre", "Stars"];
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch(`http://localhost:8888/api/movies`)
+    fetch(`${apiUrl}movies`)
       .then((res) => res.json())
       .then((fetchedMovies) => {
         const movies = fetchedMovies.map((movie: any) => ({
@@ -30,7 +31,7 @@ const MoviesPage = () => {
   }, []);
 
   const deleteMovie = (id: number) => {
-    fetch(`http://localhost:8888/api/movies/${id}`, {
+    fetch(`${apiUrl}movies/${id}`, {
       method: "DELETE",
     }).then(() => {
       setMovies(movies.filter((movie) => movie.id !== id));
