@@ -22,7 +22,7 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'movie_name' => 'required',
+            'title' => 'required',
             'director' => 'required',
             'year' => 'required',
             'stars' => 'required',
@@ -30,7 +30,7 @@ class MovieController extends Controller
         ]);
 
         return Movie::create([
-            'movie_name' => request('movie_name'),
+            'title' => request('title'),
             'director' => request('director'),
             'year' => request('year'),
             'stars' => request('stars'),
@@ -52,14 +52,14 @@ class MovieController extends Controller
     public function update(Request $request, Movie $movie)
     {
         request()->validate([
-            'movie_name' => 'required',
+            'title' => 'required',
             'director' => 'required',
             'year' => 'required',
             'stars' => 'required',
             'genre' => 'required',
         ]);
         $isSuccess = $movie->update([
-            'movie_name' => request('movie_name'),
+            'title' => request('title'),
             'director' => request('director'),
             'year' => request('year'),
             'stars' => request('stars'),

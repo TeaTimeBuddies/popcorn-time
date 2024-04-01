@@ -12,5 +12,5 @@ class Movie extends Model
     use HasFactory;
     use HasApiTokens, Notifiable;
 
-    protected $fillable = ['movie_name', 'director', 'stars', 'year', 'genre'];
+    protected $fillable = ['title', 'director', 'stars', 'year', 'genre'];
 }
