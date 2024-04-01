@@ -30,11 +30,11 @@ class MovieSeeder extends Seeder
         while (($data = fgetcsv($file)) !== false) {
             Movie::create([
                 // 'id'
-                'movie_name' => $data[1],
-                'director' => $data[2],
+                'title' => $data[1],
+                'director' => explode(',', trim($data[2], '[]')),
                 'year' => $data[3],
-                'genre' => $data[4],
-                'stars' => $data[5],
+                'genre' => explode(',', trim($data[4], '[]')),
+                'stars' => explode(',', trim($data[5], '[]')),
             ]);
         }
 
