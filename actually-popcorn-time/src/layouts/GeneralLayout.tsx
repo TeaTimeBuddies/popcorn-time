@@ -12,7 +12,7 @@ const GeneralLayout = ({ title = "Title", children }: GeneralLayoutProps) => {
       <NavBar />
 
       <h1 className="text-center text-6xl text-blue-500">{title}</h1>
-      <p>{children}</p>
+      {children}
     </div>
   );
 };
