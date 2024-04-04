@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->year('year');
             $table->string('genre');
             $table->string('stars');
+            $table->boolean('is_approved')->default(false);
             $table->timestamps();
         });
     }

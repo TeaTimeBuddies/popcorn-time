@@ -16,7 +16,15 @@ class Movie extends Model
         'director' => 'array',
         'genre' => 'array',
         'stars' => 'array',
+        'is_approved' => 'boolean',
     ];
 
-    protected $fillable = ['title', 'director', 'stars', 'year', 'genre'];
+    protected $fillable = [
+        'title',
+        'director',
+        'stars',
+        'year',
+        'genre',
+        'is_approved',
+    ];
 }
