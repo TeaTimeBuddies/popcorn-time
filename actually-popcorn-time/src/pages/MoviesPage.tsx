@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import GeneralLayout from "../layouts/GeneralLayout";
+import { Link } from "react-router-dom";
 
 export interface Movie {
   id: number;
@@ -63,7 +64,9 @@ const MoviesPage = () => {
                   </button>
                 </td>
 
-                <td>{m.title}</td>
+                <td className="text-blue-500">
+                  <Link to={`/details/${m.id}`}>{m.title}</Link>
+                </td>
                 <td>{m.director.join(", ")}</td>
                 <td>{m.year}</td>
                 <td>{m.genre.join(", ")}</td>

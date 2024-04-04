@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import MoviesPage from "../pages/MoviesPage";
+import DetailsPage from "../pages/DetailsPage";
 import HomePage from "../pages/HomePage";
 
 /**
@@ -21,6 +22,14 @@ export const router = createBrowserRouter([
           <MoviesPage
             title={"This is the page that shows all the movies"}
           ></MoviesPage>
+        ),
+      },
+      {
+        path: "/details/:id",
+        element: (
+          <DetailsPage
+            title={"This is the page that shows all the movies"}
+          ></DetailsPage>
         ),
       },
     ],
