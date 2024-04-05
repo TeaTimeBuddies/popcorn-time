@@ -3,6 +3,7 @@ import App from "../App";
 import MoviesPage from "../pages/MoviesPage";
 import DetailsPage from "../pages/DetailsPage";
 import HomePage from "../pages/HomePage";
+import AddMoviePage from "../pages/AddMoviePage"
 
 /**
  * The router configuration for the application.
@@ -30,6 +31,14 @@ export const router = createBrowserRouter([
           <DetailsPage
             title={"This is the page that shows all the movies"}
           ></DetailsPage>
+        ),
+      },
+      {
+        path: "/movies/add",
+        element: (
+          <AddMoviePage
+            title={"This is the page where users add movies"}
+          ></AddMoviePage>
         ),
       },
     ],
