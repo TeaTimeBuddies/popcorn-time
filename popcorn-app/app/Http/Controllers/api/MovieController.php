@@ -13,7 +13,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        return Movie::all();
+        return Movie::where('is_approved', true)->get();
     }
 
     /**
