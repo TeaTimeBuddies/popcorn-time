@@ -18,7 +18,7 @@ const MoviesPage = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch(`${apiUrl}movies`)
+    fetch(`${apiUrl}movies?is_approved=true`)
       .then((res) => res.json())
       .then((fetchedMovies) => {
         const movies = fetchedMovies.map((movie: any) => ({
@@ -67,12 +67,14 @@ const MoviesPage = () => {
                 <td className="text-blue-500">
                   <Link to={`/details/${m.id}`}>{m.title}</Link>
                 </td>
-                <td>{m.director.join(", ")}</td>
-                <td>{m.year}</td>
-                <td>{m.genre.join(", ")}</td>
-                <td>{m.stars.join(", ")}</td>
-              </tr>
-            ))}
+                <td>
+      {Array.isArray(m.director) ? m.director.join(", ") : m.director}
+    </td>
+    <td>{m.year}</td>
+    <td>{Array.isArray(m.genre) ? m.genre.join(", ") : m.genre}</td>
+    <td>{Array.isArray(m.stars) ? m.stars.join(", ") : m.stars}</td>
+  </tr>
+))}
           </tbody>
         </table>
       </div>

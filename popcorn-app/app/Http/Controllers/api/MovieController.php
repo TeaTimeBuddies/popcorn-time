@@ -11,11 +11,15 @@ class MovieController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Movie::where('is_approved', true)->get();
+        if ($request->has('is_approved')) {
+            $isApproved = filter_var($request->query('is_approved'), FILTER_VALIDATE_BOOLEAN);
+            return Movie::where('is_approved', $isApproved)->get();
+        }
+        return Movie::all();
     }
-
+    
     /**
      * Store a newly created resource in storage.
      */
@@ -78,6 +82,19 @@ class MovieController extends Controller
             'stars' => $request->get('stars'),
             'genre' => $request->get('genre'),
         ]);
+
+        return ['success' => $isSuccess];
+    }
+
+    public function approve($id) {
+        $movie = Movie::find($id);
+
+        if (!$movie) {
+            return response()->json(['error' => 'Movie not found'], 404);
+        }
+
+        $movie->is_approved = true;
+        $isSuccess = $movie->save();
 
         return ['success' => $isSuccess];
     }
