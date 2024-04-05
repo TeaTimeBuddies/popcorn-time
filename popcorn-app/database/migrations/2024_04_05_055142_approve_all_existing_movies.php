@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Movie;
 
 return new class extends Migration
 {
@@ -11,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        \App\Models\Movie::query()->update(['is_approved' => true]);
+        Movie::query()->update(['is_approved' => true]);
     }
 
     /**
@@ -19,6 +20,5 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
     }
 };
