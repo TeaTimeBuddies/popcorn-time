@@ -68,13 +68,15 @@ const MoviesPage = () => {
                   <Link to={`/details/${m.id}`}>{m.title}</Link>
                 </td>
                 <td>
-      {Array.isArray(m.director) ? m.director.join(", ") : m.director}
-    </td>
-    <td>{m.year}</td>
-    <td>{Array.isArray(m.genre) ? m.genre.join(", ") : m.genre}</td>
-    <td>{Array.isArray(m.stars) ? m.stars.join(", ") : m.stars}</td>
-  </tr>
-))}
+                  {Array.isArray(m.director)
+                    ? m.director.join(", ")
+                    : m.director}
+                </td>
+                <td>{m.year}</td>
+                <td>{Array.isArray(m.genre) ? m.genre.join(", ") : m.genre}</td>
+                <td>{Array.isArray(m.stars) ? m.stars.join(", ") : m.stars}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

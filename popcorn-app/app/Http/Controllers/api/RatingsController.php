@@ -27,10 +27,13 @@ class RatingsController extends Controller
             'review' => $request->review,
             'user_id' => 1, // TODO: GET USER ID FROM SESSION. CURRENTLY HARD CODED
         ]);
-        return response()->json([
-            'success' => 'Rating added successfully',
-            'rating' => $rating
-        ], 200);
+        return response()->json(
+            [
+                'success' => 'Rating added successfully',
+                'rating' => $rating,
+            ],
+            200
+        );
     }
 
     /**

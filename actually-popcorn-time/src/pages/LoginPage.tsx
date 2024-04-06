@@ -13,7 +13,8 @@ const LoginForm = () => {
     console.log("Password: ", password);
 
     // Send a POST request to the server
-    const response = await fetch(`${apiUrl}user`, { // Modify this line
+    const response = await fetch(`${apiUrl}user`, {
+      // Modify this line
       method: "POST",
       headers: {
         "Content-Type": "application/json",

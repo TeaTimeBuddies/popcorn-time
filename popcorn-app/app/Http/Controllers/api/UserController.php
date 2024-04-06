@@ -60,17 +60,20 @@ class UserController extends Controller
     {
         // Get the emails of the users who are approved
         $approvedUserEmails = $request->input('isApproved', []);
-    
+
         // Update the isApproved status of all users to false
         User::query()->update(['isApproved' => false]);
-    
-        // Update the isApproved status of approved users to true
-        User::whereIn('email', $approvedUserEmails)->update(['isApproved' => true]);
-    
-        // Redirect back with a success message
-        return redirect()->back()->with('message', 'Users updated successfully.');
-    }
 
+        // Update the isApproved status of approved users to true
+        User::whereIn('email', $approvedUserEmails)->update([
+            'isApproved' => true,
+        ]);
+
+        // Redirect back with a success message
+        return redirect()
+            ->back()
+            ->with('message', 'Users updated successfully.');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -85,7 +88,6 @@ class UserController extends Controller
     //     return view('/user/login');
     // }
 
-
     public function processLogin(Request $request)
     {
         $request->validate([
@@ -99,7 +101,7 @@ class UserController extends Controller
             return back()->withErrors([
                 'email' => 'Cannot find the email address.',
             ]);
-        } 
+        }
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
@@ -108,7 +110,10 @@ class UserController extends Controller
             session(['user' => $user]);
             return response()->json(['status' => 'success']);
         } else {
-            return response()->json(['status' => 'error', 'message' => 'Invalid credentials.']);
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Invalid credentials.',
+            ]);
         }
     }
 
