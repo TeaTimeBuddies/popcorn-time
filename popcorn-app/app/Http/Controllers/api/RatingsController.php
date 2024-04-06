@@ -19,9 +19,18 @@ class RatingsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store($movie_id, Request $request)
     {
-        //
+        $rating = Ratings::create([
+            'movie_id' => $movie_id,
+            'rating' => $request->rating,
+            'review' => $request->review,
+            'user_id' => 1, // TODO: GET USER ID FROM SESSION. CURRENTLY HARD CODED
+        ]);
+        return response()->json([
+            'success' => 'Rating added successfully',
+            'rating' => $rating
+        ], 200);
     }
 
     /**
@@ -29,7 +38,7 @@ class RatingsController extends Controller
      */
     public function show($id)
     {
-        $rating = Ratings::find($id);
+        $rating = Ratings::where('movie_id', $id)->get();
 
         if ($rating) {
             return $rating;

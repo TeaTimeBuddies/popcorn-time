@@ -20,6 +20,7 @@ Route::delete('movies/{id}', [MovieController::class, 'destroy']);
 
 // Ratings
 Route::get('ratings/{id}', [RatingsController::class, 'show']);
+Route::post('ratings/{id}', [RatingsController::class, 'store']);
 
 //Admin
 Route::post('movies/approve/{id}', [MovieController::class, 'approve']); //TODO: add middlware after auth implemented
