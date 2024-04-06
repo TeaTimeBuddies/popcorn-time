@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\api;
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
+// header("Access-Control-Allow-Origin: *");
+// header("Access-Control-Allow-Headers: Content-Type");
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -80,10 +80,10 @@ class UserController extends Controller
         //
     }
 
-    public function login()
-    {
-        return view('/user/login');
-    }
+    // public function login()
+    // {
+    //     return view('/user/login');
+    // }
 
 
     public function processLogin(Request $request)
@@ -99,21 +99,17 @@ class UserController extends Controller
             return back()->withErrors([
                 'email' => 'Cannot find the email address.',
             ]);
-        }
+        } 
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
 
             // Store the user data in the session
             session(['user' => $user]);
-            return redirect()->route('index');
+            return response()->json(['status' => 'success']);
         } else {
-            return redirect()->route('login')->with('message', 'Invalid credentials.');
+            return response()->json(['status' => 'error', 'message' => 'Invalid credentials.']);
         }
-
-        return back()->withErrors([
-            'email' => 'No user found with this email and password.',
-        ]);
     }
 
     public function manageUsers()

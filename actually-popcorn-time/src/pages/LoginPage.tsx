@@ -29,8 +29,8 @@ const LoginForm = () => {
     const data = await response.json();
 
     // If the login is successful, navigate to HomePage
-    if (data.success) {
-      navigate("/home");
+    if (data.status == "success") {
+      navigate("/movies");
     } else {
       // Handle error
       console.error(data.message);

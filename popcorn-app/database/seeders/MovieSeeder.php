@@ -35,6 +35,7 @@ class MovieSeeder extends Seeder
                 'year' => $data[3],
                 'genre' => explode(',', trim($data[4], '[]')),
                 'stars' => explode(',', trim($data[5], '[]')),
+                'is_approved' => true,
             ]);
         }
 

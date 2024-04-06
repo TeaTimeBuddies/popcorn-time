@@ -25,5 +25,5 @@ Route::get('ratings/{id}', [RatingsController::class, 'show']);
 Route::post('movies/approve/{id}', [MovieController::class, 'approve']); //TODO: add middlware after auth implemented
 
 // Login
-Route::post('/user', [UserController::class, 'processLogin'])->name('processLogin');
+Route::post('/user', [UserController::class, 'processLogin']);
 Route::get('/user', [UserController::class, 'index']);
