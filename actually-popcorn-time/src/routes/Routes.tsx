@@ -3,8 +3,9 @@ import App from "../App";
 import MoviesPage from "../pages/MoviesPage";
 import DetailsPage from "../pages/DetailsPage";
 import HomePage from "../pages/HomePage";
-import AddMoviePage from "../pages/AddMoviePage"
-import ApproveMoviePage from "../pages/ApproveMoviePage"
+import AddMoviePage from "../pages/AddMoviePage";
+import ApproveMoviePage from "../pages/ApproveMoviePage";
+import LoginForm from "../pages/LoginPage";
 
 /**
  * The router configuration for the application.
@@ -48,6 +49,12 @@ export const router = createBrowserRouter([
           <ApproveMoviePage
             title={"This is the page where admins approve movies"}
           ></ApproveMoviePage>
+        ),
+      },
+      {
+        path: "/login",
+        element: (
+          <LoginForm title={"This is the page where users login"}></LoginForm>
         ),
       },
     ],

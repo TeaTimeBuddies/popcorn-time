@@ -4,10 +4,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\MovieController;
 use App\Http\Controllers\api\RatingsController;
+use App\Http\Controllers\api\UserController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:sanctum');
+});
+// ->middleware('auth:sanctum');
 
 // Movies
 Route::get('movies', [MovieController::class, 'index']);
@@ -21,3 +23,7 @@ Route::get('ratings/{id}', [RatingsController::class, 'show']);
 
 //Admin
 Route::post('movies/approve/{id}', [MovieController::class, 'approve']); //TODO: add middlware after auth implemented
+
+// Login
+Route::post('/user', [UserController::class, 'processLogin'])->name('processLogin');
+Route::get('/user', [UserController::class, 'index']);
