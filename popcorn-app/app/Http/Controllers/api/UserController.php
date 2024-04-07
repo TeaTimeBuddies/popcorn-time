@@ -142,15 +142,17 @@ class UserController extends Controller
     public function processSignup(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required',
         ]);
 
         $user = new User();
+        $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->save();
 
-        return redirect()->route('login');
+        return response()->json(['message' => 'User successfully registered.'], 201);
     }
 }

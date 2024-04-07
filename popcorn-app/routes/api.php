@@ -28,3 +28,9 @@ Route::post('movies/approve/{id}', [MovieController::class, 'approve']); //TODO:
 // Login
 Route::post('/user', [UserController::class, 'processLogin']);
 Route::get('/user', [UserController::class, 'index']);
+
+//Signup
+Route::post('/signup', [UserController::class, 'processSignup']);
+
+// Logout
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
