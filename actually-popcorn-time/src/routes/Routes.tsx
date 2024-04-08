@@ -7,7 +7,7 @@ import AddMoviePage from "../pages/AddMoviePage";
 import ApproveMoviePage from "../pages/ApproveMoviePage";
 import LoginForm from "../pages/LoginPage";
 import UserDashboardPage from "../pages/user/UserDashboardPage";
-import RegisterPage from "../pages/RegisterPage"
+import RegisterPage from "../pages/RegisterPage";
 
 /**
  * The router configuration for the application.
@@ -62,14 +62,18 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         element: (
-          <RegisterPage title={"This is the page where users login"}></RegisterPage>
+          <RegisterPage
+            title={"This is the page where users login"}
+          ></RegisterPage>
         ),
       },
 
       {
         path: "/user/dashboard",
         element: (
-          <UserDashboardPage title={"this is the user dashboard"}></UserDashboardPage>
+          <UserDashboardPage
+            title={"this is the user dashboard"}
+          ></UserDashboardPage>
         ),
       },
     ],
