@@ -123,15 +123,16 @@ class MovieController extends Controller
         $user->favorites()->attach($movieId);
         return response()->json(['message' => 'Movie added to favorites']);
     }
-    
-    
-    public function addToWatchlist(Request $request, $movieId) {
-        $user = User::first(); 
+
+    public function addToWatchlist(Request $request, $movieId)
+    {
+        $user = User::first();
         $user->watchlist()->attach($movieId);
         return response()->json(['message' => 'Added to watchlist']);
     }
-    
-    public function addComment(Request $request, $movieId) {
+
+    public function addComment(Request $request, $movieId)
+    {
         $request->validate([
             'comment' => 'required|string',
         ]);
@@ -143,5 +144,4 @@ class MovieController extends Controller
         $comment->save();
         return response()->json(['message' => 'Comment added']);
     }
-    
 }

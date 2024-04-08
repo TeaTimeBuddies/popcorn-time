@@ -108,11 +108,11 @@ const MovieDetailLayout = ({
           {/* Favourite Button */}
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
-            {movie && (
-            <div className="flex items-center gap-2">
-              <FavoritesButton movieId={movie.id.toString()} />
-            </div>
-          )}
+              {movie && (
+                <div className="flex items-center gap-2">
+                  <FavoritesButton movieId={movie.id.toString()} />
+                </div>
+              )}
             </div>
 
             <WatchlistActionButton

@@ -40,15 +40,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function favorites() {
+    public function favorites()
+    {
         return $this->belongsToMany(Movie::class, 'favorites');
     }
-    
-    public function watchlist() {
+
+    public function watchlist()
+    {
         return $this->belongsToMany(Movie::class, 'watchlists');
     }
-    
-    public function comments() {
+
+    public function comments()
+    {
         return $this->hasMany(Comments::class);
     }
 }

@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
 interface UseFavoritesReturn {
-    isFavorited: boolean;
-    toggleFavorite: () => Promise<void>;
+  isFavorited: boolean;
+  toggleFavorite: () => Promise<void>;
 }
 
 export const useFavorites = (movieId: string): UseFavoritesReturn => {
@@ -12,15 +12,15 @@ export const useFavorites = (movieId: string): UseFavoritesReturn => {
   const checkFavoriteStatus = useCallback(async () => {
     try {
       const response = await fetch(`${apiUrl}user/favorites/check/${movieId}`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
       const data = await response.json();
       setIsFavorited(data.isFavorited);
     } catch (error) {
-      console.error('Error checking favorite status:', error);
+      console.error("Error checking favorite status:", error);
     }
   }, [movieId, apiUrl]);
 
@@ -30,15 +30,15 @@ export const useFavorites = (movieId: string): UseFavoritesReturn => {
 
   const toggleFavorite = async (): Promise<void> => {
     try {
-      const method = isFavorited ? 'DELETE' : 'POST';
+      const method = isFavorited ? "DELETE" : "POST";
       await fetch(`${apiUrl}user/favorites/${movieId}`, {
         method: method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
       });
-      
+
       setIsFavorited(!isFavorited);
     } catch (error) {
-      console.error('Error toggling favorite:', error);
+      console.error("Error toggling favorite:", error);
     }
   };
 

@@ -34,32 +34,47 @@ Route::post('/signup', [UserController::class, 'processSignup']);
 
 // Logout
 Route::post('/logout', [UserController::class, 'logout'])->middleware(
-    'auth:sanctum');
+    'auth:sanctum'
+);
 
 // User
 // Route::middleware('auth:sanctum')->group(function () {
-    //Dashboard
-    Route::get('/user/dashboard', [UserController::class, 'getDashboard']);
+//Dashboard
+Route::get('/user/dashboard', [UserController::class, 'getDashboard']);
 
-    //Favorite Movies
-    Route::get('/user/favorites', [UserController::class, 'getFavorites']);
-    Route::post('/user/favorites/{movieId}', [UserController::class, 'addFavorite']);
-    Route::delete('/user/favorites/{movieId}', [UserController::class, 'removeFavorite']);
-    Route::get('/user/favorites/check/{movieId}', [UserController::class, 'checkFavorite']);
+//Favorite Movies
+Route::get('/user/favorites', [UserController::class, 'getFavorites']);
+Route::post('/user/favorites/{movieId}', [
+    UserController::class,
+    'addFavorite',
+]);
+Route::delete('/user/favorites/{movieId}', [
+    UserController::class,
+    'removeFavorite',
+]);
+Route::get('/user/favorites/check/{movieId}', [
+    UserController::class,
+    'checkFavorite',
+]);
 
-    //Watchlist
-    Route::get('/user/watchlist', [UserController::class, 'getWatchlist']);
-    Route::post('/user/watchlist/{movieId}', [UserController::class, 'addWatchlist']);
-    Route::delete('/user/watchlist/{movieId}', [UserController::class, 'removeWatchlist']);
-    Route::get('/user/watchlist/check/{movieId}', [UserController::class, 'checkWatchlist']);
+//Watchlist
+Route::get('/user/watchlist', [UserController::class, 'getWatchlist']);
+Route::post('/user/watchlist/{movieId}', [
+    UserController::class,
+    'addWatchlist',
+]);
+Route::delete('/user/watchlist/{movieId}', [
+    UserController::class,
+    'removeWatchlist',
+]);
+Route::get('/user/watchlist/check/{movieId}', [
+    UserController::class,
+    'checkWatchlist',
+]);
 
-    //Comments
-    Route::get('/user/comments', [UserController::class, 'getComments']);
-    Route::post('/user/comments', [UserController::class, 'addComment']);
-    Route::delete('/user/comments', [UserController::class, 'removeComment']);
+//Comments
+Route::get('/user/comments', [UserController::class, 'getComments']);
+Route::post('/user/comments', [UserController::class, 'addComment']);
+Route::delete('/user/comments', [UserController::class, 'removeComment']);
 
 // });
-
-
-
-

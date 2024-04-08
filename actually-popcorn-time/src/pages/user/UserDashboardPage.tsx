@@ -60,14 +60,14 @@ const UserDashboardPage: React.FC<UserDashboardPageProps> = ({ name }) => {
       <div className="flex flex-col">
         <h1 className="text-5xl">Hello, {name}!</h1>
 
-        <h2 className="text-3xl mt-8">Favorite Movies</h2>
+        <h2 className="mt-8 text-3xl">Favorite Movies</h2>
         <ul>
           {favoriteMovies.map((movie) => (
             <li key={movie.id}>{movie.title}</li>
           ))}
         </ul>
 
-        <h2 className="text-3xl mt-8">Watchlist Movies</h2>
+        <h2 className="mt-8 text-3xl">Watchlist Movies</h2>
         <ul>
           {watchlistMovies.map((movie) => (
             <li key={movie.id}>{movie.title}</li>
@@ -77,6 +77,5 @@ const UserDashboardPage: React.FC<UserDashboardPageProps> = ({ name }) => {
     </GeneralLayout>
   );
 };
-
 
 export default UserDashboardPage;

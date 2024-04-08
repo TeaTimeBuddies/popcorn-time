@@ -8,13 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Comments extends Model
 {
     use HasFactory;
-    protected $fillable = ['movie_id', 'comment', 'user_id']; 
+    protected $fillable = ['movie_id', 'comment', 'user_id'];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-    
-    public function movie() {
+
+    public function movie()
+    {
         return $this->belongsTo(Movie::class);
     }
 }
