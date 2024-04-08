@@ -41,7 +41,11 @@ jobs:
         run: |
           cd popcorn-app
           composer install --no-progress
-      
+
+      - name: Seed database
+        run: |
+            cd popcorn-app
+            php artisan db:seed —class=DatabaseSeeder
 
       - name: Run Laravel migrations
         run: |
