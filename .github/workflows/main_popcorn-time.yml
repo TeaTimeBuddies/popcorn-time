@@ -75,14 +75,6 @@ jobs:
           echo "++++ Give full permission to database folder"
           chmod -R 777 database
 
-      # Migrate and seed database
-      - name: Migrate and seed database
-        run: |
-          cd popcorn-app
-          pwd
-          ls
-          php artisan migrate --force --seed
-
 
       - name: Zip artifact for deployment
         run: |
