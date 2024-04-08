@@ -22,10 +22,32 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      
+      - name: Install and build react app
+        run: |
+          cd actually-popcorn-time
+          npm install
+          npm run build
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
+      
+      - name: Install laravel dependencies
+        run: |
+          cd popcorn-app
+          composer install --no-progress
+      
+
+      - name: Run Laravel migrations
+        run: |
+          cd popcorn-app
+          php artisan migrate --force
 
       - name: Check if composer.json exists
         id: check_files
