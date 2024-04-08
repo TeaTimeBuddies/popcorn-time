@@ -14,9 +14,14 @@ const HomePage = () => {
         </div>
 
         <ActionButton
-          className="btn-lg mt-4 px-14"
+          className="btn-lg mt-4 min-w-[200px]"
           buttonText="Join now"
-          route="/movies"
+          route="/register"
+        />
+        <ActionButton
+          className="btn-lg mt-4 min-w-[200px]"
+          buttonText="Login"
+          route="/login"
         />
       </div>
     </GeneralLayout>

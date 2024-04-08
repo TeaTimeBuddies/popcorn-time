@@ -11,6 +11,9 @@ export default {
         app200: '#e3e3e3',
         app300: '#e6e6e6',
         action: '#7b61ff',
+        primary: '#ffffff',
+        secondary: '#1F2937',
+        stars: '#1F2937',
         white: '#ffffff',
         purple: '#3f3cbb',
         midnight: '#121063',
@@ -58,7 +61,21 @@ export default {
       "dim",
       "nord",
       "sunset",
-      "black"
+      "black",
+
     ],
+    styled: true,
+    base: true,
+    utils: true,
+    logs: true,
+    rtl: false,
+    // themes: {
+    //   navBar: {
+    //     primary: '#1f2937',
+    //     'btn-primary-bg': '#1f2937',
+    //     'btn-primary-hover-bg': '#4b5563',
+    //     'btn-primary-text': '#ffffff',
+    //   },
+    // },
   },
 }

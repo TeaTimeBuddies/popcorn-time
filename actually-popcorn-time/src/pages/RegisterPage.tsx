@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Make sure to import useNavigate
+import GeneralLayout from "../layouts/GeneralLayout";
 
 const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
@@ -59,48 +60,50 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Registration Page</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && (
-        <p style={{ color: "green" }}>
-          Registration successful! Redirecting...
-        </p>
-      )}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="text"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-            required
-          />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-    </div>
+    <GeneralLayout>
+      <div>
+        <h2>Registration Page</h2>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        {success && (
+          <p style={{ color: "green" }}>
+            Registration successful! Redirecting...
+          </p>
+        )}
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="text"
+              id="email"
+              value={email}
+              onChange={handleEmailChange}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={handlePasswordChange}
+              required
+            />
+          </div>
+          <button type="submit">Register</button>
+        </form>
+      </div>
+    </GeneralLayout>
   );
 };
 

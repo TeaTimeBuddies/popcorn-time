@@ -20,72 +20,40 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage title={"Popcorn Time Home Page"}></HomePage>,
+        element: <HomePage></HomePage>,
       },
       {
         path: "/movies",
-        element: (
-          <MoviesPage
-            title={"This is the page that shows all the movies"}
-          ></MoviesPage>
-        ),
+        element: <MoviesPage></MoviesPage>,
       },
       {
         path: "/details/:id",
-        element: (
-          <DetailsPage
-            title={"This is the page that shows all the movies"}
-          ></DetailsPage>
-        ),
+        element: <DetailsPage></DetailsPage>,
       },
       {
         path: "/comments/:id",
-        element: (
-          <CommentPage
-            title={
-              "This is he page that shows user comments on review for a movie"
-            }
-          ></CommentPage>
-        ),
+        element: <CommentPage></CommentPage>,
       },
       {
         path: "/movies/add",
-        element: (
-          <AddMoviePage
-            title={"This is the page where users add movies"}
-          ></AddMoviePage>
-        ),
+        element: <AddMoviePage></AddMoviePage>,
       },
       {
         path: "/movies/approve",
-        element: (
-          <ApproveMoviePage
-            title={"This is the page where admins approve movies"}
-          ></ApproveMoviePage>
-        ),
+        element: <ApproveMoviePage></ApproveMoviePage>,
       },
       {
         path: "/login",
-        element: (
-          <LoginForm title={"This is the page where users login"}></LoginForm>
-        ),
+        element: <LoginForm></LoginForm>,
       },
       {
         path: "/register",
-        element: (
-          <RegisterPage
-            title={"This is the page where users login"}
-          ></RegisterPage>
-        ),
+        element: <RegisterPage></RegisterPage>,
       },
 
       {
         path: "/user/dashboard",
-        element: (
-          <UserDashboardPage
-            title={"this is the user dashboard"}
-          ></UserDashboardPage>
-        ),
+        element: <UserDashboardPage name="User"></UserDashboardPage>,
       },
     ],
   },
