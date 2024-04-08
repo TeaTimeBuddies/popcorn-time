@@ -6,16 +6,14 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const apiUrl = import.meta.env.VITE_API_URL; // Add this line
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Email: ", email);
     console.log("Password: ", password);
 
-    // Send a POST request to the server
     const response = await fetch(`${apiUrl}user`, {
-      // Modify this line
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,15 +25,16 @@ const LoginForm = () => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    // Get the response data
     const data = await response.json();
 
-    // If the login is successful, navigate to HomePage
-    if (data.status == "success") {
-      navigate("/movies");
+    if (data.status === "success") {
+      const user = data.user;
+      sessionStorage.setItem("user_id", user.id);
+      sessionStorage.setItem("email", user.email);
+      sessionStorage.setItem("is_admin", user.is_admin.toString());
+      navigate("/");
     } else {
-      // Handle error
-      console.error(data.message);
+      console.error("User not found");
     }
   };
 

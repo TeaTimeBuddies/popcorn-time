@@ -106,9 +106,11 @@ class UserController extends Controller
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
 
-            // Store the user data in the session
             session(['user' => $user]);
-            return response()->json(['status' => 'success']);
+            return response()->json([
+                'status' => 'success',
+                'user' => $user,
+            ]);
         } else {
             return response()->json([
                 'status' => 'error',
