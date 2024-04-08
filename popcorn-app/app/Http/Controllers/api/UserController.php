@@ -193,7 +193,7 @@ class UserController extends Controller
     
 
     //Watchlist
-    public function getWatchlist($movieId)
+    public function getWatchlist()
     {
         $user = User::first(); 
         $watchlist = $user->watchlist()->get();

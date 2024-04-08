@@ -16,6 +16,7 @@ export interface Movie {
   image: string | undefined;
 }
 
+
 const TableHeaders = ["", "Title", "Director", "Year", "Genre", "Stars"];
 
 
