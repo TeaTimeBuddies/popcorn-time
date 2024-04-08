@@ -17,7 +17,7 @@ jobs:
       run:
         # Set the default working directory to the repository root (New)
         # Note further down: zip ../release.zip 
-        working-directory: ./popcorn-app
+        working-directory: ./
 
     steps:
       - uses: actions/checkout@v4
@@ -25,13 +25,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '20'
       
       - name: Install and build react app
         run: |
           cd actually-popcorn-time
           npm install
-          npm run build
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
