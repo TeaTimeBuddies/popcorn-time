@@ -80,13 +80,13 @@ jobs:
         run: |
           pwd
           ls
-          zip -r release.zip popcorn-app/ actually-popcorn-time/
+          zip -r release.zip popcorn-app/actually-popcorn-time/
 
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: php-app
+          name: actually-popcorn-time
           path: release.zip
 
   deploy:
@@ -102,7 +102,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: php-app
+          name: actually-popcorn-time
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
