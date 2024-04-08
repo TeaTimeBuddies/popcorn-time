@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Comments;
 
 class UserController extends Controller
 {
@@ -160,4 +161,71 @@ class UserController extends Controller
             201
         );
     }
+
+    //Favorites
+    public function getFavorites(Request $request)
+    {
+        $user = User::first(); 
+        $favorites = $user->favorites()->get();
+        return response()->json($favorites);
+    }
+    
+    public function addFavorite(Request $request)
+{
+    $user = User::first(); 
+    $movieId = $request->movie_id;
+    $user->favorites()->attach($movieId);
+    return response()->json(['message' => 'Movie added to favorites']);
+}
+
+public function removeFavorite(Request $request)
+{
+    $user = User::first(); 
+    $movieId = $request->movie_id;
+    $user->favorites()->detach($movieId);
+    return response()->json(['message' => 'Movie removed from favorites']);
+}
+
+//Watchlist
+public function getWatchlist(Request $request)
+{
+    $user = User::first(); 
+    $watchlist = $user->watchlist()->get();
+    return response()->json($watchlist);
+}
+
+public function addWatchlist(Request $request)
+{
+    $user = User::first(); 
+    $movieId = $request->movie_id;
+    $user->watchlist()->attach($movieId);
+    return response()->json(['message' => 'Movie added to watchlist']);
+}
+public function removeWatchlist(Request $request)
+{
+    $user = User::first(); 
+    $movieId = $request->movie_id;
+    $user->watchlist()->detach($movieId);
+    return response()->json(['message' => 'Movie removed from watchlist']);
+}
+//Comments
+public function getComments(Request $request)
+{
+    $user = User::first(); 
+    $comments = $user->comments()->with('movie')->get();
+    return response()->json($comments);
+}
+public function addComment(Request $request)
+{
+    $user = User::first(); 
+    $comment = new Comments([
+        'user_id' => $user->id,
+        'movie_id' => $request->movie_id,
+        'comment' => $request->comment,
+    ]);
+    $comment->save();
+    return response()->json(['message' => 'Comment added successfully']);
+}
+
+
 }

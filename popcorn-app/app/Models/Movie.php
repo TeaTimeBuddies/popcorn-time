@@ -27,4 +27,16 @@ class Movie extends Model
         'genre',
         'is_approved',
     ];
+
+    public function favoritedBy() {
+        return $this->belongsToMany(User::class, 'favorites');
+    }
+    
+    public function watchlistedBy() {
+        return $this->belongsToMany(User::class, 'watchlists');
+    }
+    
+    public function comments() {
+        return $this->hasMany(Comments::class);
+    }
 }

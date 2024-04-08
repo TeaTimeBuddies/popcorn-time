@@ -34,5 +34,30 @@ Route::post('/signup', [UserController::class, 'processSignup']);
 
 // Logout
 Route::post('/logout', [UserController::class, 'logout'])->middleware(
-    'auth:sanctum'
-);
+    'auth:sanctum');
+
+// User
+// Route::middleware('auth:sanctum')->group(function () {
+    //Dashboard
+    Route::get('/user/dashboard', [UserController::class, 'getDashboard']);
+    
+    //Favorite Movies
+    Route::get('/user/favorites', [UserController::class, 'getFavorites']);
+    Route::post('/user/favorites', [UserController::class, 'addFavorite']);
+    Route::delete('/user/favorites', [UserController::class, 'removeFavorite']);
+    
+    //Watchlist
+    Route::get('/user/watchlist', [UserController::class, 'getWatchlist']);
+    Route::post('/user/watchlist', [UserController::class, 'addWatchlist']);
+    Route::delete('/user/watchlist', [UserController::class, 'removeWatchlist']);
+
+    //Comments
+    Route::get('/user/comments', [UserController::class, 'getComments']);
+    Route::post('/user/comments', [UserController::class, 'addComment']);
+    Route::delete('/user/comments', [UserController::class, 'removeComment']);
+
+// });
+
+
+
+

@@ -19,6 +19,11 @@ const DetailsPage = () => {
   const { id } = useParams();
   const [showReviews, setShowReviews] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(false);
+  const [isWatchlisted, setIsWatchlisted] = useState(false);
+
+  const userId = 1; // Hardcoded for now, will be replaced with session user id
+
   // Fetching movie details
   const [movie, setMovie] = useState(null);
   useEffect(() => {

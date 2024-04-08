@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Movie;
+use App\Models\Comments;
 
 class User extends Authenticatable
 {
@@ -36,5 +38,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function favorites() {
+        return $this->belongsToMany(Movie::class, 'favorites');
+    }
+    
+    public function watchlist() {
+        return $this->belongsToMany(Movie::class, 'watchlists');
+    }
+    
+    public function comments() {
+        return $this->hasMany(Comments::class);
     }
 }

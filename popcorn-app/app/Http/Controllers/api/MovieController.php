@@ -5,6 +5,9 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Comments;
 
 class MovieController extends Controller
 {
@@ -113,4 +116,32 @@ class MovieController extends Controller
 
         return ['success' => $isSuccess];
     }
+
+    public function addToFavorites(Request $request, $movieId)
+    {
+        $user = User::first(); //currently getting the first user, since no auth yet
+        $user->favorites()->attach($movieId);
+        return response()->json(['message' => 'Movie added to favorites']);
+    }
+    
+    
+    public function addToWatchlist(Request $request, $movieId) {
+        $user = User::first(); 
+        $user->watchlist()->attach($movieId);
+        return response()->json(['message' => 'Added to watchlist']);
+    }
+    
+    public function addComment(Request $request, $movieId) {
+        $request->validate([
+            'comment' => 'required|string',
+        ]);
+        $comment = new Comments([
+            'user_id' => Auth::id(),
+            'movie_id' => $movieId,
+            'comment' => $request->input('comment'),
+        ]);
+        $comment->save();
+        return response()->json(['message' => 'Comment added']);
+    }
+    
 }
