@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
       
@@ -41,16 +41,6 @@ jobs:
         run: |
           cd popcorn-app
           composer install --no-progress
-
-      - name: Seed database
-        run: |
-            cd popcorn-app
-            php artisan db:seed —class=DatabaseSeeder
-
-      - name: Run Laravel migrations
-        run: |
-          cd popcorn-app
-          php artisan migrate --force
 
       - name: Check if composer.json exists
         id: check_files
