@@ -4,7 +4,22 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}"
   ], //add paths to add template files
   theme: {
-    extend: {},
+
+    extend: {
+      colors: {
+        app100: '#d9d9d9',
+        app200: '#e3e3e3',
+        app300: '#e6e6e6',
+        white: '#ffffff',
+        purple: '#3f3cbb',
+        midnight: '#121063',
+        metal: '#565584',
+        tahiti: '#3ab7bf',
+        silver: '#ecebff',
+        bubblegum: '#ff77e9',
+        bermuda: '#78dcca',
+      },
+    },
   },
   plugins: [require("daisyui")],
 
