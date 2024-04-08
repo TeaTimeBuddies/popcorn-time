@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import GeneralLayout from "../layouts/GeneralLayout";
 import { useNavigate } from "react-router-dom";
+import ActionButton from "../components/ActionButton";
 
 export interface MovieForm {
   title: string;
@@ -8,6 +9,7 @@ export interface MovieForm {
   genre: string;
   stars: string;
   year: number;
+  [key: string]: string | number;
 }
 
 const AddMoviePage: React.FC = () => {
@@ -66,63 +68,32 @@ const AddMoviePage: React.FC = () => {
   return (
     <GeneralLayout title="Add a New Movie">
       <form onSubmit={handleSubmit} className="form">
-        {error && <p className="error">{error}</p>}
-        <div>
-          <label>Title:</label>
-          <input
-            type="text"
-            name="title"
-            value={movie.title}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <div className="mt-4 grid grid-cols-3 grid-rows-3 items-center gap-2">
+          {error && <p className="error">{error}</p>}
 
-        <div>
-          <label>Director:</label>
-          <input
-            type="text"
-            name="director"
-            value={movie.director}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          {Object.keys(movie).map((key) => (
+            <div key={key} className="col-span-3">
+              <label
+                key={key}
+                className="input input-bordered flex items-center gap-2"
+              >
+                {key.charAt(0).toUpperCase() + key.slice(1).toLowerCase()} :
+                <input
+                  name={key}
+                  className="grow"
+                  value={movie[key] as keyof MovieForm}
+                  onChange={handleChange}
+                />
+              </label>
+            </div>
+          ))}
 
-        <div>
-          <label>Genre:</label>
-          <input
-            type="text"
-            name="genre"
-            value={movie.genre}
-            onChange={handleChange}
-            required
-          />
+          <ActionButton
+            className="col-span-1 col-start-2"
+            buttonText="Add Movie"
+            type="submit"
+          ></ActionButton>
         </div>
-
-        <div>
-          <label>Stars:</label>
-          <input
-            type="text"
-            name="stars"
-            value={movie.stars}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label>Year:</label>
-          <input
-            type="text"
-            name="year"
-            value={movie.year}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <button type="submit">Add Movie</button>
       </form>
     </GeneralLayout>
   );
