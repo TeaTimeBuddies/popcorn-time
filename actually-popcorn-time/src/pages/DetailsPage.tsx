@@ -1,10 +1,9 @@
 import GeneralLayout from "../layouts/GeneralLayout";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MovieDetailLayout from "../layouts/MovieDetailLayout";
 import ReviewTable from "../components/tables/ReviewTable";
 import ReviewForm from "../components/forms/ReviewForm";
-import FavoritesButton from "../components/FavoritesButton";
 
 export interface Rating {
   id: number;
