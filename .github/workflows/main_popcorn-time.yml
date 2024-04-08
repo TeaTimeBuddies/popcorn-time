@@ -13,6 +13,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        # Set the default working directory to the repository root (New)
+        # Note further down: zip ../release.zip 
+        working-directory: ./popcorn-app
+
     steps:
       - uses: actions/checkout@v4
 
@@ -25,24 +31,43 @@ jobs:
         id: check_files
         uses: andstor/file-existence-action@v1
         with:
-          files: 'composer.json'
+          files: 'popcorn-app/composer.json'
 
       - name: Run composer install if composer.json exists
         if: steps.check_files.outputs.files_exists == 'true'
         run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
       - name: give full permission to storage folder (NEW)
-        run: chmod -R 777 storage
+        run: |
+          echo "++++ What is the current directory?"
+          pwd
+          echo "++++ What is in the storage folder?"
+          ls storage
+          echo "++++ Give full permission to storage folder"
+          chmod -R 777 storage
 
       - name: migrate database (NEW)
-        run: php artisan migrate --force --seed
+        run: |
+          pwd
+          ls
+          php artisan migrate --force --seed
 
       - name: give full permission to database folder (NEW)
-        run: chmod -R 777 database
+        run: |
+          echo "++++ What is the current directory?"
+          pwd
+          echo "++++ What is in the database folder?"
+          ls database
+          echo "++++ Give full permission to database folder"
+          chmod -R 777 database
 
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: |
+          pwd
+          ls
+          zip ../release.zip ./* -r
+
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
