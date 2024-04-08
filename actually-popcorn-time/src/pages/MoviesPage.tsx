@@ -9,6 +9,7 @@ export interface Movie {
   genre: string[];
   stars: string[];
   year: number;
+  image: string | undefined;
 }
 
 const TableHeaders = ["", "Title", "Director", "Year", "Genre", "Stars"];
@@ -40,8 +41,8 @@ const MoviesPage = () => {
   };
 
   return (
-    <GeneralLayout title="Movie List">
-      <div className="overflow-x-auto">
+    <GeneralLayout>
+      <div className="">
         <table className="table">
           <thead>
             <tr>
@@ -55,16 +56,16 @@ const MoviesPage = () => {
               <tr key={m.id}>
                 <td className="flex gap-1">
                   <button
-                    className="btn btn-xs p-1"
+                    className="btn btn-xs flex items-center p-1"
                     onClick={() => deleteMovie(m.id)}
                   >
-                    <span className="material-symbols-outlined text-sm">
+                    <span className="material-symbols-outlined text-sm text-action">
                       delete
                     </span>
                   </button>
                 </td>
 
-                <td className="text-blue-500">
+                <td className="font-medium text-action">
                   <Link to={`/details/${m.id}`}>{m.title}</Link>
                 </td>
                 <td>
