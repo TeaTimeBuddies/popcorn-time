@@ -49,8 +49,9 @@ Route::post('/logout', [UserController::class, 'logout'])->middleware(
 
     //Watchlist
     Route::get('/user/watchlist', [UserController::class, 'getWatchlist']);
-    Route::post('/user/watchlist', [UserController::class, 'addWatchlist']);
-    Route::delete('/user/watchlist', [UserController::class, 'removeWatchlist']);
+    Route::post('/user/watchlist/{movieId}', [UserController::class, 'addWatchlist']);
+    Route::delete('/user/watchlist/{movieId}', [UserController::class, 'removeWatchlist']);
+    Route::get('/user/watchlist/check/{movieId}', [UserController::class, 'checkWatchlist']);
 
     //Comments
     Route::get('/user/comments', [UserController::class, 'getComments']);

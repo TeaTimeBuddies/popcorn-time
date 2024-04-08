@@ -193,27 +193,33 @@ class UserController extends Controller
     
 
 //Watchlist
-public function getWatchlist(Request $request)
+public function getWatchlist($movieId)
 {
     $user = User::first(); 
     $watchlist = $user->watchlist()->get();
     return response()->json($watchlist);
 }
 
-public function addWatchlist(Request $request)
+public function addWatchlist($movieId)
 {
     $user = User::first(); 
-    $movieId = $request->movie_id;
     $user->watchlist()->attach($movieId);
     return response()->json(['message' => 'Movie added to watchlist']);
 }
-public function removeWatchlist(Request $request)
+public function removeWatchlist($movieId)
 {
     $user = User::first(); 
-    $movieId = $request->movie_id;
     $user->watchlist()->detach($movieId);
     return response()->json(['message' => 'Movie removed from watchlist']);
 }
+
+public function checkWatchlist($movieId)
+{
+    $user = User::first(); 
+    $isWatchlisted = $user->watchlist()->where('movie_id', $movieId)->exists();
+    return response()->json(['isWatchlisted' => $isWatchlisted]);
+}
+
 //Comments
 public function getComments(Request $request)
 {

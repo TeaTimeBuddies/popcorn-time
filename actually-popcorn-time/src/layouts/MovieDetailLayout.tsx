@@ -3,6 +3,7 @@ import NavBar from "../components/Navbar";
 import { Movie } from "../pages/MoviesPage";
 import ActionButton from "../components/ActionButton";
 import FavoritesButton from "../components/FavoritesButton";
+import WatchlistActionButton from "../components/WatchlistButton";
 
 type MovieDetailLayoutProps = {
   movie?: Movie;
@@ -114,11 +115,10 @@ const MovieDetailLayout = ({
           )}
             </div>
 
-            <ActionButton
+            <WatchlistActionButton
               buttonText="TO WATCHLIST"
-              outline
-              icon="add"
-            ></ActionButton>
+              movieId={movie?.id.toString() ?? ""}
+            />
           </div>
           <div className=" flex items-center gap-6">
             <ActionButton

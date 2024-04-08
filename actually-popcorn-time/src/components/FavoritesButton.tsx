@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFavorites } from '../hooks/Favourites';
+import { useFavorites } from '../hooks/useFavorites';
 
 interface FavoritesButtonProps {
     movieId: string;
