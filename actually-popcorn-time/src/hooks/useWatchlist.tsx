@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { API_URL } from "../constants";
 
 interface UseWatchlistReturn {
   isWatchlisted: boolean;
@@ -7,22 +8,24 @@ interface UseWatchlistReturn {
 
 export const useWatchlist = (movieId: string): UseWatchlistReturn => {
   const [isWatchlisted, setIsWatchlisted] = useState<boolean>(false);
-  const apiUrl: string = import.meta.env.VITE_API_URL;
 
   const checkWatchlistStatus = useCallback(async () => {
     try {
-      const response = await fetch(`${apiUrl}user/watchlist/check/${movieId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${API_URL}user/watchlist/check/${movieId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
       setIsWatchlisted(data.isWatchlisted);
     } catch (error) {
       console.error("Error checking watchlist status:", error);
     }
-  }, [movieId, apiUrl]);
+  }, [movieId]);
 
   useEffect(() => {
     checkWatchlistStatus();
@@ -31,7 +34,7 @@ export const useWatchlist = (movieId: string): UseWatchlistReturn => {
   const toggleWatchlist = async (): Promise<void> => {
     try {
       const method = isWatchlisted ? "DELETE" : "POST";
-      const response = await fetch(`${apiUrl}user/watchlist/${movieId}`, {
+      const response = await fetch(`${API_URL}user/watchlist/${movieId}`, {
         method: method,
         headers: { "Content-Type": "application/json" },
       });

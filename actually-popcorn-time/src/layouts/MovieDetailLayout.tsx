@@ -1,5 +1,3 @@
-import { ReactNode, useState } from "react";
-import NavBar from "../components/Navbar";
 import { Movie } from "../pages/MoviesPage";
 import ActionButton from "../components/ActionButton";
 import FavoritesButton from "../components/FavoritesButton";
@@ -18,8 +16,6 @@ const MovieDetailLayout = ({
   onClickReviews,
   openReview,
 }: MovieDetailLayoutProps) => {
-  const [showReviews, setShowReviews] = useState(false);
-
   return (
     <div className="justify-centerp-10 m-10 flex h-4/5 w-4/5 flex-col items-center text-white">
       <div className="flex gap-10 font-sans">

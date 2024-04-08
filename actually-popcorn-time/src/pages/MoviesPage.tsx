@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import GeneralLayout from "../layouts/GeneralLayout";
 import { Link } from "react-router-dom";
+import { API_URL } from "../constants";
 
 export interface Movie {
   id: number;
@@ -16,13 +17,12 @@ const TableHeaders = ["", "Title", "Director", "Year", "Genre", "Stars"];
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch(`${apiUrl}movies?is_approved=true`)
+    fetch(`${API_URL}movies?is_approved=true`)
       .then((res) => res.json())
       .then((fetchedMovies) => {
-        const movies = fetchedMovies.map((movie: any) => ({
+        const movies = fetchedMovies.map((movie: Movie) => ({
           ...movie,
           director: movie.director,
           genre: movie.genre,
@@ -33,7 +33,7 @@ const MoviesPage = () => {
   }, []);
 
   const deleteMovie = (id: number) => {
-    fetch(`${apiUrl}movies/${id}`, {
+    fetch(`${API_URL}movies/${id}`, {
       method: "DELETE",
     }).then(() => {
       setMovies(movies.filter((movie) => movie.id !== id));
