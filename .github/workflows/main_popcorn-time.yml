@@ -63,7 +63,6 @@ jobs:
           ls storage
           echo "++++ Give full permission to storage folder"
           chmod -R 777 storage
-        working-directory: popcorn-app
 
       # Give full permission to database folder
       - name: Give full permission to database folder
@@ -75,7 +74,6 @@ jobs:
           ls database
           echo "++++ Give full permission to database folder"
           chmod -R 777 database
-        working-directory: popcorn-app
 
 
       - name: Zip artifact for deployment
