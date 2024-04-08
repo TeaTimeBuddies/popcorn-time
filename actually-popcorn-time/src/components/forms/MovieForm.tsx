@@ -27,7 +27,7 @@ const MovieForm = ({ onSuccess }: MovieFormProps) => {
   const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setMovie((prevMovie) => ({ ...prevMovie, [name]: value }));
