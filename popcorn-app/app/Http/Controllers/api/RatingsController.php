@@ -38,11 +38,25 @@ class RatingsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the ratings for a movie id.
      */
     public function show($id)
     {
         $rating = Ratings::where('movie_id', $id)->get();
+
+        if ($rating) {
+            return $rating;
+        } else {
+            return response()->json(['error' => 'Ratings not found'], 404);
+        }
+    }
+
+    /**
+     * Display the specified rating.
+     */
+    public function getRating($id)
+    {
+        $rating = Ratings::where('id', $id)->get();
 
         if ($rating) {
             return $rating;
