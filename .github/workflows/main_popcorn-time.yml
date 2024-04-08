@@ -56,27 +56,26 @@ jobs:
 
       - name: give full permission to storage folder (NEW)
         run: |
+          cd popcorn-app
           echo "++++ What is the current directory?"
           pwd
           echo "++++ What is in the storage folder?"
           ls storage
           echo "++++ Give full permission to storage folder"
           chmod -R 777 storage
+        working-directory: popcorn-app
 
-      - name: migrate database (NEW)
+      # Give full permission to database folder
+      - name: Give full permission to database folder
         run: |
-          pwd
-          ls
-          php artisan migrate --force --seed
-
-      - name: give full permission to database folder (NEW)
-        run: |
+          cd popcorn-app
           echo "++++ What is the current directory?"
           pwd
           echo "++++ What is in the database folder?"
           ls database
           echo "++++ Give full permission to database folder"
           chmod -R 777 database
+        working-directory: popcorn-app
 
 
       - name: Zip artifact for deployment
