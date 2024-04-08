@@ -25,6 +25,7 @@ class RatingsController extends Controller
             'movie_id' => $movie_id,
             'rating' => $request->rating,
             'review' => $request->review,
+            'comments_count' => 0,
             'user_id' => 1, // TODO: GET USER ID FROM SESSION. CURRENTLY HARD CODED
         ]);
         return response()->json(

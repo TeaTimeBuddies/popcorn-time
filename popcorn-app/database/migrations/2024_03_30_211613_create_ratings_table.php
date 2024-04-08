@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->integer('movie_id');
             $table->integer('rating');
             $table->string('review');
+            $table->integer('comments_count')->default(0);
             $table->timestamps();
         });
     }

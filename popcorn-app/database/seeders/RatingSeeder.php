@@ -18,6 +18,7 @@ class RatingSeeder extends Seeder
             'movie_id' => 1,
             'rating' => 4,
             'review' => 'This movie was pretty good',
+            'comments_count' => 1,
         ]);
 
         Ratings::create([
@@ -25,6 +26,7 @@ class RatingSeeder extends Seeder
             'movie_id' => 5,
             'rating' => 2,
             'review' => 'This movie had poor acting',
+            'comments_count' => 0,
         ]);
 
         Ratings::create([
@@ -32,6 +34,7 @@ class RatingSeeder extends Seeder
             'movie_id' => 10,
             'rating' => 5,
             'review' => 'Masterclass Movie!!!',
+            'comments_count' => 0,
         ]);
 
         Ratings::create([
@@ -39,6 +42,7 @@ class RatingSeeder extends Seeder
             'movie_id' => 4,
             'rating' => 1,
             'review' => 'Never watch this movie',
+            'comments_count' => 0,
         ]);
     }
 }

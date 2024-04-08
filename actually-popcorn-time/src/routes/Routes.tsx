@@ -2,12 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import MoviesPage from "../pages/MoviesPage";
 import DetailsPage from "../pages/DetailsPage";
+import CommentPage from "../pages/CommentPage";
 import HomePage from "../pages/HomePage";
 import AddMoviePage from "../pages/AddMoviePage";
 import ApproveMoviePage from "../pages/ApproveMoviePage";
 import LoginForm from "../pages/LoginPage";
 import UserDashboardPage from "../pages/user/UserDashboardPage";
-import RegisterPage from "../pages/RegisterPage"
+import RegisterPage from "../pages/RegisterPage";
 
 /**
  * The router configuration for the application.
@@ -38,6 +39,16 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/comments/:id",
+        element: (
+          <CommentPage
+            title={
+              "This is he page that shows user comments on review for a movie"
+            }
+          ></CommentPage>
+        ),
+      },
+      {
         path: "/movies/add",
         element: (
           <AddMoviePage
@@ -62,14 +73,18 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         element: (
-          <RegisterPage title={"This is the page where users login"}></RegisterPage>
+          <RegisterPage
+            title={"This is the page where users login"}
+          ></RegisterPage>
         ),
       },
 
       {
         path: "/user/dashboard",
         element: (
-          <UserDashboardPage title={"this is the user dashboard"}></UserDashboardPage>
+          <UserDashboardPage
+            title={"this is the user dashboard"}
+          ></UserDashboardPage>
         ),
       },
     ],

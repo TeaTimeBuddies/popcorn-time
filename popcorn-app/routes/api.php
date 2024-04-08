@@ -33,4 +33,6 @@ Route::get('/user', [UserController::class, 'index']);
 Route::post('/signup', [UserController::class, 'processSignup']);
 
 // Logout
-Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/logout', [UserController::class, 'logout'])->middleware(
+    'auth:sanctum'
+);
