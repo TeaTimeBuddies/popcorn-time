@@ -6,12 +6,12 @@ type GeneralLayoutProps = {
   children?: ReactNode;
 };
 
-const GeneralLayout = ({ title = "Title", children }: GeneralLayoutProps) => {
+const GeneralLayout = ({ title, children }: GeneralLayoutProps) => {
   return (
-    <div className="flex w-full flex-col items-center justify-center">
+    <div className="flex h-screen w-full flex-col items-center bg-app100">
       <NavBar />
 
-      <h1 className="text-center text-6xl text-blue-500">{title}</h1>
+      {title && <h1 className="text-center text-6xl text-blue-500">{title}</h1>}
       {children}
     </div>
   );

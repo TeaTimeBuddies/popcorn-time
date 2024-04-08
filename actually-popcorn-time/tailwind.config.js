@@ -10,6 +10,7 @@ export default {
         app100: '#d9d9d9',
         app200: '#e3e3e3',
         app300: '#e6e6e6',
+        action: '#7b61ff',
         white: '#ffffff',
         purple: '#3f3cbb',
         midnight: '#121063',
