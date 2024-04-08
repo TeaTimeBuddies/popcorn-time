@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { Movie } from "../../pages/MoviesPage";
-import { titleCase } from "../../utils/formatting";
 import ActionButton from "../ActionButton";
-import { useNavigate } from "react-router-dom";
 
 export interface MovieForm {
   title: string;
@@ -12,7 +9,6 @@ export interface MovieForm {
   year: number;
   [key: string]: string | number;
 }
-const fields = ["title", "director", "year", "genre", "stars"];
 
 type MovieFormProps = {
   onSuccess: () => void;
@@ -28,11 +24,10 @@ const MovieForm = ({ onSuccess }: MovieFormProps) => {
   });
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setMovie((prevMovie) => ({ ...prevMovie, [name]: value }));
@@ -60,8 +55,12 @@ const MovieForm = ({ onSuccess }: MovieFormProps) => {
 
       // alert("Successfully added movie. Please wait for admin approval.");
       // navigate("/movies");
-    } catch (err: any) {
-      setError(err.message || "Something went wrong!");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || "Something went wrong!");
+      } else {
+        setError("Something went wrong!");
+      }
     } finally {
       setLoading(false);
     }

@@ -53,7 +53,7 @@ const RegisterPage: React.FC = () => {
       })
       .catch((error) => {
         setError(
-          "There was an error processing your request: " + error.message,
+          "There was an error processing your request: " + error.message
         );
         console.error("Registration error:", error);
       });

@@ -8,7 +8,7 @@ const SuccessToast = ({ message, children }: SuccessToastProps) => {
     <>
       <div className="toast toast-center toast-bottom">
         <div className="alert alert-success flex flex-col border-action bg-action text-primary">
-          <span>Successfully added movie. Please wait for admin approval.</span>
+          <span>{message}</span>
           {children}
         </div>
       </div>
