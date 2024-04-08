@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import GeneralLayout from "../../layouts/GeneralLayout";
+import { API_URL } from "../../constants";
 
 interface UserDashboardPageProps {
   name: string;
@@ -15,17 +16,14 @@ export interface Movie {
   image: string | undefined;
 }
 
-const TableHeaders = ["", "Title", "Director", "Year", "Genre", "Stars"];
-
 const UserDashboardPage: React.FC<UserDashboardPageProps> = ({ name }) => {
   const [favoriteMovies, setFavoriteMovies] = useState<Movie[]>([]);
   const [watchlistMovies, setWatchlistMovies] = useState<Movie[]>([]);
-  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
-        const response = await fetch(`${apiUrl}user/favorites`);
+        const response = await fetch(`${API_URL}user/favorites`);
         if (response.ok) {
           const data = await response.json();
           setFavoriteMovies(data);
@@ -39,7 +37,7 @@ const UserDashboardPage: React.FC<UserDashboardPageProps> = ({ name }) => {
 
     const fetchWatchlist = async () => {
       try {
-        const response = await fetch(`${apiUrl}user/watchlist`);
+        const response = await fetch(`${API_URL}user/watchlist`);
         if (response.ok) {
           const data = await response.json();
           setWatchlistMovies(data);
