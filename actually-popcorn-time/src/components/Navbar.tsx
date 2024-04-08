@@ -6,13 +6,18 @@ type NavBarItem = {
 };
 
 const navBarItems: NavBarItem[] = [
-  { name: "Main", route: "/" },
+  { name: "Home Page", route: "/" },
   { name: "About", route: "/about" },
   {
     name: "Movies",
     route: "/movies",
   },
   { name: "Reviews", route: "/reviews" },
+  { name: "Add Movie", route: "/movies/add" },
+  { name: "User Dashboard", route: "/user/dashboard" },
+  { name: "Login", route: "/login" },
+  { name: "Register", route: "/register" },
+  { name: "Approve movies", route: "/movies/approve" },
 ];
 const NavBar = () => {
   return (
@@ -37,19 +42,23 @@ const NavBar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="bg-background menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box p-2 text-base-100 shadow"
+            className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-neutral p-2 text-primary shadow "
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+            {navBarItems.map((item) => (
+              <li
+                key={item.name}
+                className="rounded-md text-primary hover:bg-app100"
+              >
+                <Link to={item.route} className="">
+                  {item.name}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
-        <a className="btn btn-ghost text-2xl text-white">PopcornTime</a>
+        <a className="btn btn-ghost text-2xl text-primary">PopcornTime</a>
       </div>
-      <div className="navbar-center hidden text-white lg:flex">
+      <div className="navbar-center hidden text-primary lg:flex">
         <ul className="menu menu-horizontal px-1">
           {navBarItems.map((item) => (
             <li key={item.name}>
@@ -61,7 +70,7 @@ const NavBar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <span className="material-symbols-outlined text-5xl text-white ">
+        <span className="material-symbols-outlined text-5xl text-primary ">
           account_circle
         </span>
       </div>

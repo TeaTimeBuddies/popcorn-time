@@ -149,10 +149,10 @@ const DetailsPage = () => {
                   <td>
                     {/* This is the comments section for reviews */}
                     <Link to={`/comments/${r.id}`}>
-                      <div class="flex items-center justify-center">
-                        <p class="w-5 text-center">{r.comments_count}</p>
+                      <div className="flex items-center justify-center">
+                        <p className="w-5 text-center">{r.comments_count}</p>
                         <svg
-                          class="h-6 w-6 text-gray-800 dark:text-white"
+                          className="h-6 w-6 text-gray-800 dark:text-white"
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"

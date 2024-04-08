@@ -9,7 +9,7 @@ const ActionButton = ({ buttonText, route, className }: ActionButtonProps) => {
   const navigate = useNavigate();
   return (
     <button
-      className={`${className} btn rounded-full bg-action text-white`}
+      className={`${className} btn rounded-full bg-action text-primary`}
       onClick={() => route && navigate(route)}
     >
       {buttonText}

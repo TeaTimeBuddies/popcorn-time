@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import GeneralLayout from "../layouts/GeneralLayout";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -39,27 +40,29 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <label>
-        Email:
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
-      <button type="submit" className="btn btn-primary">
-        Submit
-      </button>
-    </form>
+    <GeneralLayout>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <label>
+          Email:
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <label>
+          Password:
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </form>
+    </GeneralLayout>
   );
 };
 
