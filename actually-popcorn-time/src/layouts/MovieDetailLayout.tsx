@@ -2,6 +2,7 @@ import { ReactNode, useState } from "react";
 import NavBar from "../components/Navbar";
 import { Movie } from "../pages/MoviesPage";
 import ActionButton from "../components/ActionButton";
+import FavoritesButton from "../components/FavoritesButton";
 
 type MovieDetailLayoutProps = {
   movie?: Movie;
@@ -103,13 +104,14 @@ const MovieDetailLayout = ({
             <span>DIRECTOR: {movie?.director}</span>
             <span>STARS: {movie?.stars}</span>
           </div>
-
+          {/* Favourite Button */}
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-2xl text-primary ">
-                favorite
-              </span>
-              Favourite
+            {movie && (
+            <div className="flex items-center gap-2">
+              <FavoritesButton movieId={movie.id.toString()} />
+            </div>
+          )}
             </div>
 
             <ActionButton

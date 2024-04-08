@@ -170,21 +170,27 @@ class UserController extends Controller
         return response()->json($favorites);
     }
     
-    public function addFavorite(Request $request)
-{
-    $user = User::first(); 
-    $movieId = $request->movie_id;
-    $user->favorites()->attach($movieId);
-    return response()->json(['message' => 'Movie added to favorites']);
-}
-
-public function removeFavorite(Request $request)
-{
-    $user = User::first(); 
-    $movieId = $request->movie_id;
-    $user->favorites()->detach($movieId);
-    return response()->json(['message' => 'Movie removed from favorites']);
-}
+    public function addFavorite(Request $request, $movieId)
+    {
+        $user = User::first(); 
+        $user->favorites()->attach($movieId);
+        return response()->json(['message' => 'Movie added to favorites']);
+    }
+    
+    public function removeFavorite(Request $request, $movieId)
+    {
+        $user = User::first(); 
+        $user->favorites()->detach($movieId);
+        return response()->json(['message' => 'Movie removed from favorites']);
+    }
+    
+    public function checkFavorite(Request $request, $movieId)
+    {
+        $user = User::first(); 
+        $isFavorited = $user->favorites()->where('movie_id', $movieId)->exists();
+        return response()->json(['isFavorited' => $isFavorited]);
+    }
+    
 
 //Watchlist
 public function getWatchlist(Request $request)

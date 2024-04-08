@@ -40,12 +40,13 @@ Route::post('/logout', [UserController::class, 'logout'])->middleware(
 // Route::middleware('auth:sanctum')->group(function () {
     //Dashboard
     Route::get('/user/dashboard', [UserController::class, 'getDashboard']);
-    
+
     //Favorite Movies
     Route::get('/user/favorites', [UserController::class, 'getFavorites']);
-    Route::post('/user/favorites', [UserController::class, 'addFavorite']);
-    Route::delete('/user/favorites', [UserController::class, 'removeFavorite']);
-    
+    Route::post('/user/favorites/{movieId}', [UserController::class, 'addFavorite']);
+    Route::delete('/user/favorites/{movieId}', [UserController::class, 'removeFavorite']);
+    Route::get('/user/favorites/check/{movieId}', [UserController::class, 'checkFavorite']);
+
     //Watchlist
     Route::get('/user/watchlist', [UserController::class, 'getWatchlist']);
     Route::post('/user/watchlist', [UserController::class, 'addWatchlist']);

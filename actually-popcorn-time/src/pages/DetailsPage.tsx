@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import MovieDetailLayout from "../layouts/MovieDetailLayout";
 import ReviewTable from "../components/tables/ReviewTable";
 import ReviewForm from "../components/forms/ReviewForm";
+import FavoritesButton from "../components/FavoritesButton";
 
 export interface Rating {
   id: number;
@@ -19,8 +20,6 @@ const DetailsPage = () => {
   const { id } = useParams();
   const [showReviews, setShowReviews] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
-  const [isFavorited, setIsFavorited] = useState(false);
-  const [isWatchlisted, setIsWatchlisted] = useState(false);
 
   const userId = 1; // Hardcoded for now, will be replaced with session user id
 
@@ -109,6 +108,7 @@ const DetailsPage = () => {
       {movie && showReviewForm && (
         <ReviewForm onClose={() => setShowReviewForm((prev) => !prev)} />
       )}
+
       {showReviews && movie && <ReviewTable ratings={ratings} movie={movie} />}
     </GeneralLayout>
   );
