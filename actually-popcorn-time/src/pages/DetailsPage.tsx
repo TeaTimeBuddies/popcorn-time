@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import MovieDetailLayout from "../layouts/MovieDetailLayout";
 import ReviewTable from "../components/tables/ReviewTable";
 import ReviewForm from "../components/forms/ReviewForm";
+import { API_URL } from "../constants";
 
 export interface Rating {
   id: number;
@@ -15,33 +16,30 @@ export interface Rating {
 }
 
 const DetailsPage = () => {
-  const apiUrl = import.meta.env.VITE_API_URL;
   const { id } = useParams();
   const [showReviews, setShowReviews] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
-
-  const userId = 1; // Hardcoded for now, will be replaced with session user id
 
   // Fetching movie details
   const [movie, setMovie] = useState(null);
   useEffect(() => {
     // Fetch movie details
-    fetch(`${apiUrl}movies/${id}`)
+    fetch(`${API_URL}movies/${id}`)
       .then((res) => res.json())
       .then((fetchedMovie) => {
         setMovie(fetchedMovie);
       });
-  }, [apiUrl, id]);
+  }, [id]);
 
   // Fetching movie ratings
-  var [totalRatings, setTotalRating] = useState(0);
+  const [totalRatings, setTotalRating] = useState(0);
   const [ratings, setRatings] = useState<Rating[]>([]);
   useEffect(() => {
     // Fetch movie ratings
-    fetch(`${apiUrl}ratings/${id}`)
+    fetch(`${API_URL}ratings/${id}`)
       .then((res) => res.json())
       .then((fetchedRatings) => {
-        const fetched_rating = fetchedRatings.map((rating: any) => ({
+        const fetched_rating = fetchedRatings.map((rating: Rating) => ({
           ...rating,
         }));
         setRatings(fetched_rating); // Set Rating
@@ -51,40 +49,14 @@ const DetailsPage = () => {
           total += r.rating;
         });
 
-        // Calculate average rating
+        // Calculate average ratingc
         setTotalRating(total / fetchedRatings.length);
       });
-  }, [apiUrl, id]);
+  }, [id]);
 
-  // Inserting new rating and review
-  const [review, setReview] = useState("");
-  const [rating, setRating] = useState("");
-  const store = async (event: React.FormEvent) => {
-    event.preventDefault();
-
-    if (!review || !rating) {
-      alert("Please fill out both fields.");
-      return;
-    }
-
-    console.log({ review, rating });
-
-    const response = await fetch(`${apiUrl}ratings/${id}`, {
-      method: "post",
-      body: JSON.stringify({
-        // TODO: NEED TO INSERT SESSION USER ID, ELSE REDIRECT LOGIN
-        review,
-        rating,
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to submit rating and review.");
-    } else {
-      window.location.reload();
-    }
-  };
+  if (!id) {
+    return null;
+  }
 
   return (
     <GeneralLayout title={""}>
@@ -104,9 +76,7 @@ const DetailsPage = () => {
         // While movie is null, show loading message
         <p>Movie Loading...</p>
       )}
-      {movie && showReviewForm && (
-        <ReviewForm onClose={() => setShowReviewForm((prev) => !prev)} />
-      )}
+      {movie && showReviewForm && <ReviewForm id={id} />}
 
       {showReviews && movie && <ReviewTable ratings={ratings} movie={movie} />}
     </GeneralLayout>

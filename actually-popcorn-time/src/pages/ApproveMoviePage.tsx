@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import GeneralLayout from "../layouts/GeneralLayout";
+import { API_URL } from "../constants";
 
 export interface Movie {
   id: number;
@@ -12,17 +13,16 @@ export interface Movie {
 
 const AdminApprovalPage = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch(`${apiUrl}movies?is_approved=false`)
+    fetch(`${API_URL}movies?is_approved=false`)
       .then((response) => response.json())
       .then((data) => setMovies(data))
       .catch((error) => console.error("There was an error!", error));
-  }, [apiUrl]);
+  }, []);
 
   const approveMovie = (id: number) => {
-    fetch(`${apiUrl}movies/approve/${id}`, {
+    fetch(`${API_URL}movies/approve/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

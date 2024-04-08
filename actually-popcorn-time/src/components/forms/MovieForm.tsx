@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ActionButton from "../ActionButton";
+import { API_URL } from "../../constants";
 
 export interface MovieForm {
   title: string;
@@ -24,7 +25,6 @@ const MovieForm = ({ onSuccess }: MovieFormProps) => {
   });
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -37,7 +37,7 @@ const MovieForm = ({ onSuccess }: MovieFormProps) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch(`${apiUrl}movies`, {
+      const response = await fetch(`${API_URL}movies`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

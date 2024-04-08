@@ -1,22 +1,42 @@
 import { useState } from "react";
-import ActionButton from "../ActionButton";
+import { API_URL } from "../../constants";
 
 type ReviewFormProps = {
-  onClose: () => void;
+  id: string;
 };
 
-const ReviewForm = ({ onClose }: ReviewFormProps) => {
+const ReviewForm = ({ id }: ReviewFormProps) => {
+  // Inserting new rating and review
   const [review, setReview] = useState("");
   const [rating, setRating] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const userId = 1; // Hardcoded for now, will be replaced with session user id
 
   const store = async (event: React.FormEvent) => {
     event.preventDefault();
+
     if (!review || !rating) {
       alert("Please fill out both fields.");
       return;
     }
-    onClose();
+
+    console.log({ review, rating });
+
+    const response = await fetch(`${API_URL}ratings/${id}`, {
+      method: "post",
+      body: JSON.stringify({
+        userId: userId,
+        // TODO: NEED TO INSERT SESSION USER ID, ELSE REDIRECT LOGIN
+        review,
+        rating,
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to submit rating and review.");
+    } else {
+      window.location.reload();
+    }
   };
 
   return (
