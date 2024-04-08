@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import GeneralLayout from "../../layouts/GeneralLayout";
-import { useEffect, useState } from "react";
 
 interface UserDashboardPageProps {
   name: string;
@@ -16,9 +15,7 @@ export interface Movie {
   image: string | undefined;
 }
 
-
 const TableHeaders = ["", "Title", "Director", "Year", "Genre", "Stars"];
-
 
 const UserDashboardPage: React.FC<UserDashboardPageProps> = ({ name }) => {
   const [favoriteMovies, setFavoriteMovies] = useState<Movie[]>([]);
@@ -46,7 +43,7 @@ const UserDashboardPage: React.FC<UserDashboardPageProps> = ({ name }) => {
         if (response.ok) {
           const data = await response.json();
           setWatchlistMovies(data);
-        } else { 
+        } else {
           console.error("Failed to fetch watchlist movies");
         }
       } catch (error) {

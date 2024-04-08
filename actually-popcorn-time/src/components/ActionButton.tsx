@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import { ButtonHTMLAttributes } from "react";
 
-type ActionButtonProps = {
+type ActionButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   buttonText: string;
   route?: string;
   className?: string;

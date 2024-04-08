@@ -1,72 +1,104 @@
 import { useState } from "react";
 import { Movie } from "../../pages/MoviesPage";
 import { titleCase } from "../../utils/formatting";
+import ActionButton from "../ActionButton";
+import { useNavigate } from "react-router-dom";
 
+export interface MovieForm {
+  title: string;
+  director: string;
+  genre: string;
+  stars: string;
+  year: number;
+  [key: string]: string | number;
+}
 const fields = ["title", "director", "year", "genre", "stars"];
 
 type MovieFormProps = {
-  onSave: () => void;
-  movie: Movie;
+  onSuccess: () => void;
+  // movie: Movie;
 };
-const MovieForm = ({ onSave, movie }: MovieFormProps) => {
-  const [title, setTitle] = useState<string>(movie.title);
-
-  const [year, setYear] = useState<number>(movie.year);
-  const [director, setDirector] = useState<string[]>(movie.director || []);
-  const [genre, setGenre] = useState<string[]>(movie.genre || []);
-  const [stars, setStars] = useState<string[]>(movie.stars || []);
-  const [newMovie, setNewMovie] = useState<Movie>({
-    id: 0,
+const MovieForm = ({ onSuccess }: MovieFormProps) => {
+  const [movie, setMovie] = useState<MovieForm>({
     title: "",
-    director: [],
-    year: 0,
-    genre: [],
-    stars: [],
+    director: "",
+    genre: "",
+    stars: "",
+    year: new Date().getFullYear(),
   });
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const navigate = useNavigate();
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setMovie((prevMovie) => ({ ...prevMovie, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await fetch(`${apiUrl}movies`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...movie,
+          genre: movie.genre.split(",").map((g) => g.trim()),
+          stars: movie.stars.split(",").map((s) => s.trim()),
+          year: parseInt(movie.year.toString(), 10),
+        }),
+      });
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || "Failed to add the movie.");
+      }
+      onSuccess();
+
+      // alert("Successfully added movie. Please wait for admin approval.");
+      // navigate("/movies");
+    } catch (err: any) {
+      setError(err.message || "Something went wrong!");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSave();
-      }}
-    >
-      <input type="hidden" name="id" value={movie.id} />
-      <div className="flex gap-3">
-        {fields.map((field) => {
-          let value;
-          switch (field) {
-            case "title":
-              value = title;
-              break;
-            case "director":
-              value = director.join(",");
-              break;
-            case "year":
-              value = year.toString();
-              break;
-            case "genre":
-              value = genre.join(",");
-              break;
-            case "stars":
-              value = stars.join(",");
-              break;
-          }
-          return (
-            <div key={field}>
-              <label>{titleCase(field)}: </label>
+    <form onSubmit={handleSubmit} className="form">
+      <div className="mt-4 grid grid-cols-4  items-center gap-2">
+        {error && <p className="error">{error}</p>}
+
+        {Object.keys(movie).map((key) => (
+          <div key={key} className="col-span-4">
+            <label
+              key={key}
+              className="input input-bordered flex items-center gap-2"
+            >
+              {key.charAt(0).toUpperCase() + key.slice(1).toLowerCase()} :
               <input
-                className="input input-xs input-bordered"
-                type="text"
-                name={field}
-                value={value}
-                onChange={(e) => handleInputChange(field, e.target.value)}
+                name={key}
+                className="grow"
+                value={movie[key] as keyof MovieForm}
+                onChange={handleChange}
               />
-            </div>
-          );
-        })}
+            </label>
+          </div>
+        ))}
+
+        <ActionButton
+          className="col-span-2 col-start-2"
+          buttonText="Add Movie"
+          type="submit"
+        >
+          {loading && (
+            <span className="loading loading-spinner loading-xs"></span>
+          )}
+        </ActionButton>
       </div>
-      <input className="btn btn-xs" type="submit" value="Submit" />
     </form>
   );
 };
