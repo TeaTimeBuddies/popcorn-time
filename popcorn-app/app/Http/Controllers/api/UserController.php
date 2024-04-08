@@ -192,52 +192,52 @@ class UserController extends Controller
     }
     
 
-//Watchlist
-public function getWatchlist($movieId)
-{
-    $user = User::first(); 
-    $watchlist = $user->watchlist()->get();
-    return response()->json($watchlist);
-}
+    //Watchlist
+    public function getWatchlist($movieId)
+    {
+        $user = User::first(); 
+        $watchlist = $user->watchlist()->get();
+        return response()->json($watchlist);
+    }
 
-public function addWatchlist($movieId)
-{
-    $user = User::first(); 
-    $user->watchlist()->attach($movieId);
-    return response()->json(['message' => 'Movie added to watchlist']);
-}
-public function removeWatchlist($movieId)
-{
-    $user = User::first(); 
-    $user->watchlist()->detach($movieId);
-    return response()->json(['message' => 'Movie removed from watchlist']);
-}
+    public function addWatchlist($movieId)
+    {
+        $user = User::first(); 
+        $user->watchlist()->attach($movieId);
+        return response()->json(['message' => 'Movie added to watchlist']);
+    }
+    public function removeWatchlist($movieId)
+    {
+        $user = User::first(); 
+        $user->watchlist()->detach($movieId);
+        return response()->json(['message' => 'Movie removed from watchlist']);
+    }
 
-public function checkWatchlist($movieId)
-{
-    $user = User::first(); 
-    $isWatchlisted = $user->watchlist()->where('movie_id', $movieId)->exists();
-    return response()->json(['isWatchlisted' => $isWatchlisted]);
-}
+    public function checkWatchlist($movieId)
+    {
+        $user = User::first(); 
+        $isWatchlisted = $user->watchlist()->where('movie_id', $movieId)->exists();
+        return response()->json(['isWatchlisted' => $isWatchlisted]);
+    }
 
-//Comments
-public function getComments(Request $request)
-{
-    $user = User::first(); 
-    $comments = $user->comments()->with('movie')->get();
-    return response()->json($comments);
-}
-public function addComment(Request $request)
-{
-    $user = User::first(); 
-    $comment = new Comments([
+    //Comments
+    public function getComments(Request $request)
+    {
+        $user = User::first(); 
+        $comments = $user->comments()->with('movie')->get();
+        return response()->json($comments);
+    }
+    public function addComment(Request $request)
+    {
+        $user = User::first(); 
+        $comment = new Comments([
         'user_id' => $user->id,
         'movie_id' => $request->movie_id,
         'comment' => $request->comment,
-    ]);
-    $comment->save();
-    return response()->json(['message' => 'Comment added successfully']);
-}
+        ]);
+        $comment->save();
+        return response()->json(['message' => 'Comment added successfully']);
+    }
 
 
 }
