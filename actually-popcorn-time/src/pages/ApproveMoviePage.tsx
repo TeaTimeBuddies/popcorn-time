@@ -12,6 +12,7 @@ export interface Movie {
 }
 
 const AdminApprovalPage = () => {
+  const navigate = useNavigate();
   const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
@@ -36,21 +37,47 @@ const AdminApprovalPage = () => {
       .catch((error) => console.error("There was an error!", error));
   };
 
-  return (
-    <GeneralLayout title="Admin: Approve Movies">
-      <div>
-        <h2>Unapproved Movies</h2>
-        <ul>
-          {movies.map((movie) => (
-            <li key={movie.id}>
-              {movie.title} -{" "}
-              <button onClick={() => approveMovie(movie.id)}>Approve</button>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </GeneralLayout>
-  );
+  const rejectMovie = (id: number) => {
+    fetch(`${apiUrl}movies/reject/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          navigate("/movies/approve");
+        }
+      })
+      .catch((error) => console.error("There was an error!", error));
+  };
+
+  const $admin = sessionStorage.getItem("is_admin");
+  if ($admin == "1") {
+    // If the user is an admin
+    return (
+      <GeneralLayout title="Admin: Approve Movies">
+        <div>
+          <h2>Unapproved Movies</h2>
+          <ul>
+            {movies.map((movie) => (
+              <li key={movie.id}>
+                {movie.title} - {movie.director} - {movie.genre} - {movie.stars}{" "}
+                - {movie.year}
+                <button className="mx-2" onClick={() => approveMovie(movie.id)}>
+                  Approve
+                </button>
+                <button onClick={() => rejectMovie(movie.id)}>Reject</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </GeneralLayout>
+    );
+  } else {
+    // If user is not admin, redirect
+    navigate("/");
+  }
 };
 
 export default AdminApprovalPage;
