@@ -29,6 +29,7 @@ jobs:
       
       - name: Install and build react app
         run: |
+          cd ..
           cd actually-popcorn-time
           npm install
 
