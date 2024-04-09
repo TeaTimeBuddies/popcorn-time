@@ -69,7 +69,7 @@ jobs:
           cd popcorn-app
           pwd
           ls
-          run: php artisan migrate --force --seed
+          php artisan migrate --force --seed
 
       # Give full permission to database folder
       - name: Give full permission to database folder
