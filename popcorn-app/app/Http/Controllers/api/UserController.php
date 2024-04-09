@@ -106,18 +106,18 @@ class UserController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
-
-            $token = $user->createToken('Super Safe Token')->plainTextToken;
-
+            if ($user) {
+            // $token = $user->createToken('Super Safe Token')->plainTextToken;
+            
             session(['user' => $user]);
             return response()->json([
                 'status' => 'success',
                 'user' => $user,
                 'authorisation' => [
-                    'token' => $token,
+                    // 'token' => $token,
                     'type' => 'bearer',
                 ],
-            ]);
+            ]); } 
         } else {
             return response()->json([
                 'status' => 'error',
@@ -207,20 +207,6 @@ class UserController extends Controller
         $watchlist = $user->watchlist()->get();
         return response()->json($watchlist);
     }
-
-    public function addWatchlist($movieId)
-    {
-        $user = User::first();
-        $user->watchlist()->attach($movieId);
-        return response()->json(['message' => 'Movie added to watchlist']);
-    }
-    public function removeWatchlist($movieId)
-    {
-        $user = User::first();
-        $user->watchlist()->detach($movieId);
-        return response()->json(['message' => 'Movie removed from watchlist']);
-    }
-
     public function checkWatchlist($movieId)
     {
         $user = User::first();
@@ -248,7 +234,7 @@ class UserController extends Controller
         ]);
         $comment->save();
         return response()->json(['message' => 'Comment added successfully']);
-
+    }
     public function addWatchlist(Request $request)
     {
         $user = User::first();
@@ -262,24 +248,6 @@ class UserController extends Controller
         $movieId = $request->movie_id;
         $user->watchlist()->detach($movieId);
         return response()->json(['message' => 'Movie removed from watchlist']);
-    }
-    //Comments
-    public function getComments(Request $request)
-    {
-        $user = User::first();
-        $comments = $user->comments()->with('movie')->get();
-        return response()->json($comments);
-    }
-    public function addComment(Request $request)
-    {
-        $user = User::first();
-        $comment = new Comments([
-            'user_id' => $user->id,
-            'movie_id' => $request->movie_id,
-            'comment' => $request->comment,
-        ]);
-        $comment->save();
-        return response()->json(['message' => 'Comment added successfully']);
     }
 
     public function getUsername($id)
