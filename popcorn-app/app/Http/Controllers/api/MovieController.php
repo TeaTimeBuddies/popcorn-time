@@ -106,6 +106,19 @@ class MovieController extends Controller
         return ['success' => $isSuccess];
     }
 
+    public function reject($id)
+    {
+        $movie = Movie::find($id);
+
+        if (!$movie) {
+            return response()->json(['error' => 'Movie not found'], 404);
+        }
+
+        $isSuccess = $movie->delete();
+
+        return ['success' => $isSuccess];
+    }
+
     /**
      * Remove the specified resource from storage.
      */

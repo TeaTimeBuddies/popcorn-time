@@ -26,6 +26,7 @@ Route::post('ratings/{id}', [RatingsController::class, 'store']);
 
 //Admin
 Route::post('movies/approve/{id}', [MovieController::class, 'approve']); //TODO: add middlware after auth implemented
+Route::post('movies/reject/{id}', [MovieController::class, 'reject']); //TODO: add middlware after auth implemented
 
 // Login
 Route::post('/user', [UserController::class, 'processLogin']);

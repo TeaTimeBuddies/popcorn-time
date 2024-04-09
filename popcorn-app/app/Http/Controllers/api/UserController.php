@@ -242,5 +242,43 @@ class UserController extends Controller
         ]);
         $comment->save();
         return response()->json(['message' => 'Comment added successfully']);
+
+    public function addWatchlist(Request $request)
+    {
+        $user = User::first();
+        $movieId = $request->movie_id;
+        $user->watchlist()->attach($movieId);
+        return response()->json(['message' => 'Movie added to watchlist']);
+    }
+    public function removeWatchlist(Request $request)
+    {
+        $user = User::first();
+        $movieId = $request->movie_id;
+        $user->watchlist()->detach($movieId);
+        return response()->json(['message' => 'Movie removed from watchlist']);
+    }
+    //Comments
+    public function getComments(Request $request)
+    {
+        $user = User::first();
+        $comments = $user->comments()->with('movie')->get();
+        return response()->json($comments);
+    }
+    public function addComment(Request $request)
+    {
+        $user = User::first();
+        $comment = new Comments([
+            'user_id' => $user->id,
+            'movie_id' => $request->movie_id,
+            'comment' => $request->comment,
+        ]);
+        $comment->save();
+        return response()->json(['message' => 'Comment added successfully']);
+    }
+
+    public function getUsername($id)
+    {
+        $user = User::find($id);
+        return response()->json(['username' => $user->name]);
     }
 }
