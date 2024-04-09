@@ -111,3 +111,6 @@ jobs:
           app-name: "popcorn-time"
           slot-name: "Production"
           package: .
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
