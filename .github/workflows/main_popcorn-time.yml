@@ -108,6 +108,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: "popcorn-app"
+          app-name: "popcorn-time"
           slot-name: "Production"
           package: .
