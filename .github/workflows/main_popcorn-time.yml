@@ -113,7 +113,7 @@ jobs:
             exit 1
           fi
         env:
-          DB_DATABASE: database/database.sqlite
+          DB_DATABASE: database/movies.sqlite
 
       - name: "Deploy to Azure Web App"
         uses: azure/webapps-deploy@v2
