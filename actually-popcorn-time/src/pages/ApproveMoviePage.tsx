@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import GeneralLayout from "../layouts/GeneralLayout";
 import { API_URL } from "../constants";
 
@@ -38,7 +39,7 @@ const AdminApprovalPage = () => {
   };
 
   const rejectMovie = (id: number) => {
-    fetch(`${apiUrl}movies/reject/${id}`, {
+    fetch(`${API_URL}movies/reject/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

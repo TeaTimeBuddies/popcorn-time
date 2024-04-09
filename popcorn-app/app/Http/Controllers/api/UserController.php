@@ -107,14 +107,14 @@ class UserController extends Controller
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
             if ($user) {
-            // $token = $user->createToken('Super Safe Token')->plainTextToken;
+            $token = $user->createToken('Super Safe Token')->plainTextToken;
             
             session(['user' => $user]);
             return response()->json([
                 'status' => 'success',
                 'user' => $user,
                 'authorisation' => [
-                    // 'token' => $token,
+                    'token' => $token,
                     'type' => 'bearer',
                 ],
             ]); } 
