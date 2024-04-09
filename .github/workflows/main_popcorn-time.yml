@@ -17,7 +17,7 @@ jobs:
       run:
         # Set the default working directory to the repository root (New)
         # Note further down: zip ../release.zip 
-        working-directory: ./
+        working-directory: ./popcorn-app
 
     steps:
       - uses: actions/checkout@v4
@@ -51,12 +51,10 @@ jobs:
       - name: Run composer install if composer.json exists
         if: steps.check_files.outputs.files_exists == 'true'
         run: |
-          cd popcorn-app
           composer validate --no-check-publish && composer install
 
       - name: Give full permission to storage folder (NEW)
         run: |
-          cd popcorn-app
           echo "++++ What is the current directory?"
           pwd
           echo "++++ What is in the storage folder?"
@@ -67,7 +65,6 @@ jobs:
       # Give full permission to database folder
       - name: Give full permission to database folder
         run: |
-          cd popcorn-app
           echo "++++ What is the current directory?"
           pwd
           echo "++++ What is in the database folder?"
@@ -77,7 +74,6 @@ jobs:
 
       - name: Migrate database (NEW)
         run: |
-          cd popcorn-app
           pwd
           ls
           php artisan migrate --force --seed
@@ -86,7 +82,7 @@ jobs:
         run: |
           pwd
           ls
-          zip -r release.zip ./*
+          zip ../release.zip ./* -r
 
 
       - name: Upload artifact for deployment job
@@ -124,7 +120,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'popcorn-time'
+          app-name: 'popcorn-app'
           slot-name: 'Production'
           package: .
           
