@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\MovieController;
 use App\Http\Controllers\api\RatingsController;
 use App\Http\Controllers\api\UserController;
+use App\Http\Controllers\api\CommentsController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -20,6 +21,7 @@ Route::delete('movies/{id}', [MovieController::class, 'destroy']);
 
 // Ratings
 Route::get('ratings/{id}', [RatingsController::class, 'show']);
+Route::get('ratings/index/{id}', [RatingsController::class, 'getRating']);
 Route::post('ratings/{id}', [RatingsController::class, 'store']);
 
 //Admin
@@ -76,5 +78,8 @@ Route::get('/user/watchlist/check/{movieId}', [
 Route::get('/user/comments', [UserController::class, 'getComments']);
 Route::post('/user/comments', [UserController::class, 'addComment']);
 Route::delete('/user/comments', [UserController::class, 'removeComment']);
+Route::get('/comment/{id}', [CommentsController::class, 'show']);
+Route::get('/user/{id}', [UserController::class, 'getUsername']);
+Route::post('/comment', [CommentsController::class, 'store']);
 
 // });
