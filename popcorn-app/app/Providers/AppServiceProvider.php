@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
             $directory = dirname("database/".$database);
             
             if (!File::exists($directory)) {
-                File::makeDirectory($directory, 0755, true);
+                File::makeDirectory($directory, 0777, true);
             }
 
             if (!File::exists($database)) {
