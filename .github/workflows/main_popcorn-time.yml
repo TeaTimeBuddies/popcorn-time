@@ -86,7 +86,7 @@ jobs:
         run: |
           pwd
           ls
-          zip -r release.zip popcorn-app/ actually-popcorn-time/
+          zip -r release.zip popcorn-app
 
 
       - name: Upload artifact for deployment job
