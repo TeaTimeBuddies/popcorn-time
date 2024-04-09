@@ -72,11 +72,11 @@ jobs:
           echo "++++ Give full permission to database folder"
           chmod -R 777 database
 
-      - name: Migrate database (NEW)
-        run: |
-          pwd
-          ls
-          php artisan migrate --force --seed
+      # - name: Migrate database (NEW)
+      #   run: |
+      #     pwd
+      #     ls
+      #     php artisan migrate --force --seed
 
       - name: Zip artifact for deployment
         run: |

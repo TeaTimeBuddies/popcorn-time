@@ -37,6 +37,6 @@ class AppServiceProvider extends ServiceProvider
             }
         }
 
-        Artisan::call('migrate');
+        Artisan::call('migrate', ['--force' => true]);
     }
 }
