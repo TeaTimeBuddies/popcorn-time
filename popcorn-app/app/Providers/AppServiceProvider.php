@@ -25,8 +25,8 @@ class AppServiceProvider extends ServiceProvider
     {
         if (DB::connection() instanceof \Illuminate\Database\SQLiteConnection) {
             $database = DB::getDatabaseName();
-            $directory = dirname($database);
-
+            $directory = dirname("database/".$database);
+            
             if (!File::exists($directory)) {
                 File::makeDirectory($directory, 0755, true);
             }
@@ -38,5 +38,6 @@ class AppServiceProvider extends ServiceProvider
         }
 
         Artisan::call('migrate', ['--force' => true]);
+
     }
 }
