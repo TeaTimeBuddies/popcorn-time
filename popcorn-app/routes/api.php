@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\MovieController;
@@ -9,8 +10,17 @@ use App\Http\Controllers\api\CommentsController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
-});
-// ->middleware('auth:sanctum');
+})->middleware('auth:sanctum');
+
+// Login
+Route::post('/user', [UserController::class, 'processLogin'])->name('login');
+Route::get('/user', [UserController::class, 'index']);
+
+//Signup
+Route::post('/signup', [UserController::class, 'processSignup']);
+
+//Dashboard
+Route::get('/user/dashboard', [UserController::class, 'getDashboard']);
 
 // Movies
 Route::get('movies', [MovieController::class, 'index']);
@@ -28,12 +38,40 @@ Route::post('ratings/{id}', [RatingsController::class, 'store']);
 Route::post('movies/approve/{id}', [MovieController::class, 'approve']); //TODO: add middlware after auth implemented
 Route::post('movies/reject/{id}', [MovieController::class, 'reject']); //TODO: add middlware after auth implemented
 
-// Login
-Route::post('/user', [UserController::class, 'processLogin']);
-Route::get('/user', [UserController::class, 'index']);
+//Favorite Movies
+Route::get('/user/favorites', [UserController::class, 'getFavorites']);
+Route::post('/user/favorites/{movieId}', [
+    UserController::class,
+    'addFavorite',
+]);
+Route::delete('/user/favorites/{movieId}', [
+    UserController::class,
+    'removeFavorite',
+]);
+Route::get('/user/favorites/check/{movieId}', [
+    UserController::class,
+    'checkFavorite',
+]);
 
-//Signup
-Route::post('/signup', [UserController::class, 'processSignup']);
+//Watchlist
+Route::get('/user/watchlist', [UserController::class, 'getWatchlist']);
+Route::post('/user/watchlist/{movieId}', [
+    UserController::class,
+    'addWatchlist',
+]);
+Route::delete('/user/watchlist/{movieId}', [
+    UserController::class,
+    'removeWatchlist',
+]);
+Route::get('/user/watchlist/check/{movieId}', [
+    UserController::class,
+    'checkWatchlist',
+]);
+
+//Comments
+Route::get('/user/comments', [UserController::class, 'getComments']);
+Route::post('/user/comments', [UserController::class, 'addComment']);
+Route::delete('/user/comments', [UserController::class, 'removeComment']);
 
 // Logout
 Route::post('/logout', [UserController::class, 'logout'])->middleware(
@@ -84,3 +122,14 @@ Route::get('/user/{id}', [UserController::class, 'getUsername']);
 Route::post('/comment', [CommentsController::class, 'store']);
 
 // });
+Route::group([], function () {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
+});
+
+// jwt.auth
+Route::middleware('auth:sanctum')->group(function () {
+    # all the routes that require authentication go here
+});

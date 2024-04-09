@@ -29,9 +29,11 @@ const LoginForm = () => {
 
     if (data.status === "success") {
       const user = data.user;
+      const token = data.authorisation.token;
       sessionStorage.setItem("user_id", user.id);
       sessionStorage.setItem("email", user.email);
       sessionStorage.setItem("is_admin", user.is_admin.toString());
+      sessionStorage.setItem("token", token);
       navigate("/");
     } else {
       console.error("User not found");
