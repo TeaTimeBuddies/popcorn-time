@@ -16,7 +16,7 @@ jobs:
     defaults:
       run:
         # Set the default working directory to the repository root (New)
-        # Note further down: zip ../release.zip 
+        # Note further down: zip ../release.zip
         working-directory: ./popcorn-app
 
     steps:
@@ -25,18 +25,17 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
-      
+          php-version: "8.2"
+
       - name: Install laravel dependencies
         run: |
-          cd popcorn-app
           composer install --no-progress
 
       - name: Check if composer.json exists
         id: check_files
         uses: andstor/file-existence-action@v1
         with:
-          files: 'popcorn-app/composer.json'
+          files: "popcorn-app/composer.json"
 
       - name: Run composer install if composer.json exists
         if: steps.check_files.outputs.files_exists == 'true'
@@ -51,7 +50,7 @@ jobs:
           ls storage
           echo "++++ Give full permission to storage folder"
           chmod -R 777 storage
-      
+
       # Give full permission to database folder
       - name: Give full permission to database folder
         run: |
@@ -74,7 +73,6 @@ jobs:
           ls
           zip ../release.zip ./* -r
 
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
@@ -85,7 +83,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Production'
+      name: "Production"
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write #This is required for requesting the JWT
@@ -98,7 +96,7 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-      
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -106,11 +104,10 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_BEC36A2C075F40D0BAF1D739ECCA4B98 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_969DD1DDBCFD40B6BB577BA761DA8090 }}
 
-      - name: 'Deploy to Azure Web App'
+      - name: "Deploy to Azure Web App"
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'popcorn-app'
-          slot-name: 'Production'
+          app-name: "popcorn-app"
+          slot-name: "Production"
           package: .
-          
