@@ -12,8 +12,10 @@ const ReviewForm = ({ id, onClose }: ReviewFormProps) => {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState("");
   const userId = 1; // Hardcoded for now, will be replaced with session user id
+  const [loading, setLoading] = useState(false);
 
   const store = async (event: React.FormEvent) => {
+    setLoading(true);
     event.preventDefault();
 
     if (!review || !rating) {
@@ -29,10 +31,10 @@ const ReviewForm = ({ id, onClose }: ReviewFormProps) => {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        userId: parseInt(sessionStorage.getItem("user_id") || '0', 10), 
+        userId: parseInt(sessionStorage.getItem("user_id") || "0", 10),
         review,
         rating,
       }),
@@ -41,7 +43,8 @@ const ReviewForm = ({ id, onClose }: ReviewFormProps) => {
     if (!response.ok) {
       throw new Error("Failed to submit rating and review.");
     } else {
-      window.location.reload();
+      setLoading(false);
+      onClose();
     }
   };
 
@@ -68,7 +71,6 @@ const ReviewForm = ({ id, onClose }: ReviewFormProps) => {
             <option value="" disabled selected>
               Select rating..
             </option>
-            {/* <option value="">Select...</option> */}
             {[...Array(5).keys()].map((value) => (
               <option key={value + 1} value={value + 1}>
                 {value + 1}
@@ -81,20 +83,22 @@ const ReviewForm = ({ id, onClose }: ReviewFormProps) => {
               className="btn-sm col-span-2 col-start-2"
               buttonText="Add Review"
               type="submit"
+              disabled={loading}
             >
-              {/* {loading && (
-            <span className="loading loading-spinner loading-xs"></span>
-          )} */}
+              {loading && (
+                <span className="loading loading-spinner loading-xs"></span>
+              )}
             </ActionButton>
             <ActionButton
               className="btn-sm col-span-2 col-start-2 border-secondary bg-secondary"
               buttonText="Cancel"
               type="button"
               onClick={onClose}
+              disabled={loading}
             >
-              {/* {loading && (
-              <span className="loading loading-spinner loading-xs"></span>
-            )} */}
+              {loading && (
+                <span className="loading loading-spinner loading-xs"></span>
+              )}
             </ActionButton>
           </div>
         </div>

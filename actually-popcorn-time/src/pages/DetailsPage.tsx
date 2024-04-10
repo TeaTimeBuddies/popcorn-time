@@ -92,7 +92,6 @@ const DetailsPage = () => {
           </div>
         </div>
       )}
-
       {showReviews && movie && <ReviewTable ratings={ratings} movie={movie} />}
     </GeneralLayout>
   );

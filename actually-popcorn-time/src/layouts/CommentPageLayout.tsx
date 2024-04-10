@@ -32,12 +32,12 @@ const CommentPageLayout = ({ ratings, comments }: CommentLayoutProps) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         rating_id: ratings.id,
         comment: newComment,
-        user_id: parseInt(sessionStorage.getItem("user_id") || '0', 10), 
+        user_id: parseInt(sessionStorage.getItem("user_id") || "0", 10),
       }),
     });
     if (response.ok) {
