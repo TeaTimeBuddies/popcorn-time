@@ -12,7 +12,6 @@ const navBarItems: NavBarItem[] = [
     name: "Movies",
     route: "/movies",
   },
-  { name: "Reviews", route: "/reviews" },
   { name: "Add Movie", route: "/movies/add" },
   { name: "User Dashboard", route: "/user/dashboard" },
   { name: "Login", route: "/login" },
@@ -56,7 +55,7 @@ const NavBar = () => {
             ))}
           </ul>
         </div>
-        <a className="btn btn-ghost text-2xl text-primary">PopcornTime</a>
+        <a className="btn btn-ghost text-2xl text-primary" href="/">PopcornTime</a>
       </div>
       <div className="navbar-center hidden text-primary lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -70,9 +69,9 @@ const NavBar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <span className="material-symbols-outlined text-5xl text-primary ">
+        <a className="btn btn-ghost material-symbols-outlined text-5xl text-primary" href="/user/dashboard">
           account_circle
-        </span>
+        </a>
       </div>
     </div>
   );
