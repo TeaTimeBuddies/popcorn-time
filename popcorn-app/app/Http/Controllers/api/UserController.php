@@ -172,28 +172,28 @@ class UserController extends Controller
     //Favorites
     public function getFavorites(Request $request)
     {
-        $user = User::first();
+        $user = $request->user();
         $favorites = $user->favorites()->get();
         return response()->json($favorites);
     }
 
     public function addFavorite(Request $request, $movieId)
     {
-        $user = User::first();
+        $user = $request->user();
         $user->favorites()->attach($movieId);
         return response()->json(['message' => 'Movie added to favorites']);
     }
 
     public function removeFavorite(Request $request, $movieId)
     {
-        $user = User::first();
+        $user = $request->user();
         $user->favorites()->detach($movieId);
         return response()->json(['message' => 'Movie removed from favorites']);
     }
 
     public function checkFavorite(Request $request, $movieId)
     {
-        $user = User::first();
+        $user = $request->user();
         $isFavorited = $user
             ->favorites()
             ->where('movie_id', $movieId)
@@ -202,15 +202,15 @@ class UserController extends Controller
     }
 
     //Watchlist
-    public function getWatchlist()
+    public function getWatchlist(Request $request)
     {
-        $user = User::first();
+        $user = $request->user();
         $watchlist = $user->watchlist()->get();
         return response()->json($watchlist);
     }
-    public function checkWatchlist($movieId)
+    public function checkWatchlist(Request $request, $movieId)
     {
-        $user = User::first();
+        $user = $request->user();
         $isWatchlisted = $user
             ->watchlist()
             ->where('movie_id', $movieId)
@@ -221,13 +221,13 @@ class UserController extends Controller
     //Comments
     public function getComments(Request $request)
     {
-        $user = User::first();
+        $user = $request->user();
         $comments = $user->comments()->with('movie')->get();
         return response()->json($comments);
     }
     public function addComment(Request $request)
     {
-        $user = User::first();
+        $user = $request->user();
         $comment = new Comments([
             'user_id' => $user->id,
             'movie_id' => $request->movie_id,
@@ -236,17 +236,16 @@ class UserController extends Controller
         $comment->save();
         return response()->json(['message' => 'Comment added successfully']);
     }
-    public function addWatchlist(Request $request)
+    public function addWatchlist(Request $request, $movieId)
     {
-        $user = User::first();
-        $movieId = $request->movie_id;
+
+        $user = $request->user();
         $user->watchlist()->attach($movieId);
         return response()->json(['message' => 'Movie added to watchlist']);
     }
-    public function removeWatchlist(Request $request)
+    public function removeWatchlist(Request $request, $movieId)
     {
-        $user = User::first();
-        $movieId = $request->movie_id;
+        $user = $request->user();
         $user->watchlist()->detach($movieId);
         return response()->json(['message' => 'Movie removed from watchlist']);
     }

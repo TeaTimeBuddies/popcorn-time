@@ -8,7 +8,7 @@ interface UseFavoritesReturn {
 
 export const useFavorites = (movieId: string): UseFavoritesReturn => {
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
-
+  const token = sessionStorage.getItem("token");
   const checkFavoriteStatus = useCallback(async () => {
     try {
       const response = await fetch(
@@ -17,6 +17,7 @@ export const useFavorites = (movieId: string): UseFavoritesReturn => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
           },
         }
       );
@@ -25,7 +26,7 @@ export const useFavorites = (movieId: string): UseFavoritesReturn => {
     } catch (error) {
       console.error("Error checking favorite status:", error);
     }
-  }, [movieId]);
+  }, [movieId, token]);
 
   useEffect(() => {
     checkFavoriteStatus();
@@ -36,7 +37,10 @@ export const useFavorites = (movieId: string): UseFavoritesReturn => {
       const method = isFavorited ? "DELETE" : "POST";
       await fetch(`${API_URL}user/favorites/${movieId}`, {
         method: method,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+        },
+
       });
 
       setIsFavorited(!isFavorited);

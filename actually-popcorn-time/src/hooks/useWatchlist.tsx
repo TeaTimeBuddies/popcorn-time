@@ -8,7 +8,7 @@ interface UseWatchlistReturn {
 
 export const useWatchlist = (movieId: string): UseWatchlistReturn => {
   const [isWatchlisted, setIsWatchlisted] = useState<boolean>(false);
-
+  const token = sessionStorage.getItem("token");
   const checkWatchlistStatus = useCallback(async () => {
     try {
       const response = await fetch(
@@ -17,6 +17,7 @@ export const useWatchlist = (movieId: string): UseWatchlistReturn => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`, 
           },
         }
       );
@@ -25,7 +26,7 @@ export const useWatchlist = (movieId: string): UseWatchlistReturn => {
     } catch (error) {
       console.error("Error checking watchlist status:", error);
     }
-  }, [movieId]);
+  }, [movieId, token]);
 
   useEffect(() => {
     checkWatchlistStatus();
@@ -36,7 +37,10 @@ export const useWatchlist = (movieId: string): UseWatchlistReturn => {
       const method = isWatchlisted ? "DELETE" : "POST";
       const response = await fetch(`${API_URL}user/watchlist/${movieId}`, {
         method: method,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+        },
+        
       });
 
       if (response.ok) {
