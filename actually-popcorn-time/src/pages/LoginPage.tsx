@@ -1,70 +1,51 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GeneralLayout from "../layouts/GeneralLayout";
+import Toast from "../components/Toast";
+import LoginForm from "../components/forms/LoginForm";
 
-const LoginForm = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const apiUrl = import.meta.env.VITE_API_URL;
+  const [errors, setErrors] = useState<string[]>([]);
+  const [success, setSuccess] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Email: ", email);
-    console.log("Password: ", password);
-
-    const response = await fetch(`${apiUrl}user`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    if (data.status === "success") {
-      const user = data.user;
-      const token = data.authorisation.token;
-      sessionStorage.setItem("user_id", user.id);
-      sessionStorage.setItem("email", user.email);
-      sessionStorage.setItem("is_admin", user.is_admin.toString());
-      sessionStorage.setItem("token", token);
-      navigate("/");
-    } else {
-      console.error("User not found");
-    }
+  const handleErrors = (errors: string[]) => {
+    setErrors(errors);
+    setTimeout(() => {
+      setErrors([]);
+    }, 5000);
   };
 
   return (
     <GeneralLayout>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <label>
-          Email:
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+      <LoginForm onErrors={handleErrors} />
+      {success && (
+        <Toast
+          toasts={[
+            {
+              message: "Login Successful!",
+              children: (
+                <button
+                  className="btn btn-neutral btn-xs text-primary"
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                >
+                  Back to login
+                </button>
+              ),
+            },
+          ]}
+        ></Toast>
+      )}
+
+      {errors.length > 0 && (
+        <Toast
+          toasts={errors.map((error) => ({ message: error, status: "error" }))}
+        />
+      )}
     </GeneralLayout>
   );
 };
 
-export default LoginForm;
+export default LoginPage;

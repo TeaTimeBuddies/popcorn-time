@@ -19,16 +19,24 @@ const AddMoviePage: React.FC = () => {
     <GeneralLayout title="Add a New Movie">
       <MovieForm onSuccess={handleSuccess} />
       {showSuccessToast && (
-        <Toast message="Successfully added movie. Please wait for admin approval.">
-          <button
-            className="btn btn-neutral btn-xs text-primary"
-            onClick={() => {
-              navigate("/movies");
-            }}
-          >
-            Go to movie page
-          </button>
-        </Toast>
+        <Toast
+          toasts={[
+            {
+              message:
+                "Successfully added movie. Please wait for admin approval.",
+              children: (
+                <button
+                  className="btn btn-neutral btn-xs text-primary"
+                  onClick={() => {
+                    navigate("/movies");
+                  }}
+                >
+                  Go to movie page
+                </button>
+              ),
+            },
+          ]}
+        />
       )}
     </GeneralLayout>
   );
