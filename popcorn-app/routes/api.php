@@ -68,7 +68,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/dashboard', [UserController::class, 'getDashboard']);
 
     //Favorite Movies
-    Route::get('/user/favorites', [UserController::class, 'getFavorites']);
+    Route::get('/user/favorites/{userId}', [UserController::class, 'getFavorites']);
     Route::post('/user/favorites/{movieId}', [
         UserController::class,
         'addFavorite',
@@ -83,17 +83,17 @@ Route::middleware('auth:sanctum')->group(function () {
     ]);
 
     //Watchlist
-    Route::get('/user/watchlist', [UserController::class, 'getWatchlist']);
+    Route::get('/user/watchlist/{userId}', [UserController::class, 'getWatchlist']);
     Route::post('/user/watchlist/{movieId}', [
         UserController::class,
-        'addWatchlist',
+        'addFavorite',
     ]);
     Route::delete('/user/watchlist/{movieId}', [
         UserController::class,
-        'removeWatchlist',
+        'removeFavorite',
     ]);
     Route::get('/user/watchlist/check/{movieId}', [
         UserController::class,
-        'checkWatchlist',
+        'checkFavorite',
     ]);
 });

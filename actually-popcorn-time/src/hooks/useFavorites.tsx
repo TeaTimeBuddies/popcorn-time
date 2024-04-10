@@ -21,8 +21,10 @@ export const useFavorites = (movieId: string): UseFavoritesReturn => {
           },
         }
       );
+      console.log("token in useFavorites", token);
       const data = await response.json();
       setIsFavorited(data.isFavorited);
+      console.log("status for favorite button", data.isFavorited)
     } catch (error) {
       console.error("Error checking favorite status:", error);
     }
@@ -44,6 +46,7 @@ export const useFavorites = (movieId: string): UseFavoritesReturn => {
       });
 
       setIsFavorited(!isFavorited);
+      console.log("status for favorite button adding/deleting", isFavorited)
     } catch (error) {
       console.error("Error toggling favorite:", error);
     }
