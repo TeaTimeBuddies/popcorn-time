@@ -120,29 +120,36 @@ const MoviesPage = () => {
           </tbody>
         </table>
       </div>
-      {currentPage > 1 && (
-        <button onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))}>
-          Previous Page
-        </button>
-      )}
-      {pageNumbers.map((number) => (
-        <button
-          key={number}
-          onClick={() => setCurrentPage(number)}
-          disabled={number === currentPage}
-        >
-          {number}
-        </button>
-      ))}
-      {currentPage < totalPages && (
-        <button
-          onClick={() =>
-            setCurrentPage((page) => Math.min(page + 1, totalPages))
-          }
-        >
-          Next Page
-        </button>
-      )}
+      <div className="join">
+        {currentPage > 1 && (
+          <button
+            className="btn join-item"
+            onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))}
+          >
+            Previous Page
+          </button>
+        )}
+        {pageNumbers.map((number) => (
+          <button
+            className="btn join-item"
+            key={number}
+            onClick={() => setCurrentPage(number)}
+            disabled={number === currentPage}
+          >
+            {number}
+          </button>
+        ))}
+        {currentPage < totalPages && (
+          <button
+            className="btn join-item"
+            onClick={() =>
+              setCurrentPage((page) => Math.min(page + 1, totalPages))
+            }
+          >
+            Next Page
+          </button>
+        )}
+      </div>
     </GeneralLayout>
   );
 };
