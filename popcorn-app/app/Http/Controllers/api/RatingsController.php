@@ -23,7 +23,7 @@ class RatingsController extends Controller
     public function store($movie_id, Request $request)
     {
         $user = User::find($request->userId);
-        $username = $user ? $user->name : '';
+        $username = $user->name;
 
         $rating = Ratings::create([
             'movie_id' => $movie_id,
@@ -31,7 +31,7 @@ class RatingsController extends Controller
             'review' => $request->review,
             'username' => $username,
             'comments_count' => 0,
-            'user_id' => 1, // TODO: GET USER ID FROM SESSION. CURRENTLY HARD CODED
+            'user_id' => $request->userId,
         ]);
         return response()->json(
             [

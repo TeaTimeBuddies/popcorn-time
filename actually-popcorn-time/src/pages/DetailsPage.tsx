@@ -12,6 +12,7 @@ export interface Rating {
   user_id: string;
   movie_id: string[];
   rating: number;
+  username: string;
   review: string[];
   comments_count: number;
 }

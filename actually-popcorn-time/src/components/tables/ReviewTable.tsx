@@ -26,8 +26,7 @@ const ReviewTable = ({ ratings, movie }: ReviewTableProps) => {
             <tbody>
               {ratings.map((r: Rating) => (
                 <tr key={r.id}>
-                  <td>{r.user_id}</td>
-                  {/* TODO: Change this to display username after users */}
+                  <td>{r.username}</td>
                   <td>{r.rating}/5</td>
                   <td>{r.review}</td>
                   <td>
