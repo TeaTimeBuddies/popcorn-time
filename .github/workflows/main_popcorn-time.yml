@@ -108,6 +108,7 @@ jobs:
         run: |
           if [ -f "${{ env.DB_DATABASE }}" ]; then
             echo "Database file exists at ${{ env.DB_DATABASE }}"
+            ls -l ${{ env.DB_DATABASE }}
           else
             echo "Database file does not exist at ${{ env.DB_DATABASE }}"
             exit 1
