@@ -125,9 +125,6 @@ const MovieDetailLayout = ({
               icon="play_arrow"
               onClick={() => {
                 onClickReviews();
-                navigate.push({
-                  search: "?reviews=true",
-                });
               }}
             ></ActionButton>
             <ActionButton
