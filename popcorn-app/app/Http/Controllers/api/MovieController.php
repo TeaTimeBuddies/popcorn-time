@@ -17,17 +17,19 @@ class MovieController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->query('per_page', 10);
-    
+
         if ($request->has('is_approved')) {
             $isApproved = filter_var(
                 $request->query('is_approved'),
                 FILTER_VALIDATE_BOOLEAN
             );
-            $movies = Movie::where('is_approved', $isApproved)->paginate($perPage);
+            $movies = Movie::where('is_approved', $isApproved)->paginate(
+                $perPage
+            );
         } else {
             $movies = Movie::paginate($perPage);
         }
-    
+
         return [
             'data' => $movies->items(),
             'meta' => [
