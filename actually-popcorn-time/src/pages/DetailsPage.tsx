@@ -85,7 +85,13 @@ const DetailsPage = () => {
         // While movie is null, show loading message
         <p>Movie Loading...</p>
       )}
-      {movie && showReviewForm && <ReviewForm id={id} />}
+      {movie && showReviewForm && (
+        <div className="fixed inset-0 z-50 flex h-full w-full items-center justify-center ">
+          <div className="rounded-md bg-app200 p-10 shadow-lg">
+            <ReviewForm id={id} onClose={() => setShowReviewForm(false)} />
+          </div>
+        </div>
+      )}
 
       {showReviews && movie && <ReviewTable ratings={ratings} movie={movie} />}
     </GeneralLayout>
