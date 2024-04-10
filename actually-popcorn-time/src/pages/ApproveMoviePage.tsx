@@ -16,13 +16,6 @@ const AdminApprovalPage = () => {
   const navigate = useNavigate();
   const [movies, setMovies] = useState<Movie[]>([]);
 
-  // Check if the user is an admin
-  const isAdmin = sessionStorage.getItem("is_admin");
-  if (isAdmin !== "1") {
-    navigate("/"); // Redirect to home page or any other page
-    return null; // Return null or a different component to render
-  }
-
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     fetch(`${API_URL}movies?is_approved=false`, {
@@ -31,7 +24,7 @@ const AdminApprovalPage = () => {
       },
     })
       .then((response) => response.json())
-      .then((data) => setMovies(data))
+      .then((data) => setMovies(data.data))
       .catch((error) => console.error("There was an error!", error));
   }, []);
 
@@ -77,7 +70,7 @@ const AdminApprovalPage = () => {
         <div>
           <h2>Unapproved Movies</h2>
           <ul>
-            {movies.map((movie) => (
+            {Array.isArray(movies) ? movies.map((movie) => (
               <li key={movie.id}>
                 {movie.title} - {movie.director} - {movie.genre} - {movie.stars}{" "}
                 - {movie.year}
@@ -86,7 +79,7 @@ const AdminApprovalPage = () => {
                 </button>
                 <button onClick={() => rejectMovie(movie.id)}>Reject</button>
               </li>
-            ))}
+            )) : null}
           </ul>
         </div>
       </GeneralLayout>
