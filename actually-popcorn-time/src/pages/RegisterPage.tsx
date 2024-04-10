@@ -9,7 +9,6 @@ const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const apiUrl = `${import.meta.env.VITE_API_URL}signup`;
 
   const handleSuccess = () => {
     setSuccess(true);
@@ -30,19 +29,27 @@ const RegisterPage: React.FC = () => {
       <RegisterForm onSuccess={handleSuccess} onErrors={handleErrors} />
 
       {success && (
-        <Toast message="Registration sucessful. Please wait for admin approval.">
-          <button
-            className="btn btn-neutral btn-xs text-primary"
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Back to login
-          </button>
-        </Toast>
+        <Toast
+          toasts={[
+            {
+              message:
+                "Registration successful. Please wait for admin approval.",
+              children: (
+                <button
+                  className="btn btn-neutral btn-xs text-primary"
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                >
+                  Back to login
+                </button>
+              ),
+            },
+          ]}
+        />
       )}
 
-      {error && <Toast status="error" message={error}></Toast>}
+      {error && <Toast toasts={[{ status: "error", message: error }]} />}
     </GeneralLayout>
   );
 };
