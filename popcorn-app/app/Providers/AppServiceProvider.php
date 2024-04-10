@@ -22,19 +22,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (DB::connection() instanceof \Illuminate\Database\SQLiteConnection) {
-            $database = DB::getDatabaseName();
-            $directory = dirname("database/".$database);
+        // if (DB::connection() instanceof \Illuminate\Database\SQLiteConnection) {
+        //     $database = DB::getDatabaseName();
+        //     $directory = dirname("database/".$database);
 
-            if (!File::exists($directory)) {
-                File::makeDirectory($directory, 0777, true);
-            }
+        //     if (!File::exists($directory)) {
+        //         File::makeDirectory($directory, 0777, true);
+        //     }
 
-            if (!File::exists($database)) {
-                File::put($database, '');
-                DB::reconnect(DB::getDefaultConnection());
-            }
-        }
-        Artisan::call('migrate', ['--force' => true]);
+        //     if (!File::exists($database)) {
+        //         File::put($database, '');
+        //         DB::reconnect(DB::getDefaultConnection());
+        //     }
+        // }
+        // Artisan::call('migrate', ['--force' => true]);
     }
 }
