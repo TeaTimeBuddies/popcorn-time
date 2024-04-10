@@ -107,17 +107,18 @@ class UserController extends Controller
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
             if ($user) {
-            // $token = $user->createToken('Super Safe Token')->plainTextToken;
-            
-            session(['user' => $user]);
-            return response()->json([
-                'status' => 'success',
-                'user' => $user,
-                'authorisation' => [
-                    // 'token' => $token,
-                    'type' => 'bearer',
-                ],
-            ]); } 
+                $token = $user->createToken('Super Safe Token')->plainTextToken;
+
+                session(['user' => $user]);
+                return response()->json([
+                    'status' => 'success',
+                    'user' => $user,
+                    'authorisation' => [
+                        'token' => $token,
+                        'type' => 'bearer',
+                    ],
+                ]);
+            }
         } else {
             return response()->json([
                 'status' => 'error',
@@ -250,9 +251,15 @@ class UserController extends Controller
         return response()->json(['message' => 'Movie removed from watchlist']);
     }
 
-    public function getUsername($id)
+    public function getUsername(Request $request)
     {
-        $user = User::find($id);
-        return response()->json(['username' => $user->name]);
+        $user = User::find($request->id);
+
+        if ($user === null) {
+            // Handle the case where the user is not found
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        return response()->json(['name' => $user->name], 200);
     }
 }

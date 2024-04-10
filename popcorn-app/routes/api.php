@@ -22,13 +22,6 @@ Route::post('/signup', [UserController::class, 'processSignup']);
 //Dashboard
 Route::get('/user/dashboard', [UserController::class, 'getDashboard']);
 
-// Movies
-Route::get('movies', [MovieController::class, 'index']);
-Route::get('movies/{id}', [MovieController::class, 'show']);
-Route::post('movies', [MovieController::class, 'store']);
-Route::put('movies/{id}', [MovieController::class, 'update']);
-Route::delete('movies/{id}', [MovieController::class, 'destroy']);
-
 // Ratings
 Route::get('ratings/{id}', [RatingsController::class, 'show']);
 Route::get('ratings/index/{id}', [RatingsController::class, 'getRating']);
@@ -132,4 +125,11 @@ Route::group([], function () {
 // jwt.auth
 Route::middleware('auth:sanctum')->group(function () {
     # all the routes that require authentication go here
+
+    // Movies
+    Route::get('movies', [MovieController::class, 'index']);
+    Route::get('movies/{id}', [MovieController::class, 'show']);
+    Route::post('movies', [MovieController::class, 'store']);
+    Route::put('movies/{id}', [MovieController::class, 'update']);
+    Route::delete('movies/{id}', [MovieController::class, 'destroy']);
 });

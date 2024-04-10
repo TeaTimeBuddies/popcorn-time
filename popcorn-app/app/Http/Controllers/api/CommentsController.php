@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Comments;
 use App\Models\Ratings;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
@@ -22,8 +23,13 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
+
+        $user = User::find($request->user_id);
+        $username = $user ? $user->name : '';
+
         $comment = Comments::create([
-            'user_id' => $request,
+            'user_id' => $request->user_id,
+            'username' => $username,
             'rating_id' => $request->rating_id,
             'comment' => $request->comment,
         ]);

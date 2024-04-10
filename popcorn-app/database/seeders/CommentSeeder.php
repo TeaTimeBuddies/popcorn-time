@@ -16,6 +16,7 @@ class CommentSeeder extends Seeder
         Comments::create([
             'user_id' => 1,
             'rating_id' => 1,
+            'username' => 'Test User',
             'comment' => 'I very much disagree!',
         ]);
     }

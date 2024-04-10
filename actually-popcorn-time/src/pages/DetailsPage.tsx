@@ -5,6 +5,7 @@ import MovieDetailLayout from "../layouts/MovieDetailLayout";
 import ReviewTable from "../components/tables/ReviewTable";
 import ReviewForm from "../components/forms/ReviewForm";
 import { API_URL } from "../constants";
+import useFetchWithToken from "../hooks/useToken";
 
 export interface Rating {
   id: number;
@@ -21,28 +22,23 @@ const DetailsPage = () => {
   const [showReviewForm, setShowReviewForm] = useState(false);
 
   // Fetching movie details
-  const [movie, setMovie] = useState(null);
+  const { data: movie, error: movieError, isLoading: movieLoading } = useFetchWithToken(`${API_URL}movies/${id}`);
   useEffect(() => {
-    // Fetch movie details
-    fetch(`${API_URL}movies/${id}`)
-      .then((res) => res.json())
-      .then((fetchedMovie) => {
-        setMovie(fetchedMovie);
-      });
-  }, [id]);
+    if (movieError) {
+      console.error(movieError);
+    }
+  }, [movieError]);
 
   // Fetching movie ratings
+  const { data: fetchedRatings, error: ratingsError, isLoading: ratingsLoading } = useFetchWithToken(`${API_URL}ratings/${id}`);
   const [totalRatings, setTotalRating] = useState(0);
   const [ratings, setRatings] = useState<Rating[]>([]);
   useEffect(() => {
-    // Fetch movie ratings
-    fetch(`${API_URL}ratings/${id}`)
-      .then((res) => res.json())
-      .then((fetchedRatings) => {
-        const fetched_rating = fetchedRatings.map((rating: Rating) => ({
-          ...rating,
-        }));
-        setRatings(fetched_rating); // Set Rating
+    if (fetchedRatings) {
+      const fetched_rating = fetchedRatings.map((rating: Rating) => ({
+        ...rating,
+      }));
+      setRatings(fetched_rating); // Set Rating
 
         let total = 0;
         fetchedRatings.forEach((r: Rating) => {
@@ -51,8 +47,12 @@ const DetailsPage = () => {
 
         // Calculate average ratingc
         setTotalRating(total / fetchedRatings.length);
-      });
-  }, [id]);
+      }
+
+      if (ratingsError) {
+        console.error(ratingsError);
+      }
+    }, [fetchedRatings, ratingsError]);
 
   if (!id) {
     return null;

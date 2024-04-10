@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ratings;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RatingsController extends Controller
@@ -21,10 +22,14 @@ class RatingsController extends Controller
      */
     public function store($movie_id, Request $request)
     {
+        $user = User::find($request->userId);
+        $username = $user ? $user->name : '';
+
         $rating = Ratings::create([
             'movie_id' => $movie_id,
             'rating' => $request->rating,
             'review' => $request->review,
+            'username' => $username,
             'comments_count' => 0,
             'user_id' => 1, // TODO: GET USER ID FROM SESSION. CURRENTLY HARD CODED
         ]);

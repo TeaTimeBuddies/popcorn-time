@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import GeneralLayout from "../layouts/GeneralLayout";
 import { Link } from "react-router-dom";
 import { API_URL } from "../constants";
+import useFetchWithToken from "../hooks/useToken";
 
 export interface Movie {
   id: number;
@@ -16,21 +17,35 @@ export interface Movie {
 const TableHeaders = ["", "Title", "Director", "Year", "Genre", "Stars"];
 
 const MoviesPage = () => {
+  const { data: fetchedMovies, error, isLoading } = useFetchWithToken(`${API_URL}movies?is_approved=true`);
+
   const [movies, setMovies] = useState<Movie[]>([]);
 
+  // useEffect(() => {
+  //   fetch(`${API_URL}movies?is_approved=true`)
+  //     .then((res) => res.json())
+  //     .then((fetchedMovies) => {
+  //       const movies = fetchedMovies.map((movie: Movie) => ({
+  //         ...movie,
+  //         director: movie.director,
+  //         genre: movie.genre,
+  //         stars: movie.stars,
+  //       }));
+  //       setMovies(movies);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    fetch(`${API_URL}movies?is_approved=true`)
-      .then((res) => res.json())
-      .then((fetchedMovies) => {
-        const movies = fetchedMovies.map((movie: Movie) => ({
-          ...movie,
-          director: movie.director,
-          genre: movie.genre,
-          stars: movie.stars,
-        }));
-        setMovies(movies);
-      });
-  }, []);
+    if (fetchedMovies) {
+      const movies = fetchedMovies.map((movie: Movie) => ({
+        ...movie,
+        director: movie.director,
+        genre: movie.genre,
+        stars: movie.stars,
+      }));
+      setMovies(movies);
+    }
+  }, [fetchedMovies]);
 
   const deleteMovie = (id: number) => {
     fetch(`${API_URL}movies/${id}`, {

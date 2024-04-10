@@ -4,6 +4,7 @@ import { Rating } from "../pages/DetailsPage";
 export interface Comment {
   id: number;
   user_id: number;
+  username: string;
   rating_id: string[];
   comment: string[];
 }
@@ -54,19 +55,38 @@ const CommentPageLayout = ({ ratings, comments }: CommentLayoutProps) => {
   };
 
   // function to recieve the username of the commenter
-  const getCommentUsername = (id: number): string => {
-    const [username, setUsername] = useState<string>("");
+  // const getCommentUsername = (id: number): string => {
+  //   const [username, setUsername] = useState<string>("");
 
+  //   useEffect(() => {
+  //     // Fetch movie details
+  //     fetch(`${apiUrl}user/${id}`)
+  //       .then((res) => res.json())
+  //       .then((fetchedUsername) => {
+  //         setUsername(fetchedUsername.username);
+  //       });
+  //   });
+  //   return username;
+  // };
+
+    // Store usernames in a state
+    const [usernames, setUsernames] = useState<{ [key: number]: string }>({});
     useEffect(() => {
-      // Fetch movie details
-      fetch(`${apiUrl}user/${id}`)
-        .then((res) => res.json())
-        .then((fetchedUsername) => {
-          setUsername(fetchedUsername.username);
+      // Fetch usernames for all comments
+      Promise.all(
+        comments.map((c) =>
+          fetch(`${apiUrl}user/${c.user_id}`)
+            .then((res) => res.json())
+            .then((user) => ({ id: c.user_id, username: user.name }))
+        )
+      ).then((users) => {
+        const newUsernameMap: { [key: number]: string } = {};
+        users.forEach((user) => {
+          newUsernameMap[user.id] = user.username;
         });
-    });
-    return username;
-  };
+        setUsernames(newUsernameMap);
+      });
+    }, [apiUrl, comments]);
 
   return (
     <div className="w-11/12 py-10">
@@ -103,7 +123,7 @@ const CommentPageLayout = ({ ratings, comments }: CommentLayoutProps) => {
         <div className="my-5 flex w-full flex-col items-center rounded-3xl bg-stone-200 py-5">
           <div className="mt-2 w-full flex-none px-5 text-2xl text-primary text-white">
             <div className="flex-none items-center gap-2">
-              <span>{getCommentUsername(c.user_id)}</span>
+              <span>{c.username}</span>
             </div>
             <span className="text-white"> {c.comment} </span>
           </div>
