@@ -23,11 +23,12 @@ class MovieController extends Controller
                 $request->query('is_approved'),
                 FILTER_VALIDATE_BOOLEAN
             );
-            $movies = Movie::where('is_approved', $isApproved)->paginate(
-                $perPage
-            );
+            $movies = Movie::where('is_approved', $isApproved)
+                ->orderBy('title')
+                ->paginate($perPage);
         } else {
-            $movies = Movie::paginate($perPage);
+            $movies = Movie::orderBy('title')
+                ->paginate($perPage);
         }
 
         return [
