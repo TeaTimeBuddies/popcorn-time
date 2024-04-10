@@ -8,9 +8,7 @@ const Error404Page = () => {
         <div className="flex w-full flex-col items-center text-8xl font-bold leading-tight">
           <span>404 ERROR PAGE</span>
         </div>
-        <span className="font-medium">
-          Uh oh, There's nothing here...
-        </span>
+        <span className="font-medium">Uh oh, There's nothing here...</span>
 
         <ActionButton
           className="btn-lg mt-4 min-w-[200px]"

@@ -55,7 +55,9 @@ const NavBar = () => {
             ))}
           </ul>
         </div>
-        <a className="btn btn-ghost text-2xl text-primary" href="/">PopcornTime</a>
+        <a className="btn btn-ghost text-2xl text-primary" href="/">
+          PopcornTime
+        </a>
       </div>
       <div className="navbar-center hidden text-primary lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -69,7 +71,10 @@ const NavBar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn btn-ghost material-symbols-outlined text-5xl text-primary" href="/user/dashboard">
+        <a
+          className="material-symbols-outlined btn btn-ghost text-5xl text-primary"
+          href="/user/dashboard"
+        >
           account_circle
         </a>
       </div>

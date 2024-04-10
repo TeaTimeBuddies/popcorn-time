@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Artisan;
 
-
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -26,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
         // if (DB::connection() instanceof \Illuminate\Database\SQLiteConnection) {
         //     $database = DB::getDatabaseName();
         //     $directory = dirname("database/".$database);
-            
+
         //     if (!File::exists($directory)) {
         //         File::makeDirectory($directory, 0777, true);
         //     }
