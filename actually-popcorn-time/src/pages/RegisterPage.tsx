@@ -41,7 +41,7 @@ const RegisterPage: React.FC = () => {
                     navigate("/");
                   }}
                 >
-                  Back to login
+                  Back to Main Page
                 </button>
               ),
             },

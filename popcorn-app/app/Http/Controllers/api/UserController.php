@@ -19,9 +19,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
-        // return view('/index');
+        $adminEmail = config('admin.email');
+        $users = User::where('email', '!=', $adminEmail)
+            ->orderBy('created_at', 'asc')
+            ->paginate(10);
+        return $users;
     }
+
+  
 
     /**
      * Show the form for creating a new resource.
@@ -104,7 +109,7 @@ class UserController extends Controller
 
         if (!$userExists) {
             return back()->withErrors([
-                'email' => 'Cannot find the email address.',
+                'email' => 'Cannot find the email addrpotess.',
             ]);
         }
 
@@ -159,14 +164,14 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
-            'iApproved' => 'required',
+            'is_approved' => 'required',
         ]);
 
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->isApproved = false;
+        $user->is_approved = false;
         $user->save();
 
         return response()->json(

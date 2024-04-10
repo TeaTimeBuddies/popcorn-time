@@ -65,6 +65,13 @@ Route::middleware('auth:sanctum')->group(function () {
     //Admin
     Route::post('movies/approve/{id}', [MovieController::class, 'approve']); //TODO: add middlware after auth implemented
     Route::post('movies/reject/{id}', [MovieController::class, 'reject']); //TODO: add middlware after auth implemented
+     Route::get('approvals/users', [UserController::class, 'index'])->name(
+        'approvals'
+    );
+     Route::post('approvals/users/{user}', [
+        UserController::class,
+        'toggleApprove',
+    ])->name('approve');
 
     //Dashboard
     Route::get('/user/dashboard', [UserController::class, 'getDashboard']);

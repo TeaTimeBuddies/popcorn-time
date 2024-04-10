@@ -11,6 +11,7 @@ import UserDashboardPage from "../pages/user/UserDashboardPage";
 import RegisterPage from "../pages/RegisterPage";
 import Error404Page from "../pages/Error404Page";
 import AboutPage from "../pages/AboutPage";
+import ApproveUsersPage from "../pages/admin/ApproveUsersPage";
 
 /**
  * The router configuration for the application.
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutPage></AboutPage>,
+      },
+      {
+        path: "/users/approve",
+        element: <ApproveUsersPage></ApproveUsersPage>,
       },
       {
         path: "*",
