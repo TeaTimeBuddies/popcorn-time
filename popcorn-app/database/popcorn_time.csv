@@ -1,39 +1,38 @@
-id,Name,Director,Year,Genre,Stars
-,Dune (2021),Denis Villeneuve,2021,"[Action, Adventure, Drama]",Timothee Chalamet
-,Dune: Part Two,Denis Villeneuve,2024,"[Action, Adventure, Drama]",Timothee Chalamet
-,Interstellar,Christopher Nolan,2014,"[Adventure, Drama, Sci-Fi]",Matthew McConaughey
-,Inception,Christopher Nolan,2010,"[Action, Adventure, Sci-Fi]",Leonardo DiCaprio
-,Tenet,Christopher Nolan,2020,"[Action, Sci-Fi, Thriller]",John David Washington
-,The Martian,Ridley Scott,2015,"[Adventure, Drama, Sci-Fi]",Matt Damon
-,Batman Begins,Christopher Nolan,2005,"[Action, Thriller]",Christian Bale
-,Godzilla,Gareth Edwards,2014,"[Action, Adventure, Sci-Fi]",Elizabeth Olsen
-,Guardians of the Galaxy,James Gunn,2014,"[Sci-Fi, Adventure]",Chris Pratt
-,Avatar,James Cameron,2009,"[Sci-Fi, Adventure]",Sam Worthington
+id,Name,Director,Year,Genre,Stars,image
+,Dune (2021),Denis Villeneuve,2021,"[Action, Adventure, Drama]",Timothee Chalamet,https://m.media-amazon.com/images/M/MV5BMDQ0NjgyN2YtNWViNS00YjA3LTkxNDktYzFkZTExZGMxZDkxXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_FMjpg_UX1000_.jpg
+,Dune: Part Two,Denis Villeneuve,2024,"[Action, Adventure, Drama]",Timothee Chalamet,https://m.media-amazon.com/images/M/MV5BN2QyZGU4ZDctOWMzMy00NTc5LThlOGQtODhmNDI1NmY5YzAwXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg
+,Interstellar,Christopher Nolan,2014,"[Adventure, Drama, Sci-Fi]",Matthew McConaughey,https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg
+,Inception,Christopher Nolan,2010,"[Action, Adventure, Sci-Fi]",Leonardo DiCaprio,https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX1000_.jpg
+,Tenet,Christopher Nolan,2020,"[Action, Sci-Fi, Thriller]",John David Washington,https://m.media-amazon.com/images/M/MV5BMzU3YWYwNTQtZTdiMC00NjY5LTlmMTMtZDFlYTEyODBjMTk5XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg
+,The Martian,Ridley Scott,2015,"[Adventure, Drama, Sci-Fi]",Matt Damon,https://m.media-amazon.com/images/M/MV5BMTc2MTQ3MDA1Nl5BMl5BanBnXkFtZTgwODA3OTI4NjE@._V1_.jpg
+,Batman Begins,Christopher Nolan,2005,"[Action, Thriller]",Christian Bale,https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg
+,Godzilla,Gareth Edwards,2014,"[Action, Adventure, Sci-Fi]",Elizabeth Olsen,https://m.media-amazon.com/images/M/MV5BZDFmYTM4NzAtNWM0ZC00MGJlLWEyYzQtYzA3ZTFiNzc1YjllXkEyXkFqcGdeQXVyMTA4NjE0NjEy._V1_.jpg
+,Guardians of the Galaxy,James Gunn,2014,"[Sci-Fi, Adventure]",Chris Pratt,https://m.media-amazon.com/images/M/MV5BNDIzMTk4NDYtMjg5OS00ZGI0LWJhZDYtMzdmZGY1YWU5ZGNkXkEyXkFqcGdeQXVyMTI5NzUyMTIz._V1_FMjpg_UX1000_.jpg
 ,Titanic,"
-James Cameron",1997,"[Romance, Drama, Tragedy]",Leonardo DiCaprio
-,Everything Everywhere All at Once,"[Daniel Kwan, Daniel Scheinert]",2022,"[Action, Adventure, Comedy]",Michelle Yeoh
-,Past Lives,Celine Song,2023,"[Romance, Drama]",Greta Lee
-,The Matrix,"[Lana Wachowski, Lily Wachowski]",1999,"[Sci-Fi, Action]",Keanu Reeves
-,The Creator,Gareth Edwards,2023,"[Action, Adventure, Drama]",John David Washington
-,Avengers: Endgame,"[Anthony Russo, Joe Russo]",2019,"[Action, Adventure, Drama]",Robert Downey Jr.
-,Jaws,Steven Spielberg,1975,"[Thriller, Adventure]",Richard Dreyfuss
-,Saving Private Ryan,Steven Spielberg,1998,"[Drama, War]",Tom Hanks
-,Spider-Man: Across the Spider-Verse,"[Joaquim Dos Santos, Kemp Powers, Justin K. Thompson]",2023,"[Animation, Action, Adventure]",Shameik Moore
-,Fight Club,David Fincher,1999,"[Thriller, Crime]",Brad Pitt
-,Jurrasic Park,Steven Spielberg,1993,"[Action, Adventure]",Sam Neill
-,Raiders of the Lost Ark,Steven Spielberg,1981,"[Action, Adventure]",Harrison Ford
-,E.T,Steven Spielberg,1982,"[Adventure, Sci-Fi]",Henry Thomas
-,Catch Me If You Can,Steven Spielberg,2002,"[Crime, Drama]",Leonardo DiCaprio
-,Good Will Hunting,Gus Van Sant,1997,"[Drama, Romance]",Matt Damon
-,Shin Godzilla,Hideaki Anno,2016,"[Action, Drama]",Hiroki Hasegawa
-,Godzilla Minus One,Takashi Yamazaki,2023,"[Action, Adventure]",Sakura Ando
-,Se7en,David Fincher,1995,"[Crime, Thriller]",Brad Pitt
-,Bad Boys,Michael Bay,1995,"[Action, Comedy]",Lisa Boyle
-,Django Unchained,Quentin Tarantino,2012,"[Action, Western, Drama]",Jamie Foxx
-,Once Upon A Time In Hollywood,Quentin Tarantino,2019,"[Comedy, Drama]",Leonardo DiCaprio
-,Pulp Fiction,Quentin Tarantino,1994,"[Crime, Thriller]",John Travolta
-,Shutter Island,Martin Scorsese,2010,"[Thriller, Mystery]",Leonardo DiCaprio
-,Avatar,James Cameron,2009,"[Action, Adventure, Fantasy]",Sam Worthington
-,Your Name,Makoto Shinkai,2016,"[Animation, Drama, Fantasy]","[Ryunosuke Kamiki, Mone Kamishiraishi] "
-,Suzume,Makoto Shinkai,2022,"[Animation, Action, Adventure]","[Nanoka Hara, Hokuto Matsumura]"
-,Rush Hour,Brett Ratner,1998,"[Action, Comedy, Crime]","[Jackie Chan, Chris Tucker]"
+James Cameron",1997,"[Romance, Drama, Tragedy]",Leonardo DiCaprio,https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg
+,Everything Everywhere All at Once,"[Daniel Kwan, Daniel Scheinert]",2022,"[Action, Adventure, Comedy]",Michelle Yeoh,https://d135u4jtzauizi.cloudfront.net/EEAAOPayoff.jpg
+,Past Lives,Celine Song,2023,"[Romance, Drama]",Greta Lee,https://m.media-amazon.com/images/M/MV5BOTkzYmMxNTItZDAxNC00NGM0LWIyODMtMWYzMzRkMjIyMTE1XkEyXkFqcGdeQXVyMTAyMjQ3NzQ1._V1_.jpg
+,The Matrix,"[Lana Wachowski, Lily Wachowski]",1999,"[Sci-Fi, Action]",Keanu Reeves,https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg
+,The Creator,Gareth Edwards,2023,"[Action, Adventure, Drama]",John David Washington,https://m.media-amazon.com/images/M/MV5BNDUyNTIzNDQtYTZmMi00M2FlLTgyZjUtYWViZWNhMDYzMjE4XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg
+,Avengers: Endgame,"[Anthony Russo, Joe Russo]",2019,"[Action, Adventure, Drama]",Robert Downey Jr.,https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg
+,Jaws,Steven Spielberg,1975,"[Thriller, Adventure]",Richard Dreyfuss,https://m.media-amazon.com/images/M/MV5BMmVmODY1MzEtYTMwZC00MzNhLWFkNDMtZjAwM2EwODUxZTA5XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg
+,Saving Private Ryan,Steven Spielberg,1998,"[Drama, War]",Tom Hanks,https://m.media-amazon.com/images/M/MV5BZjhkMDM4MWItZTVjOC00ZDRhLThmYTAtM2I5NzBmNmNlMzI1XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_.jpg
+,Spider-Man: Across the Spider-Verse,"[Joaquim Dos Santos, Kemp Powers, Justin K. Thompson]",2023,"[Animation, Action, Adventure]",Shameik Moore,https://m.media-amazon.com/images/M/MV5BMzI0NmVkMjEtYmY4MS00ZDMxLTlkZmEtMzU4MDQxYTMzMjU2XkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_.jpg
+,Fight Club,David Fincher,1999,"[Thriller, Crime]",Brad Pitt,https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg
+,Jurrasic Park,Steven Spielberg,1993,"[Action, Adventure]",Sam Neill,https://m.media-amazon.com/images/M/MV5BMjM2MDgxMDg0Nl5BMl5BanBnXkFtZTgwNTM2OTM5NDE@._V1_FMjpg_UX1000_.jpg
+,Raiders of the Lost Ark,Steven Spielberg,1981,"[Action, Adventure]",Harrison Ford,https://m.media-amazon.com/images/M/MV5BNTU2ODkyY2MtMjU1NC00NjE1LWEzYjgtMWQ3MzRhMTE0NDc0XkEyXkFqcGdeQXVyMjM4MzQ4OTQ@._V1_FMjpg_UX1000_.jpg
+,E.T,Steven Spielberg,1982,"[Adventure, Sci-Fi]",Henry Thomas,https://m.media-amazon.com/images/M/MV5BMTQ2ODFlMDAtNzdhOC00ZDYzLWE3YTMtNDU4ZGFmZmJmYTczXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg
+,Catch Me If You Can,Steven Spielberg,2002,"[Crime, Drama]",Leonardo DiCaprio,https://m.media-amazon.com/images/M/MV5BZWNjNGRmNGEtYjRjNS00YzEwLWExZmEtMzAzMDhiMjFhZGRiXkEyXkFqcGdeQXVyMjQ0NzE0MQ@@._V1_.jpg
+,Good Will Hunting,Gus Van Sant,1997,"[Drama, Romance]",Matt Damon,https://m.media-amazon.com/images/M/MV5BOTI0MzcxMTYtZDVkMy00NjY1LTgyMTYtZmUxN2M3NmQ2NWJhXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg
+,Shin Godzilla,Hideaki Anno,2016,"[Action, Drama]",Hiroki Hasegawa,https://m.media-amazon.com/images/M/MV5BODQ4ZmIzNWMtY2NiYi00MmM1LWFjMGQtMDE0Nzc1NzhjNjEyXkEyXkFqcGdeQXVyNDUwNzM4MzQ@._V1_.jpg
+,Godzilla Minus One,Takashi Yamazaki,2023,"[Action, Adventure]",Sakura Ando,https://m.media-amazon.com/images/M/MV5BOTI5MjNjMTMtN2NiNC00YjBlLTgzMWQtMGRhZDZkYmY1NGU2XkEyXkFqcGdeQXVyNTgyNTA4MjM@._V1_.jpg
+,Se7en,David Fincher,1995,"[Crime, Thriller]",Brad Pitt,https://m.media-amazon.com/images/M/MV5BOTUwODM5MTctZjczMi00OTk4LTg3NWUtNmVhMTAzNTNjYjcyXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg
+,Bad Boys,Michael Bay,1995,"[Action, Comedy]",Lisa Boyle,https://m.media-amazon.com/images/M/MV5BMGE1ZTQ0ZTEtZTEwZS00NWE0LTlmMDUtMTE1ZWJiZTYzZTQ2XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg
+,Django Unchained,Quentin Tarantino,2012,"[Action, Western, Drama]",Jamie Foxx,https://m.media-amazon.com/images/M/MV5BMjIyNTQ5NjQ1OV5BMl5BanBnXkFtZTcwODg1MDU4OA@@._V1_.jpg
+,Once Upon A Time In Hollywood,Quentin Tarantino,2019,"[Comedy, Drama]",Leonardo DiCaprio,https://m.media-amazon.com/images/M/MV5BOTg4ZTNkZmUtMzNlZi00YmFjLTk1MmUtNWQwNTM0YjcyNTNkXkEyXkFqcGdeQXVyNjg2NjQwMDQ@._V1_FMjpg_UX1000_.jpg
+,Pulp Fiction,Quentin Tarantino,1994,"[Crime, Thriller]",John Travolta,https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg
+,Shutter Island,Martin Scorsese,2010,"[Thriller, Mystery]",Leonardo DiCaprio,https://m.media-amazon.com/images/M/MV5BYzhiNDkyNzktNTZmYS00ZTBkLTk2MDAtM2U0YjU1MzgxZjgzXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg
+,Avatar,James Cameron,2009,"[Action, Adventure, Fantasy]",Sam Worthington,https://m.media-amazon.com/images/M/MV5BZDA0OGQxNTItMDZkMC00N2UyLTg3MzMtYTJmNjg3Nzk5MzRiXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_FMjpg_UX1000_.jpg
+,Your Name,Makoto Shinkai,2016,"[Animation, Drama, Fantasy]","[Ryunosuke Kamiki, Mone Kamishiraishi] ",https://m.media-amazon.com/images/M/MV5BODRmZDVmNzUtZDA4ZC00NjhkLWI2M2UtN2M0ZDIzNDcxYThjL2ltYWdlXkEyXkFqcGdeQXVyNTk0MzMzODA@._V1_FMjpg_UX1000_.jpg
+,Suzume,Makoto Shinkai,2022,"[Animation, Action, Adventure]","[Nanoka Hara, Hokuto Matsumura]",https://m.media-amazon.com/images/M/MV5BNGVkNDc3NjUtNTY5ZS00ZmE0LWE3YzctMDk2OTRlNTdiZWQwXkEyXkFqcGdeQXVyMTU3NDg0OTgx._V1_.jpg
+,Rush Hour,Brett Ratner,1998,"[Action, Comedy, Crime]","[Jackie Chan, Chris Tucker]",https://m.media-amazon.com/images/M/MV5BYWM2NDZmYmYtNzlmZC00M2MyLWJmOGUtMjhiYmQ2OGU1YTE1L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg

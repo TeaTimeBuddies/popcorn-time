@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('genre');
             $table->string('stars');
             $table->boolean('is_approved')->default(false);
+            $table->string('image');
             $table->timestamps();
         });
     }
