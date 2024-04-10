@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
             'is_admin' => true,
+            'is_approved' => true,
         ]);
 
         $this->call(MovieSeeder::class);

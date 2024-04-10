@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GeneralLayout from "../layouts/GeneralLayout";
-import { API_URL } from "../constants";
+import GeneralLayout from "../../layouts/GeneralLayout";
+import { API_URL } from "../../constants";
 
 export interface Movie {
   id: number;

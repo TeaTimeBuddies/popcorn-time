@@ -70,6 +70,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/dashboard', [UserController::class, 'getDashboard']);
 
     //Favorite Movies
+    Route::get('/user/favorites/{userId}', [
+        UserController::class,
+        'getFavorites',
+    ]);
     Route::post('/user/favorites/{movieId}', [
         UserController::class,
         'addFavorite',

@@ -82,7 +82,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()
+            ->route('approvals')
+            ->with('success', 'User removed successfully.');
     }
 
     // public function login()
@@ -156,18 +159,30 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
+            'iApproved' => 'required',
         ]);
 
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->isApproved = false;
         $user->save();
 
         return response()->json(
             ['message' => 'User successfully registered.'],
             201
         );
+    }
+
+    //Favorites
+    public function getFavorites(Request $request, $userId)
+    {
+        $user = User::find($userId);
+        $favorites = $user
+            ->favorites()
+            ->get(['title', 'movies.id as movie_id']);
+        return response()->json($favorites);
     }
 
     public function addFavorite(Request $request, $movieId)
@@ -256,5 +271,21 @@ class UserController extends Controller
         }
 
         return response()->json(['name' => $user->name], 200);
+    }
+
+    public function toggleApprove($id)
+    {
+        $user = User::findOrFail($id);
+        $user->approved = !$user->approved;
+        $user->save();
+
+        return redirect()
+            ->route('approvals')
+            ->with(
+                'success',
+                $user->approved
+                    ? 'User has been approved.'
+                    : 'User has been unapproved.'
+            );
     }
 }

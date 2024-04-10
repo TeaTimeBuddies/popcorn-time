@@ -5,7 +5,7 @@ import DetailsPage from "../pages/DetailsPage";
 import CommentPage from "../pages/CommentPage";
 import HomePage from "../pages/HomePage";
 import AddMoviePage from "../pages/AddMoviePage";
-import ApproveMoviePage from "../pages/ApproveMoviePage";
+import ApproveMoviePage from "../pages/admin/ApproveMoviePage";
 import LoginForm from "../pages/LoginPage";
 import UserDashboardPage from "../pages/user/UserDashboardPage";
 import RegisterPage from "../pages/RegisterPage";
