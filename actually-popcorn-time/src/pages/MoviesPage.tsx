@@ -79,8 +79,39 @@ const MoviesPage = () => {
     });
   };
 
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    fetch(`${API_URL}movies/search/${searchQuery}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((fetchedMovies) => {
+        const movies = fetchedMovies.map((movie: Movie) => ({
+          ...movie,
+          director: movie.director,
+          genre: movie.genre,
+          stars: movie.stars,
+        }));
+        setMovies(movies);
+      });
+  };
+
   return (
     <GeneralLayout>
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search movies..."
+        />
+        <button type="submit">Search</button>
+      </form>
       <div className="">
         <table className="table">
           <thead>

@@ -172,4 +172,23 @@ class MovieController extends Controller
         $comment->save();
         return response()->json(['message' => 'Comment added']);
     }
+
+    /**
+     * Search for a movie by title.
+     */
+    public function search(Request $request)
+    {
+        $request->validate([
+            'query' => 'required|string',
+        ]);
+
+        $query = $request->input('query');
+
+        // Remove special characters from the search query
+        $query = preg_replace("/[^A-Za-z0-9 ]/", '', $query);
+
+        $movies = Movie::where('title', 'LIKE', "%{$query}%")->get();
+
+        return response()->json($movies);
+    }
 }
