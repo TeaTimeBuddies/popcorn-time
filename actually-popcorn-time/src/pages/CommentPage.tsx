@@ -19,7 +19,11 @@ const CommentPage = () => {
   // }, [apiUrl, id]);
 
   // Fetching review details
-  const { data: review, error: reviewError, isLoading: reviewLoading } = useFetchWithToken(`${apiUrl}ratings/index/${id}`);
+  const {
+    data: review,
+    error: reviewError,
+    isLoading: reviewLoading,
+  } = useFetchWithToken(`${apiUrl}ratings/index/${id}`);
   useEffect(() => {
     if (reviewError) {
       console.error(reviewError); // Log the error
@@ -42,7 +46,11 @@ const CommentPage = () => {
   // }, [apiUrl, id]);
 
   // Fetching comments
-  const { data: fetchedComments, error: commentsError, isLoading: commentsLoading } = useFetchWithToken(`${apiUrl}comment/${id}`);
+  const {
+    data: fetchedComments,
+    error: commentsError,
+    isLoading: commentsLoading,
+  } = useFetchWithToken(`${apiUrl}comment/${id}`);
   const [comments, setComments] = useState([]);
   useEffect(() => {
     if (fetchedComments) {
