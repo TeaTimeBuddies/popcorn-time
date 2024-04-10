@@ -174,10 +174,12 @@ class UserController extends Controller
     public function getFavorites(Request $request, $userId)
     {
         $user = User::find($userId);
-        $favorites = $user->favorites()->get(['title', 'movies.id as movie_id']);
+        $favorites = $user
+            ->favorites()
+            ->get(['title', 'movies.id as movie_id']);
         return response()->json($favorites);
     }
-    
+
     public function addFavorite(Request $request, $movieId)
     {
         $user = $request->user();
@@ -206,7 +208,9 @@ class UserController extends Controller
     public function getWatchlist(Request $request, $userId)
     {
         $user = User::find($userId);
-        $watchlist = $user->watchlist()->get(['title', 'movies.id as movie_id']);
+        $watchlist = $user
+            ->watchlist()
+            ->get(['title', 'movies.id as movie_id']);
         Log::info("Fetching watchlist for user: {$user->id}");
         return response()->json($watchlist);
     }
@@ -232,7 +236,6 @@ class UserController extends Controller
         $user->watchlist()->detach($movieId);
         return response()->json(['message' => 'Movie removed from watchlist']);
     }
-
 
     //Comments
     public function getComments(Request $request)

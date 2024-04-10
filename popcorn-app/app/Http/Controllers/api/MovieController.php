@@ -27,8 +27,7 @@ class MovieController extends Controller
                 ->orderBy('title')
                 ->paginate($perPage);
         } else {
-            $movies = Movie::orderBy('title')
-                ->paginate($perPage);
+            $movies = Movie::orderBy('title')->paginate($perPage);
         }
 
         return [

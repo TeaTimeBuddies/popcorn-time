@@ -12,6 +12,9 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+//Validation
+Route::post('/validate/${userId}', [AuthController::class, 'validateUser']);
+
 // Login
 Route::post('/user', [UserController::class, 'processLogin'])->name('login');
 Route::get('/user', [UserController::class, 'index']);
@@ -68,7 +71,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/dashboard', [UserController::class, 'getDashboard']);
 
     //Favorite Movies
-    Route::get('/user/favorites/{userId}', [UserController::class, 'getFavorites']);
+    Route::get('/user/favorites/{userId}', [
+        UserController::class,
+        'getFavorites',
+    ]);
     Route::post('/user/favorites/{movieId}', [
         UserController::class,
         'addFavorite',
@@ -83,7 +89,10 @@ Route::middleware('auth:sanctum')->group(function () {
     ]);
 
     //Watchlist
-    Route::get('/user/watchlist/{userId}', [UserController::class, 'getWatchlist']);
+    Route::get('/user/watchlist/{userId}', [
+        UserController::class,
+        'getWatchlist',
+    ]);
     Route::post('/user/watchlist/{movieId}', [
         UserController::class,
         'addFavorite',

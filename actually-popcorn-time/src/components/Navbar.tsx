@@ -71,12 +71,6 @@ const NavBar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a
-          className="material-symbols-outlined btn btn-ghost text-5xl text-primary"
-          href="/user/dashboard"
-        >
-          account_circle
-        </a>
       </div>
     </div>
   );
