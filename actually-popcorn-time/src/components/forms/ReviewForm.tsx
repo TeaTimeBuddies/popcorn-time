@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { API_URL } from "../../constants";
+import ActionButton from "../ActionButton";
 
 type ReviewFormProps = {
   id: string;
+  onClose: () => void;
 };
 
-const ReviewForm = ({ id }: ReviewFormProps) => {
+const ReviewForm = ({ id, onClose }: ReviewFormProps) => {
   // Inserting new rating and review
   const [review, setReview] = useState("");
   const [rating, setRating] = useState("");
@@ -46,35 +48,56 @@ const ReviewForm = ({ id }: ReviewFormProps) => {
   return (
     <>
       {/* Inserting new rating and review */}
+
       <form onSubmit={store}>
-        <label>
-          Review:
-          <br />
+        <div className="flex flex-col items-center gap-3">
           <textarea
-            value={review}
+            className="textarea textarea-bordered"
+            placeholder="Leave a review"
             onChange={(e) => setReview(e.target.value)}
+            value={review}
             required
             cols={50}
-          />
-        </label>
-        <br />
-        <label>
-          Rating:
+          ></textarea>
           <select
+            className="select select-bordered w-full max-w-xs"
             value={rating}
             onChange={(e) => setRating(e.target.value)}
             required
           >
-            <option value="">Select...</option>
+            <option value="" disabled selected>
+              Select rating..
+            </option>
+            {/* <option value="">Select...</option> */}
             {[...Array(5).keys()].map((value) => (
               <option key={value + 1} value={value + 1}>
                 {value + 1}
               </option>
             ))}
           </select>
-        </label>
-        <br />
-        <button type="submit">Submit</button>
+
+          <div className="flex gap-3">
+            <ActionButton
+              className="btn-sm col-span-2 col-start-2"
+              buttonText="Add Review"
+              type="submit"
+            >
+              {/* {loading && (
+            <span className="loading loading-spinner loading-xs"></span>
+          )} */}
+            </ActionButton>
+            <ActionButton
+              className="btn-sm col-span-2 col-start-2 border-secondary bg-secondary"
+              buttonText="Cancel"
+              type="button"
+              onClick={onClose}
+            >
+              {/* {loading && (
+              <span className="loading loading-spinner loading-xs"></span>
+            )} */}
+            </ActionButton>
+          </div>
+        </div>
       </form>
     </>
   );
