@@ -22,7 +22,11 @@ const DetailsPage = () => {
   const [showReviewForm, setShowReviewForm] = useState(false);
 
   // Fetching movie details
-  const { data: movie, error: movieError, isLoading: movieLoading } = useFetchWithToken(`${API_URL}movies/${id}`);
+  const {
+    data: movie,
+    error: movieError,
+    isLoading: movieLoading,
+  } = useFetchWithToken(`${API_URL}movies/${id}`);
   useEffect(() => {
     if (movieError) {
       console.error(movieError);
@@ -30,7 +34,11 @@ const DetailsPage = () => {
   }, [movieError]);
 
   // Fetching movie ratings
-  const { data: fetchedRatings, error: ratingsError, isLoading: ratingsLoading } = useFetchWithToken(`${API_URL}ratings/${id}`);
+  const {
+    data: fetchedRatings,
+    error: ratingsError,
+    isLoading: ratingsLoading,
+  } = useFetchWithToken(`${API_URL}ratings/${id}`);
   const [totalRatings, setTotalRating] = useState(0);
   const [ratings, setRatings] = useState<Rating[]>([]);
   useEffect(() => {
@@ -40,19 +48,19 @@ const DetailsPage = () => {
       }));
       setRatings(fetched_rating); // Set Rating
 
-        let total = 0;
-        fetchedRatings.forEach((r: Rating) => {
-          total += r.rating;
-        });
+      let total = 0;
+      fetchedRatings.forEach((r: Rating) => {
+        total += r.rating;
+      });
 
-        // Calculate average ratingc
-        setTotalRating(total / fetchedRatings.length);
-      }
+      // Calculate average ratingc
+      setTotalRating(total / fetchedRatings.length);
+    }
 
-      if (ratingsError) {
-        console.error(ratingsError);
-      }
-    }, [fetchedRatings, ratingsError]);
+    if (ratingsError) {
+      console.error(ratingsError);
+    }
+  }, [fetchedRatings, ratingsError]);
 
   if (!id) {
     return null;

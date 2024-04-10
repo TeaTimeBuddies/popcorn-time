@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import GeneralLayout from "../layouts/GeneralLayout";
 import { useNavigate } from "react-router-dom";
 import MovieForm from "../components/forms/MovieForm";
-import SuccessToast from "../components/SuccessToast";
+import Toast from "../components/Toast";
 
 const AddMoviePage: React.FC = () => {
   const [showSuccessToast, setShowSuccessToast] = useState<boolean>(false);
@@ -19,7 +19,7 @@ const AddMoviePage: React.FC = () => {
     <GeneralLayout title="Add a New Movie">
       <MovieForm onSuccess={handleSuccess} />
       {showSuccessToast && (
-        <SuccessToast message="Successfully added movie. Please wait for admin approval.">
+        <Toast message="Successfully added movie. Please wait for admin approval.">
           <button
             className="btn btn-neutral btn-xs text-primary"
             onClick={() => {
@@ -28,7 +28,7 @@ const AddMoviePage: React.FC = () => {
           >
             Go to movie page
           </button>
-        </SuccessToast>
+        </Toast>
       )}
     </GeneralLayout>
   );

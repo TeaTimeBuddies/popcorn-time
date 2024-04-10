@@ -17,7 +17,11 @@ export interface Movie {
 const TableHeaders = ["", "Title", "Director", "Year", "Genre", "Stars"];
 
 const MoviesPage = () => {
-  const { data: fetchedMovies, error, isLoading } = useFetchWithToken(`${API_URL}movies?is_approved=true`);
+  const {
+    data: fetchedMovies,
+    error,
+    isLoading,
+  } = useFetchWithToken(`${API_URL}movies?is_approved=true`);
 
   const [movies, setMovies] = useState<Movie[]>([]);
 

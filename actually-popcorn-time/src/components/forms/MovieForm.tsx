@@ -40,9 +40,9 @@ const MovieForm = ({ onSuccess }: MovieFormProps) => {
       const token = sessionStorage.getItem("token");
       const response = await fetch(`${API_URL}movies`, {
         method: "POST",
-        headers: { 
-          "Content-Type": "application/json" ,
-          'Authorization': `Bearer ${token}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           ...movie,

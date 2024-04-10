@@ -69,24 +69,24 @@ const CommentPageLayout = ({ ratings, comments }: CommentLayoutProps) => {
   //   return username;
   // };
 
-    // Store usernames in a state
-    const [usernames, setUsernames] = useState<{ [key: number]: string }>({});
-    useEffect(() => {
-      // Fetch usernames for all comments
-      Promise.all(
-        comments.map((c) =>
-          fetch(`${apiUrl}user/${c.user_id}`)
-            .then((res) => res.json())
-            .then((user) => ({ id: c.user_id, username: user.name }))
-        )
-      ).then((users) => {
-        const newUsernameMap: { [key: number]: string } = {};
-        users.forEach((user) => {
-          newUsernameMap[user.id] = user.username;
-        });
-        setUsernames(newUsernameMap);
+  // Store usernames in a state
+  const [usernames, setUsernames] = useState<{ [key: number]: string }>({});
+  useEffect(() => {
+    // Fetch usernames for all comments
+    Promise.all(
+      comments.map((c) =>
+        fetch(`${apiUrl}user/${c.user_id}`)
+          .then((res) => res.json())
+          .then((user) => ({ id: c.user_id, username: user.name }))
+      )
+    ).then((users) => {
+      const newUsernameMap: { [key: number]: string } = {};
+      users.forEach((user) => {
+        newUsernameMap[user.id] = user.username;
       });
-    }, [apiUrl, comments]);
+      setUsernames(newUsernameMap);
+    });
+  }, [apiUrl, comments]);
 
   return (
     <div className="w-11/12 py-10">
