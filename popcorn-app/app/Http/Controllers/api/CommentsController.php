@@ -25,7 +25,7 @@ class CommentsController extends Controller
     {
 
         $user = User::find($request->user_id);
-        $username = $user ? $user->name : '';
+        $username = $user->name;
 
         $comment = Comments::create([
             'user_id' => $request->user_id,

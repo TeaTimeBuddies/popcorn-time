@@ -21,15 +21,19 @@ const ReviewForm = ({ id }: ReviewFormProps) => {
 
     console.log({ review, rating });
 
+    const token = sessionStorage.getItem("token");
+
     const response = await fetch(`${API_URL}ratings/${id}`, {
       method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
       body: JSON.stringify({
-        userId: userId,
-        // TODO: NEED TO INSERT SESSION USER ID, ELSE REDIRECT LOGIN
+        userId: parseInt(sessionStorage.getItem("user_id") || '0', 10), 
         review,
         rating,
       }),
-      headers: { "Content-Type": "application/json" },
     });
 
     if (!response.ok) {

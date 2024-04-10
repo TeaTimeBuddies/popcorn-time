@@ -7,7 +7,7 @@ import useFetchWithToken from "../hooks/useToken";
 const CommentPage = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
   const { id } = useParams();
-  // const [review, setReview] = useState(null);
+  //const [rating, setReview] = useState(null);
   // const [comment, setComment] = useState(null);
 
   // useEffect(() => {
@@ -74,7 +74,7 @@ const CommentPage = () => {
       {reviewError || commentsError ? (
         <p>Error loading comments. Please try again later.</p>
       ) : review && comments ? (
-        <CommentPageLayout ratings={review} comments={comments} />
+        <CommentPageLayout ratings={review[0]} comments={comments} />
       ) : (
         <p>Comment Loading...</p>
       )}

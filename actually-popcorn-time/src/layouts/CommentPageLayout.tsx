@@ -10,26 +10,15 @@ export interface Comment {
 }
 
 type CommentLayoutProps = {
-  ratings?: Rating;
+  ratings: Rating;
   comments: Comment[];
 };
 
 const CommentPageLayout = ({ ratings, comments }: CommentLayoutProps) => {
   const apiUrl = import.meta.env.VITE_API_URL;
-
-  // Getting the username of the user that post
-  const [postUsername, setUsername] = useState("");
-  useEffect(() => {
-    // Fetch movie details
-    fetch(`${apiUrl}user/${ratings?.user_id}`)
-      .then((res) => res.json())
-      .then((fetchedUsername) => {
-        setUsername(fetchedUsername.username);
-      });
-  }, [apiUrl, ratings?.user_id]);
+  const [newComment, setComment] = useState("");
 
   // Creates a new comment
-  const [newComment, setComment] = useState("");
   const store = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!newComment) {
@@ -37,63 +26,34 @@ const CommentPageLayout = ({ ratings, comments }: CommentLayoutProps) => {
       return;
     }
 
+    const token = sessionStorage.getItem("token");
+
     const response = await fetch(`${apiUrl}comment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
       },
       body: JSON.stringify({
+        rating_id: ratings.id,
         comment: newComment,
-        user_id: sessionStorage.getItem("user_id"),
-        rating_id: ratings?.id,
+        user_id: parseInt(sessionStorage.getItem("user_id") || '0', 10), 
       }),
     });
     if (response.ok) {
+      const responseData = await response.json();
+      console.log(responseData);
       console.log("Comment added successfully");
       window.location.reload();
     }
   };
-
-  // function to recieve the username of the commenter
-  // const getCommentUsername = (id: number): string => {
-  //   const [username, setUsername] = useState<string>("");
-
-  //   useEffect(() => {
-  //     // Fetch movie details
-  //     fetch(`${apiUrl}user/${id}`)
-  //       .then((res) => res.json())
-  //       .then((fetchedUsername) => {
-  //         setUsername(fetchedUsername.username);
-  //       });
-  //   });
-  //   return username;
-  // };
-
-  // Store usernames in a state
-  const [usernames, setUsernames] = useState<{ [key: number]: string }>({});
-  useEffect(() => {
-    // Fetch usernames for all comments
-    Promise.all(
-      comments.map((c) =>
-        fetch(`${apiUrl}user/${c.user_id}`)
-          .then((res) => res.json())
-          .then((user) => ({ id: c.user_id, username: user.name }))
-      )
-    ).then((users) => {
-      const newUsernameMap: { [key: number]: string } = {};
-      users.forEach((user) => {
-        newUsernameMap[user.id] = user.username;
-      });
-      setUsernames(newUsernameMap);
-    });
-  }, [apiUrl, comments]);
 
   return (
     <div className="w-11/12 py-10">
       <div className="flex w-full flex-col items-center rounded-3xl border-2 border-sky-500 bg-stone-200 pb-10">
         <div className="w-full px-12">
           <div className="mt-2 w-full flex-none pt-6 text-4xl font-bold text-primary text-sky-500">
-            {postUsername}
+            {ratings?.username}
           </div>
           <div className="mt-2 w-full flex-none text-2xl text-primary text-white">
             <div className="flex items-center gap-2">
