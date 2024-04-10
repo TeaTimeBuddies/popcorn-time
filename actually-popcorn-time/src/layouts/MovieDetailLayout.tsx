@@ -2,6 +2,7 @@ import { Movie } from "../pages/MoviesPage";
 import ActionButton from "../components/ActionButton";
 import FavoritesButton from "../components/FavoritesButton";
 import WatchlistActionButton from "../components/WatchlistButton";
+import { useNavigate } from "react-router-dom";
 
 type MovieDetailLayoutProps = {
   movie?: Movie;
@@ -16,8 +17,9 @@ const MovieDetailLayout = ({
   onClickReviews,
   openReview,
 }: MovieDetailLayoutProps) => {
+  const navigate = useNavigate();
   return (
-    <div className="justify-centerp-10 m-10 flex h-4/5 w-4/5 flex-col items-center text-white">
+    <div className="m-10 flex h-4/5 w-4/5 flex-col items-center justify-center p-10 text-white">
       <div className="flex gap-10 font-sans">
         {/* Movie Image */}
         <div className="relative w-56">
@@ -121,7 +123,12 @@ const MovieDetailLayout = ({
               className="btn-sm mt-4"
               buttonText="REVIEWS"
               icon="play_arrow"
-              onClick={onClickReviews}
+              onClick={() => {
+                onClickReviews();
+                navigate.push({
+                  search: "?reviews=true",
+                });
+              }}
             ></ActionButton>
             <ActionButton
               className="btn-sm mt-4"
