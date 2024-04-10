@@ -17,13 +17,27 @@ export interface Movie {
 const TableHeaders = ["", "Title", "Director", "Year", "Genre", "Stars"];
 
 const MoviesPage = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 15;
+
   const {
     data: fetchedMovies,
     error,
     isLoading,
-  } = useFetchWithToken(`${API_URL}movies?is_approved=true`);
+  } = useFetchWithToken(
+    `${API_URL}movies?is_approved=true&per_page=${perPage}&page=${currentPage}`
+  );
+
+  // const MoviesPage = () => {
+  //   const {
+  //     data: fetchedMovies,
+  //     error,
+  //     isLoading,
+  //   } = useFetchWithToken(`${API_URL}movies?is_approved=true`);
 
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [pageNumbers, setPageNumbers] = useState<number[]>([]);
 
   // useEffect(() => {
   //   fetch(`${API_URL}movies?is_approved=true`)
@@ -41,13 +55,19 @@ const MoviesPage = () => {
 
   useEffect(() => {
     if (fetchedMovies) {
-      const movies = fetchedMovies.map((movie: Movie) => ({
+      const movies = fetchedMovies.data.map((movie: Movie) => ({
         ...movie,
         director: movie.director,
         genre: movie.genre,
         stars: movie.stars,
       }));
       setMovies(movies);
+
+      const totalPages = fetchedMovies.meta ? fetchedMovies.meta.last_page : 1;
+      setTotalPages(totalPages);
+
+      const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+      setPageNumbers(pageNumbers);
     }
   }, [fetchedMovies]);
 
@@ -100,6 +120,29 @@ const MoviesPage = () => {
           </tbody>
         </table>
       </div>
+      {currentPage > 1 && (
+        <button onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))}>
+          Previous Page
+        </button>
+      )}
+      {pageNumbers.map((number) => (
+        <button
+          key={number}
+          onClick={() => setCurrentPage(number)}
+          disabled={number === currentPage}
+        >
+          {number}
+        </button>
+      ))}
+      {currentPage < totalPages && (
+        <button
+          onClick={() =>
+            setCurrentPage((page) => Math.min(page + 1, totalPages))
+          }
+        >
+          Next Page
+        </button>
+      )}
     </GeneralLayout>
   );
 };
