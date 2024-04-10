@@ -19,53 +19,6 @@ Route::get('/user', [UserController::class, 'index']);
 //Signup
 Route::post('/signup', [UserController::class, 'processSignup']);
 
-//Dashboard
-Route::get('/user/dashboard', [UserController::class, 'getDashboard']);
-
-// Ratings
-Route::get('ratings/{id}', [RatingsController::class, 'show']);
-Route::get('ratings/index/{id}', [RatingsController::class, 'getRating']);
-Route::post('ratings/{id}', [RatingsController::class, 'store']);
-
-//Admin
-Route::post('movies/approve/{id}', [MovieController::class, 'approve']); //TODO: add middlware after auth implemented
-Route::post('movies/reject/{id}', [MovieController::class, 'reject']); //TODO: add middlware after auth implemented
-
-//Favorite Movies
-Route::get('/user/favorites', [UserController::class, 'getFavorites']);
-Route::post('/user/favorites/{movieId}', [
-    UserController::class,
-    'addFavorite',
-]);
-Route::delete('/user/favorites/{movieId}', [
-    UserController::class,
-    'removeFavorite',
-]);
-Route::get('/user/favorites/check/{movieId}', [
-    UserController::class,
-    'checkFavorite',
-]);
-
-//Watchlist
-Route::get('/user/watchlist', [UserController::class, 'getWatchlist']);
-Route::post('/user/watchlist/{movieId}', [
-    UserController::class,
-    'addWatchlist',
-]);
-Route::delete('/user/watchlist/{movieId}', [
-    UserController::class,
-    'removeWatchlist',
-]);
-Route::get('/user/watchlist/check/{movieId}', [
-    UserController::class,
-    'checkWatchlist',
-]);
-
-//Comments
-Route::get('/user/comments', [UserController::class, 'getComments']);
-Route::post('/user/comments', [UserController::class, 'addComment']);
-Route::delete('/user/comments', [UserController::class, 'removeComment']);
-
 // Logout
 Route::post('/logout', [UserController::class, 'logout'])->middleware(
     'auth:sanctum'
@@ -73,46 +26,6 @@ Route::post('/logout', [UserController::class, 'logout'])->middleware(
 
 // User
 // Route::middleware('auth:sanctum')->group(function () {
-//Dashboard
-Route::get('/user/dashboard', [UserController::class, 'getDashboard']);
-
-//Favorite Movies
-Route::get('/user/favorites', [UserController::class, 'getFavorites']);
-Route::post('/user/favorites/{movieId}', [
-    UserController::class,
-    'addFavorite',
-]);
-Route::delete('/user/favorites/{movieId}', [
-    UserController::class,
-    'removeFavorite',
-]);
-Route::get('/user/favorites/check/{movieId}', [
-    UserController::class,
-    'checkFavorite',
-]);
-
-//Watchlist
-Route::get('/user/watchlist', [UserController::class, 'getWatchlist']);
-Route::post('/user/watchlist/{movieId}', [
-    UserController::class,
-    'addWatchlist',
-]);
-Route::delete('/user/watchlist/{movieId}', [
-    UserController::class,
-    'removeWatchlist',
-]);
-Route::get('/user/watchlist/check/{movieId}', [
-    UserController::class,
-    'checkWatchlist',
-]);
-
-//Comments
-Route::get('/user/comments', [UserController::class, 'getComments']);
-Route::post('/user/comments', [UserController::class, 'addComment']);
-Route::delete('/user/comments', [UserController::class, 'removeComment']);
-Route::get('/comment/{id}', [CommentsController::class, 'show']);
-Route::get('/user/{id}', [UserController::class, 'getUsername']);
-Route::post('/comment', [CommentsController::class, 'store']);
 
 // });
 Route::group([], function () {
@@ -123,6 +36,7 @@ Route::group([], function () {
 });
 
 // jwt.auth
+// auth:sanctum
 Route::middleware('auth:sanctum')->group(function () {
     # all the routes that require authentication go here
 
@@ -132,4 +46,54 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('movies', [MovieController::class, 'store']);
     Route::put('movies/{id}', [MovieController::class, 'update']);
     Route::delete('movies/{id}', [MovieController::class, 'destroy']);
+
+    // Ratings
+    Route::get('ratings/{id}', [RatingsController::class, 'show']);
+    Route::get('ratings/index/{id}', [RatingsController::class, 'getRating']);
+    Route::post('ratings/{id}', [RatingsController::class, 'store']);
+
+    //Comments
+    Route::get('/user/comments', [UserController::class, 'getComments']);
+    Route::post('/user/comments', [UserController::class, 'addComment']);
+    Route::delete('/user/comments', [UserController::class, 'removeComment']);
+    Route::get('/comment/{id}', [CommentsController::class, 'show']);
+    Route::get('/user/{id}', [UserController::class, 'getUsername']);
+    Route::post('/comment', [CommentsController::class, 'store']);
+
+    //Admin
+    Route::post('movies/approve/{id}', [MovieController::class, 'approve']); //TODO: add middlware after auth implemented
+    Route::post('movies/reject/{id}', [MovieController::class, 'reject']); //TODO: add middlware after auth implemented
+
+    //Dashboard
+    Route::get('/user/dashboard', [UserController::class, 'getDashboard']);
+
+    //Favorite Movies
+    Route::get('/user/favorites', [UserController::class, 'getFavorites']);
+    Route::post('/user/favorites/{movieId}', [
+        UserController::class,
+        'addFavorite',
+    ]);
+    Route::delete('/user/favorites/{movieId}', [
+        UserController::class,
+        'removeFavorite',
+    ]);
+    Route::get('/user/favorites/check/{movieId}', [
+        UserController::class,
+        'checkFavorite',
+    ]);
+
+    //Watchlist
+    Route::get('/user/watchlist', [UserController::class, 'getWatchlist']);
+    Route::post('/user/watchlist/{movieId}', [
+        UserController::class,
+        'addWatchlist',
+    ]);
+    Route::delete('/user/watchlist/{movieId}', [
+        UserController::class,
+        'removeWatchlist',
+    ]);
+    Route::get('/user/watchlist/check/{movieId}', [
+        UserController::class,
+        'checkWatchlist',
+    ]);
 });

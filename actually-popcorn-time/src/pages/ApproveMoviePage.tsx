@@ -16,18 +16,32 @@ const AdminApprovalPage = () => {
   const navigate = useNavigate();
   const [movies, setMovies] = useState<Movie[]>([]);
 
+    // Check if the user is an admin
+    const isAdmin = sessionStorage.getItem('is_admin');
+    if (isAdmin !== '1') {
+      navigate('/'); // Redirect to home page or any other page
+      return null; // Return null or a different component to render
+    }
+
   useEffect(() => {
-    fetch(`${API_URL}movies?is_approved=false`)
+    const token = sessionStorage.getItem('token');
+    fetch(`${API_URL}movies?is_approved=false`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => setMovies(data))
       .catch((error) => console.error("There was an error!", error));
   }, []);
 
   const approveMovie = (id: number) => {
+    const token = sessionStorage.getItem('token');
     fetch(`${API_URL}movies/approve/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
       },
     })
       .then((response) => {
@@ -39,10 +53,12 @@ const AdminApprovalPage = () => {
   };
 
   const rejectMovie = (id: number) => {
+    const token = sessionStorage.getItem('token');
     fetch(`${API_URL}movies/reject/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
       },
     })
       .then((response) => {

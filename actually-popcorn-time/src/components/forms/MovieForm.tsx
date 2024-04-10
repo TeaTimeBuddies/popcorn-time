@@ -37,9 +37,13 @@ const MovieForm = ({ onSuccess }: MovieFormProps) => {
     e.preventDefault();
     setLoading(true);
     try {
+      const token = sessionStorage.getItem("token");
       const response = await fetch(`${API_URL}movies`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json" ,
+          'Authorization': `Bearer ${token}`,
+        },
         body: JSON.stringify({
           ...movie,
           genre: movie.genre.split(",").map((g) => g.trim()),
