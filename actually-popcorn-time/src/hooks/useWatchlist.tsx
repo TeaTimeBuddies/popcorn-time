@@ -21,8 +21,10 @@ export const useWatchlist = (movieId: string): UseWatchlistReturn => {
           },
         }
       );
+      console.log("token in useWatchlist", token);
       const data = await response.json();
       setIsWatchlisted(data.isWatchlisted);
+      console.log("status for watchlist button", data.isWatchlisted)
     } catch (error) {
       console.error("Error checking watchlist status:", error);
     }
@@ -35,7 +37,7 @@ export const useWatchlist = (movieId: string): UseWatchlistReturn => {
   const toggleWatchlist = async (): Promise<void> => {
     try {
       const method = isWatchlisted ? "DELETE" : "POST";
-      const response = await fetch(`${API_URL}user/watchlist/${movieId}`, {
+      await fetch(`${API_URL}user/watchlist/${movieId}`, {
         method: method,
         headers: { "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
@@ -43,11 +45,8 @@ export const useWatchlist = (movieId: string): UseWatchlistReturn => {
         
       });
 
-      if (response.ok) {
         setIsWatchlisted(!isWatchlisted);
-      } else {
-        console.error("Failed to toggle watchlist:", response.status);
-      }
+        console.log("status for watchlist button adding/deleting", isWatchlisted)
     } catch (error) {
       console.error("Error toggling watchlist:", error);
     }
