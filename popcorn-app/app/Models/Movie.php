@@ -25,6 +25,7 @@ class Movie extends Model
         'stars',
         'year',
         'genre',
+        'image',
         'is_approved',
     ];
 

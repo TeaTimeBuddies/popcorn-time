@@ -1,8 +1,8 @@
-import { Movie } from "../pages/MoviesPage";
 import ActionButton from "../components/ActionButton";
 import FavoritesButton from "../components/FavoritesButton";
 import WatchlistActionButton from "../components/WatchlistButton";
 import { useNavigate } from "react-router-dom";
+import { Movie } from "../pages/MoviesPage";
 
 type MovieDetailLayoutProps = {
   movie?: Movie;
