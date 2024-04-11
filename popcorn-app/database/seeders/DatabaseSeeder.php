@@ -16,9 +16,11 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => config('admin.name'),
+            'email' => config('admin.email'),
+            'password' => bcrypt(config('admin.password')),
             'is_admin' => true,
+            'is_approved' => true,
         ]);
 
         $this->call(MovieSeeder::class);

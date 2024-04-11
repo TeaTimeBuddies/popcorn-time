@@ -49,6 +49,7 @@ const LoginForm = ({ onErrors }: LoginFormProps) => {
         sessionStorage.setItem("user_id", user.id);
         sessionStorage.setItem("email", user.email);
         sessionStorage.setItem("is_admin", user.is_admin.toString());
+        sessionStorage.setItem("is_approved", user.is_approved.toString());
         sessionStorage.setItem("token", token);
         navigate("/user/dashboard");
       } else {
