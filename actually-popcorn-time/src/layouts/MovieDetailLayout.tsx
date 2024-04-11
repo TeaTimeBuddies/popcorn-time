@@ -118,14 +118,15 @@ const MovieDetailLayout = ({
             />
           </div>
           <div className=" flex items-center gap-6">
-            <ActionButton
-              className="btn-sm mt-4"
-              buttonText="REVIEWS"
-              icon="play_arrow"
+            <button
+             // className="bg-action btn-sm hover:primary border-4 text-primary font-bold py-2 px-4 border-primary hover:border-action mt-4"
+            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded-full"
+
+             
               onClick={() => {
                 onClickReviews();
               }}
-            ></ActionButton>
+            >Reviews</button>
             <ActionButton
               className="btn-sm mt-4"
               buttonText="LEAVE REVIEW"

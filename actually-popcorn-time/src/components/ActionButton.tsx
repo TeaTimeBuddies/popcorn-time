@@ -25,11 +25,10 @@ const ActionButton = ({
   return (
     <button
       type="button"
-      className={`btn flex items-center gap-1 ${className} ${outline ? " btn-outline btn-sm rounded-full border-primary text-primary" : "btn rounded-full border-action bg-action text-primary"}`}
-      onClick={() => route && navigate(route)}
+      className={`btn flex items-center gap-1 ${className} ${outline ? "btn-outline btn-sm rounded-full border-action text-primary hover:bg-primary hover:text-action hover:border-action hover:border-4" : "btn rounded-full border-action bg-action text-primary hover:bg-primary hover:text-action hover:border-action hover:border-4"}`}      onClick={() => route && navigate(route)}
       {...props}
     >
-      {buttonText}
+      <span className="font-bold">{buttonText}</span>
       {children}
       <span className="material-symbols-outlined text-lg text-primary ">
         {icon}

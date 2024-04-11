@@ -7,14 +7,14 @@ export default {
 
     extend: {
       colors: {
-        app100: '#d9d9d9',
-        app200: '#e3e3e3',
-        app300: '#e6e6e6',
-        action: '#7b61ff',
-        primary: '#ffffff',
-        secondary: '#1F2937',
-        stars: '#1F2937',
-        white: '#ffffff',
+        app100: '#22262A', // background for app
+        app200: '#DE0001', 
+        app300: '#F52870', // internal backgrounds 
+        action: '#FFF797', // buttons, yellow background 
+        primary: '#F52870', // primary text color
+        secondary: '#000C66',
+        stars: '#1F2937', 
+        white: '#F8EFE4', // text color
         purple: '#3f3cbb',
         midnight: '#121063',
         metal: '#565584',
