@@ -104,6 +104,7 @@ Route::middleware('auth:sanctum')->group(function () {
         'getFavorites',
     ]);
 
+    Route::post('/user/favorites', [FavoritesController::class, 'store']);
 
     //Watchlist
     Route::post('/user/watchlist', [WatchlistsController::class, 'store']);

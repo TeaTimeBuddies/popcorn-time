@@ -13,8 +13,26 @@ type MovieDetailLayoutProps = {
 };
 
 const token = sessionStorage.getItem("token");
-const addMovieFavorite = async (movieId: number) => {
+const addMovieWatchlist = async (movieId: number) => {
   const response = await fetch(`${API_URL}user/watchlist`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        movie_id: movieId,
+        user_id: sessionStorage.getItem("user_id"),
+      })
+    }
+  );
+
+  console.log(response);
+};
+
+const addMovieFavorites = async (movieId: number) => {
+  const response = await fetch(`${API_URL}user/favorites`,
     {
       method: "POST",
       headers: {
@@ -124,28 +142,38 @@ const MovieDetailLayout = ({
             <span><span className="font-bold">STARS: </span><span>{movie?.stars}</span></span>
           </div>
           {/* Favourite Button */}
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2">
-              {movie && (
+          {movie && (
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2">
+
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() => addMovieFavorite(movie?.id)}
+                    onClick={() => addMovieFavorites(movie?.id)}
                     className="material-icons"
                     // aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
                     aria-label="Remove from favorites"
                   >
                     {/*isFavorited ? "favorite" : "favorite_border"*/}
                     {"favorite_border"}
-                    </button>
+                  </button>
                 </div>
-              )}
-            </div>
 
-            <WatchlistActionButton
-              buttonText="TO WATCHLIST"
-              movieId={movie?.id.toString() ?? ""}
-            />
-          </div>
+              </div>
+
+              {/* Watchlist Button */}
+              <button
+                type="button"
+                className={`btn flex items-center gap-1`}
+                onClick={() => addMovieWatchlist(movie?.id)}
+              >
+                {"TO WATCHLIST"}
+                <span className="material-symbols-outlined text-lg text-primary">
+                  {"add"}
+                </span>
+              </button>
+
+            </div>
+          )}
           <div className=" flex items-center gap-6">
             {/* <button
              // className="bg-action btn-sm hover:primary border-4 text-primary font-bold py-2 px-4 border-primary hover:border-action mt-4"
