@@ -51,6 +51,26 @@ const ApproveUsersPage = () => {
       });
   };
 
+  const handleDelete = (id: string) => {
+    const token = sessionStorage.getItem("token");
+    console.log(id);
+    fetch(`${API_URL}approvals/users/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // Remove the user from the list
+        setUsers((prevUsers) =>
+          prevUsers.filter((user) => user.id.toString() !== id)
+        );
+        setRefresh(!refresh); // Toggle the refresh state to force a re-render
+      });
+  };
+
   return (
     <GeneralLayout>
       <div className="flex w-4/5 justify-center overflow-x-auto">
@@ -83,6 +103,7 @@ const ApproveUsersPage = () => {
                     </button>
 
                     <button
+                      onClick={() => handleDelete(u.id.toString())}
                       type="button"
                       className="justify-cente btn btn-error btn-sm flex items-center"
                     >

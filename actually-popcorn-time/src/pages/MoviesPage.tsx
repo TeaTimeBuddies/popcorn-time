@@ -15,7 +15,7 @@ export interface Movie {
 }
 
 const TableHeaders = ["", "Title", "Director", "Year", "Genre", "Stars"];
-const userId = Number(sessionStorage.getItem("userId")); 
+const userId = Number(sessionStorage.getItem("userId"));
 
 const MoviesPage = () => {
   const [currentPage, setCurrentPage] = useState(1);

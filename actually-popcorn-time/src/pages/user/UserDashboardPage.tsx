@@ -16,12 +16,12 @@ const UserDashboardPage = () => {
       const userID = sessionStorage.getItem("user_id");
       const apiCall = `${API_URL}user/${userID}/favorites`;
       console.log(apiCall);
-      const response = await fetch(`${apiCall}`,{
+      const response = await fetch(`${apiCall}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
-        }
+        },
       });
 
       const data = await response.json();
@@ -32,33 +32,33 @@ const UserDashboardPage = () => {
           director: movie.director,
           genre: movie.genre,
           stars: movie.stars,
-        }))
+        }));
 
         setFavoriteMovies(movies);
-      };
+      }
     };
 
     const fetchWatchlist = async () => {
-        const userID = sessionStorage.getItem("user_id")
-        const response = await fetch(`${API_URL}user/${userID}/watchlist`,{
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            }
-        });
-        
-        const data = await response.json();
-        if (data) {
-          const movies = data.map((movie: Movie) => ({
-            ...movie,
-            director: movie.director,
-            genre: movie.genre,
-            stars: movie.stars,
-          }))
+      const userID = sessionStorage.getItem("user_id");
+      const response = await fetch(`${API_URL}user/${userID}/watchlist`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-          setWatchlistMovies(movies);
-        };
+      const data = await response.json();
+      if (data) {
+        const movies = data.map((movie: Movie) => ({
+          ...movie,
+          director: movie.director,
+          genre: movie.genre,
+          stars: movie.stars,
+        }));
+
+        setWatchlistMovies(movies);
+      }
     };
 
     fetchFavorites();
@@ -96,7 +96,7 @@ const UserDashboardPage = () => {
               </tbody>
             </table>
           </div>
-        ) : ( 
+        ) : (
           // While favoriteMovies is null, show loading message
           <p>Movie Loading...</p>
         )}
@@ -125,11 +125,10 @@ const UserDashboardPage = () => {
               </tbody>
             </table>
           </div>
-        ) : ( 
+        ) : (
           // While favoriteMovies is null, show loading message
           <p>Movie Loading...</p>
         )}
-
       </div>
     </GeneralLayout>
   );

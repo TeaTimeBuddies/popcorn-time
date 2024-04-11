@@ -83,12 +83,13 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy($userId)
     {
-        $user->delete();
-        return redirect()
-            ->route('approvals')
-            ->with('success', 'User removed successfully.');
+        $user = User::findOrFail($userId);
+
+        if ($user->delete()) {
+            return response()->json(['message' => 'User deleted successfully']);
+        }
     }
 
     // public function login()

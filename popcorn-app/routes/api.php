@@ -72,6 +72,10 @@ Route::middleware('auth:sanctum')->group(function () {
         UserController::class,
         'toggleApprove',
     ])->name('approve');
+    Route::delete('approvals/users/{userId}', [
+        UserController::class,
+        'destroy',
+    ])->name('destroy');
 
     //Dashboard
     Route::get('/user/dashboard', [UserController::class, 'getDashboard']);
@@ -113,6 +117,12 @@ Route::middleware('auth:sanctum')->group(function () {
     ]);
 
     // UserDashboard get methods - Favorites and Watchlist
-    Route::get('/user/{userID}/favorites', [FavoritesController::class, 'getFavorites']);
-    Route::get('/user/{userID}/watchlist', [WatchlistsController::class, 'getWatchlist']);
+    Route::get('/user/{userID}/favorites', [
+        FavoritesController::class,
+        'getFavorites',
+    ]);
+    Route::get('/user/{userID}/watchlist', [
+        WatchlistsController::class,
+        'getWatchlist',
+    ]);
 });
