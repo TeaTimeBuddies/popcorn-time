@@ -203,9 +203,22 @@ class UserController extends Controller
         return response()->json(['message' => 'Movie removed from favorites']);
     }
 
-    public function checkFavorite(Request $request, $movieId)
+    public function removeWatchlist(Request $request, $movieId)
     {
         $user = $request->user();
+        $user->watchlists()->detach($movieId);
+        return response()->json(['message' => 'Movie removed from watchlist']);
+    }
+
+    public function checkFavorite(Request $request, $movieId)
+    {
+        $userId = $request->input('user_id');
+        $user = User::find($userId); 
+    
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+        
         $isFavorited = $user
             ->favorites()
             ->where('movie_id', $movieId)
@@ -213,56 +226,20 @@ class UserController extends Controller
         return response()->json(['isFavorited' => $isFavorited]);
     }
 
-    //Watchlist
-    public function getWatchlist(Request $request, $userId)
-    {
-        $user = User::find($userId);
-        $watchlist = $user
-            ->watchlist()
-            ->get(['title', 'movies.id as movie_id']);
-        Log::info("Fetching watchlist for user: {$user->id}");
-        return response()->json($watchlist);
-    }
     public function checkWatchlist(Request $request, $movieId)
     {
-        $user = $request->user();
+        $userId = $request->input('user_id'); 
+        $user = User::find($userId); 
+
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
         $isWatchlisted = $user
-            ->watchlist()
+            ->watchlists()
             ->where('movie_id', $movieId)
             ->exists();
         return response()->json(['isWatchlisted' => $isWatchlisted]);
-    }
-
-    public function addWatchlist(Request $request, $movieId)
-    {
-        $user = $request->user();
-        $user->watchlist()->attach($movieId);
-        return response()->json(['message' => 'Movie added to watchlist']);
-    }
-    public function removeWatchlist(Request $request, $movieId)
-    {
-        $user = $request->user();
-        $user->watchlist()->detach($movieId);
-        return response()->json(['message' => 'Movie removed from watchlist']);
-    }
-
-    //Comments
-    public function getComments(Request $request)
-    {
-        $user = $request->user();
-        $comments = $user->comments()->with('movie')->get();
-        return response()->json($comments);
-    }
-    public function addComment(Request $request)
-    {
-        $user = $request->user();
-        $comment = new Comments([
-            'user_id' => $user->id,
-            'movie_id' => $request->movie_id,
-            'comment' => $request->comment,
-        ]);
-        $comment->save();
-        return response()->json(['message' => 'Comment added successfully']);
     }
 
     public function getUsername(Request $request)
@@ -287,4 +264,11 @@ class UserController extends Controller
             ? response()->json(['message' => 'User approved'])
             : response()->json(['message' => 'User disapproved']);
     }
+
+    public function isWatchlisted(Request $request, $movieId) {
+        $userId = $request -> user() -> id;
+        $isWatchlisted = User::find($userId) -> watchlist() -> where('movie_id', $movieId) -> exists();
+        return response() -> json(['isWatchlisted' => $isWatchlisted]);
+    }
+
 }

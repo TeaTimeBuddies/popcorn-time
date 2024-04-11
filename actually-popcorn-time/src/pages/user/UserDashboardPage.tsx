@@ -43,7 +43,7 @@ const UserDashboardPage = () => {
     const fetchWatchlist = async () => {
       setLoading(true);
       const userID = sessionStorage.getItem("user_id");
-      const response = await fetch(`${API_URL}user/${userID}/watchlist`, {
+      const response = await fetch(`${API_URL}user/watchlist/${userID}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -52,6 +52,8 @@ const UserDashboardPage = () => {
       });
 
       const data = await response.json();
+      console.log(data)
+
       if (data) {
         const movies = data.map((movie: Movie) => ({
           ...movie,

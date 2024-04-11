@@ -22,7 +22,18 @@ class WatchlistsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $watchlist = Watchlists::create([
+            'user_id' => $request->user_id,
+            'movie_id' => $request->movie_id,
+        ]);
+
+        return response()->json(
+            [
+                'success' => 'Rating added successfully',
+                'watchlist' => $watchlist,
+            ],
+            200
+        );
     }
 
     /**

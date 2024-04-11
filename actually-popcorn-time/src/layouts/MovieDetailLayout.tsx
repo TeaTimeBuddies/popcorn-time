@@ -1,8 +1,9 @@
 import ActionButton from "../components/ActionButton";
-import FavoritesButton from "../components/FavoritesButton";
 import WatchlistActionButton from "../components/WatchlistButton";
 import { useNavigate } from "react-router-dom";
 import { Movie } from "../pages/MoviesPage";
+import { API_URL } from "../constants";
+import { useState, useEffect, useCallback } from "react";
 
 type MovieDetailLayoutProps = {
   movie?: Movie;
@@ -18,6 +19,158 @@ const MovieDetailLayout = ({
   openReview,
 }: MovieDetailLayoutProps) => {
   const navigate = useNavigate();
+
+  const [isFavorited, setIsFavorited] = useState<boolean>(false);
+  const [isWatchlisted, setIsWatchlisted] = useState<boolean>(false);
+const token = sessionStorage.getItem("token");
+const addMovieWatchlist = async (movieId: number) => {
+  const response = await fetch(`${API_URL}user/watchlist`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        movie_id: movieId,
+        user_id: sessionStorage.getItem("user_id"),
+      })
+    }
+  );
+
+  console.log(response);
+  
+  if (response.ok){
+    const data = await response.json();
+    console.log(data);
+    setIsWatchlisted(true)
+  }
+
+};
+
+const removeMovieWatchlist = async (movieId: number) => {
+  const response = await fetch(`${API_URL}user/watchlist/${movieId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  console.log(response);
+
+  if (response.ok){
+    const data = await response.json();
+    console.log(data);
+    setIsWatchlisted(false)
+  }
+
+};
+
+const addMovieFavorites = async (movieId: number) => {
+  const response = await fetch(`${API_URL}user/favorites`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        movie_id: movieId,
+        user_id: sessionStorage.getItem("user_id"),
+      })
+    }
+  );
+
+  console.log(response);
+
+  if (response.ok){
+    const data = await response.json();
+    console.log(data);
+    setIsFavorited(true)
+  }
+
+};
+
+const removeMovieFavorites = async (movieId: number) => {
+  const response = await fetch(`${API_URL}user/favorites/${movieId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        movie_id: movieId,
+        user_id: sessionStorage.getItem("user_id"),
+      })
+    }
+  );
+
+  console.log(response);
+
+  if (response.ok){
+    const data = await response.json();
+    console.log(data);
+    setIsFavorited(false)
+  }
+
+};
+
+const findIfFavorite = async (movieId: number) => {
+  const response = await fetch(`${API_URL}user/favorites/check/${movieId}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        user_id: sessionStorage.getItem("user_id"),
+      }),
+    }
+  );
+
+  if (response.ok){
+    const data = await response.json();
+    console.log(data);
+    setIsFavorited(data.isFavorited)
+  }
+
+};
+
+const findIfWatchlist = async (movieId: number) => {
+  const response = await fetch(`${API_URL}user/watchlist/check/${movieId}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        user_id: sessionStorage.getItem("user_id"),
+      }),
+    }
+  );
+
+  if (response.ok){
+    const data = await response.json();
+    console.log(data);
+    setIsWatchlisted(data.isWatchlisted)
+  }
+
+};
+
+  useEffect(() => {
+    if (movie) {
+      findIfFavorite(movie.id);
+      findIfWatchlist(movie.id);
+    }
+  }, []);
+
+
   return (
 <div className="flex flex-col items-center justify-center max-w-screen-lg pt-10 text-white h-3/4 w-full mt-10">
   <div className="flex gap-1 font-sans">
@@ -104,20 +257,50 @@ const MovieDetailLayout = ({
             <span><span className="font-bold">STARS: </span><span>{movie?.stars}</span></span>
           </div>
           {/* Favourite Button */}
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2">
-              {movie && (
-                <div className="flex items-center gap-2">
-                  <FavoritesButton movieId={movie.id.toString()} />
-                </div>
-              )}
-            </div>
+          {movie && (
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2">
 
-            <WatchlistActionButton
-              buttonText="TO WATCHLIST"
-              movieId={movie?.id.toString() ?? ""}
-            />
-          </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      if (isFavorited) {
+                        removeMovieFavorites(movie?.id)
+                      } else {
+                        addMovieFavorites(movie?.id)
+                      }
+                  }}
+                    className="material-icons"
+                    // aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
+                    aria-label="Remove from favorites"
+                  >
+                    {/*isFavorited ? "favorite" : "favorite_border"*/}
+                    {isFavorited ? "favorite" : "favorite_border"}
+                  </button>
+                </div>
+
+              </div>
+
+              {/* Watchlist Button */}
+              <button
+                type="button"
+                className={`btn flex items-center gap-1`}
+                onClick={() => {
+                  if (isWatchlisted) {
+                    removeMovieWatchlist(movie?.id)
+                  } else {
+                    addMovieWatchlist(movie?.id)
+                  }
+                }}
+              >
+                {"TO WATCHLIST"}
+                <span className="material-symbols-outlined text-lg text-primary">
+                  {isWatchlisted ? "remove" : "add"}
+                </span>
+              </button>
+
+            </div>
+          )}
           <div className=" flex items-center gap-6">
             {/* <button
              // className="bg-action btn-sm hover:primary border-4 text-primary font-bold py-2 px-4 border-primary hover:border-action mt-4"
