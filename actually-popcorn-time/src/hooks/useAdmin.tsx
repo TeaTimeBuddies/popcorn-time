@@ -1,5 +1,6 @@
 export const useAdmin = () => {
-  const isAdmin = sessionStorage.getItem("is_admin");
-  console.log(isAdmin)
+  const isAdminString = sessionStorage.getItem("is_admin");
+  const isAdmin = isAdminString === "1";
+  console.log(isAdmin);
   return isAdmin;
-  }
+};

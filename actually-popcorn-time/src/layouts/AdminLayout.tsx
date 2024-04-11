@@ -13,13 +13,11 @@ const AdminLayout = ({ title, children }: AdminLayoutProps) => {
   const isAdmin = useAdmin();
 
   useEffect(() => {
-    if (isAdmin == "0") {
-      navigate("/Unauthorized");
-    }
-    if (isAdmin === null) {
+    if (!isAdmin) {
       navigate("/Unauthorized");
     }
   }, [isAdmin, navigate]);
+  
     return (
       <div className="flex h-full min-h-screen w-full flex-col items-center bg-app100">
         <NavBar />

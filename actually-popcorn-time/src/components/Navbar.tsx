@@ -61,7 +61,10 @@ const NavBar = () => {
             tabIndex={0}
             className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-neutral p-2 text-primary shadow "
           >
-            {navBarItems.map((item) => (
+            {navBarItems
+            .filter((item) => (isAdmin ? "1" : !item.adminOnly))
+            .map((item) => (
+              
               <li
                 key={item.name}
                 className="rounded-md text-primary hover:bg-app100"
