@@ -22,6 +22,16 @@ const navBarItems: NavBarItem[] = [
     route: "/users/approve",
   },
 ];
+
+const logout = () => {
+  sessionStorage.removeItem("user_id");
+  sessionStorage.removeItem("email");
+  sessionStorage.removeItem("is_admin");
+  sessionStorage.removeItem("is_approved");
+  sessionStorage.removeItem("token");
+  window.location.href = "/";
+};
+
 const NavBar = () => {
   return (
     <div className="navbar fixed top-0 z-50 w-full bg-app100">
@@ -74,7 +84,15 @@ const NavBar = () => {
           ))}
         </ul>
       </div>
-      <div className="navbar-end"></div>
+      <div className="navbar-end">
+        <button
+          onClick={() => {
+            logout();
+          }}
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 };
