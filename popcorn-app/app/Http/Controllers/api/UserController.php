@@ -170,16 +170,6 @@ class UserController extends Controller
         );
     }
 
-    //Favorites
-    public function getFavorites(Request $request, $userId)
-    {
-        $user = User::find($userId);
-        $favorites = $user
-            ->favorites()
-            ->get(['title', 'movies.id as movie_id']);
-        return response()->json($favorites);
-    }
-
     public function addFavorite(Request $request, $movieId)
     {
         $user = $request->user();

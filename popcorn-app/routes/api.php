@@ -7,6 +7,8 @@ use App\Http\Controllers\api\MovieController;
 use App\Http\Controllers\api\RatingsController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\CommentsController;
+use App\Http\Controllers\api\FavoritesController;
+use App\Http\Controllers\api\WatchlistsController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -68,10 +70,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/dashboard', [UserController::class, 'getDashboard']);
 
     //Favorite Movies
-    Route::get('/user/favorites/{userId}', [
-        UserController::class,
-        'getFavorites',
-    ]);
     Route::post('/user/favorites/{movieId}', [
         UserController::class,
         'addFavorite',
@@ -102,4 +100,8 @@ Route::middleware('auth:sanctum')->group(function () {
         UserController::class,
         'checkFavorite',
     ]);
+
+    // UserDashboard get methods - Favorites and Watchlist
+    Route::get('/user/{userID}/favorites', [FavoritesController::class, 'getFavorites']);
+    Route::get('/user/{userID}/watchlist', [WatchlistsController::class, 'getWatchlist']);
 });
