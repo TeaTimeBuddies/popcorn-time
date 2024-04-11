@@ -7,7 +7,7 @@ import HomePage from "../pages/HomePage";
 import AddMoviePage from "../pages/AddMoviePage";
 import ApproveMoviePage from "../pages/ApproveMoviePage";
 import LoginForm from "../pages/LoginPage";
-import UserDashboardPage from "../pages/UserDashboardPage";
+import UserDashboardPage from "../pages/user/UserDashboardPage";
 import RegisterPage from "../pages/RegisterPage";
 import Error404Page from "../pages/Error404Page";
 import AboutPage from "../pages/AboutPage";
