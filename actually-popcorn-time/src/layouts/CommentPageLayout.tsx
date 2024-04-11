@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { Rating } from "../pages/DetailsPage";
+import { Movie } from "../pages/MoviesPage";
+import useFetchWithToken from "../hooks/useToken";
+import { API_URL } from "../constants";
+import ActionButton from "../components/ActionButton";
 
 export interface Comment {
   id: number;
@@ -14,9 +18,23 @@ type CommentLayoutProps = {
   comments: Comment[];
 };
 
+const chatColours = ["chat-bubble-secondary", "chat-bubble-accent"];
+
 const CommentPageLayout = ({ ratings, comments }: CommentLayoutProps) => {
   const apiUrl = import.meta.env.VITE_API_URL;
   const [newComment, setComment] = useState("");
+  console.log("ratings", ratings);
+
+  const {
+    data: movie,
+    error: movieError,
+    isLoading: movieLoading,
+  } = useFetchWithToken(`${API_URL}movies/${ratings.movie_id}`);
+  useEffect(() => {
+    if (movieError) {
+      console.error(movieError);
+    }
+  }, [movieError]);
 
   // Creates a new comment
   const store = async (event: React.FormEvent) => {
@@ -50,25 +68,37 @@ const CommentPageLayout = ({ ratings, comments }: CommentLayoutProps) => {
 
   return (
     <div className="w-11/12 py-10">
-      <div className="flex w-full flex-col items-center rounded-3xl border-2 border-sky-500 bg-stone-200 pb-10">
-        <div className="w-full px-12">
-          <div className="mt-2 w-full flex-none pt-6 text-4xl font-bold text-primary text-sky-500">
-            {ratings?.username}
+      <div className="chat chat-start">
+        <div className="chat-header text-action">{ratings?.username}</div>
+        <div className="chat-bubble chat-bubble-primary flex flex-col">
+          <span> My rating for {movie?.title}:</span>
+          <div className="flex">
+            {[...Array(ratings?.rating)].map((_, index) => (
+              <span key={index} className="material-symbols-outlined">
+                kid_star
+              </span>
+            ))}
           </div>
-          <div className="mt-2 w-full flex-none text-2xl text-primary text-white">
-            <div className="flex items-center gap-2">
-              <span> RATING: </span> {ratings?.rating}
-            </div>
-          </div>
-          <span className="text-white">{ratings?.review}</span>
+          <span className="text-white">Thoughts : {ratings?.review}</span>
         </div>
       </div>
 
+      {comments.map((c: Comment) => (
+        <div key={c.id} className="chat chat-end">
+          <div className="chat-header text-action">{c.username}</div>
+          <div className="chat-bubble chat-bubble-accent flex flex-col">
+            <div className="flex">
+            </div>
+            <span className="text-white">{c?.comment}</span>
+          </div>
+        </div>
+      ))}
       <form onSubmit={store}>
-        <label>
-          Comments:
+        <label className="text-white">
+          Write a Comment:
           <br />
           <textarea
+            className="text-black"
             value={newComment}
             onChange={(e) => setComment(e.target.value)}
             required
@@ -76,19 +106,12 @@ const CommentPageLayout = ({ ratings, comments }: CommentLayoutProps) => {
           />
         </label>
         <br />
-        <button type="submit">Submit</button>
+        <ActionButton
+          className="btn- btn btn-sm"
+          type="submit"
+          buttonText={"Submit Comment"}
+        ></ActionButton>
       </form>
-
-      {comments.map((c: Comment) => (
-        <div className="my-5 flex w-full flex-col items-center rounded-3xl bg-stone-200 py-5">
-          <div className="mt-2 w-full flex-none px-5 text-2xl text-primary text-white">
-            <div className="flex-none items-center gap-2">
-              <span>{c.username}</span>
-            </div>
-            <span className="text-white"> {c.comment} </span>
-          </div>
-        </div>
-      ))}
     </div>
   );
 };

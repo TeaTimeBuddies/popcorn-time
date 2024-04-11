@@ -11,7 +11,7 @@ import Loader from "../components/Loader";
 export interface Rating {
   id: number;
   user_id: string;
-  movie_id: string[];
+  movie_id: string;
   rating: number;
   username: string;
   review: string[];
