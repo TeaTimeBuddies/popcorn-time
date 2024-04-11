@@ -40,6 +40,7 @@ const NavBar = () => {
   return (
     <div className="navbar fixed top-0 z-50 w-full bg-app100">
       <div className="navbar-start">
+      {isApproved && (
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -62,7 +63,7 @@ const NavBar = () => {
             className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-neutral p-2 text-primary shadow "
           >
             {navBarItems
-              .filter((item) => (isAdmin ? true : !item.adminOnly))
+            .filter((item) => (isAdmin ? true : !item.adminOnly))
             .map((item) => (
               
               <li
@@ -75,12 +76,13 @@ const NavBar = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div>)}
+        
         <a className="btn btn-ghost text-2xl text-primary" href="/">
           PopcornTime
         </a>
       </div>
-      {/* {isAdmin && ( */}
+      {isApproved && (
         <div className="navbar-center hidden text-primary lg:flex">
           <ul className="menu menu-horizontal px-1">
             {navBarItems
@@ -94,7 +96,7 @@ const NavBar = () => {
               ))}
           </ul>
         </div>
-
+      )}
 
       {isApproved && (
         <div className="navbar-end">
