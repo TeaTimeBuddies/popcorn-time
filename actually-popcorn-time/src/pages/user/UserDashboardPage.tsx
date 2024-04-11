@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useFetchWithToken from "../../hooks/useToken";
 import { Movie } from "../../pages/MoviesPage";
 
-const UserDashboardPage: React.FC<UserDashboardPageProps> = ({ name }) => {
+const UserDashboardPage = () => {
   const token = sessionStorage.getItem("token");
 
   const [favoriteMovies, setFavoriteMovies] = useState<Movie[]>([]);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import UserLayout from "../layouts/UserLayout";
+import GeneralLayout from "../layouts/GeneralLayout";
 import { Link } from "react-router-dom";
 import { API_URL } from "../constants";
 import useFetchWithToken from "../hooks/useToken";
@@ -81,7 +81,7 @@ const MoviesPage = () => {
   };
 
   return (
-    <UserLayout userId={userId}>
+    <GeneralLayout>
       <div className="">
         <table className="table">
           <thead>
@@ -151,7 +151,7 @@ const MoviesPage = () => {
           </button>
         )}
       </div>
-    </UserLayout>
+    </GeneralLayout>
   );
 };
 
