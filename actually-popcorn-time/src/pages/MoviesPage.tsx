@@ -15,12 +15,12 @@ export interface Movie {
   image: string | undefined;
 }
 
-const TableHeaders = ["", "Title", "Director", "Year", "Genre", "Stars"];
+const TableHeaders = ["Title", "Director", "Year", "Genre", "Stars"];
 const userId = Number(sessionStorage.getItem("userId"));
 
 const MoviesPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const perPage = 15;
+  const perPage = 10;
 
   const {
     data: fetchedMovies,
@@ -66,53 +66,43 @@ const MoviesPage = () => {
         <Loader text="Loading Movies" />
       ) : (
         <>
-          <div className="">
-            <table className="table">
+          <div className="max-w-5xl mx-auto">
+            <table className="w-full table table-fixed">
               <thead>
                 <tr>
-                  {TableHeaders.map((header) => (
-                    <th key={header}>{header}</th>
+                {TableHeaders.map((header) => (
+                    <th key={header} className="w-1/5">{header}</th> 
                   ))}
                 </tr>
               </thead>
               <tbody>
-                {movies.map((m: Movie) => (
-                  <tr key={m.id} className="hover:bg-primary cursor-pointer">
-                    <td className="flex gap-1">
-                      <button
-                        className="btn btn-xs flex items-center p-1"
-                        onClick={() => deleteMovie(m.id)}
-                      >
-                        <span className="material-symbols-outlined text-sm text-action">
-                          delete
-                        </span>
-                      </button>
-                    </td>
+  {movies.map((m: Movie) => (
+    <tr key={m.id}>
+          {/* <td></td> */}
+      <td className="font-medium text-action truncate max-w-xs">
+        <Link to={`/details/${m.id}`}>{m.title}</Link>
+      </td>
+      <td className="text-white truncate max-w-xs">
+        {Array.isArray(m.director) ? m.director.join(", ") : m.director}
+      </td>
+      <td className="text-white">{m.year}</td>
+      <td className="text-white">
+        {Array.isArray(m.genre) ? m.genre.join(", ") : m.genre}
+      </td>
+      <td className="text-white">
+        {Array.isArray(m.stars) ? m.stars.join(", ") : m.stars}
+      </td>
+    </tr>
+  ))}
+</tbody>
 
-                    <td className="font-medium text-action">
-                      <Link to={`/details/${m.id}`}>{m.title}</Link>
-                    </td>
-                    <td className="text-white">
-                      {Array.isArray(m.director)
-                        ? m.director.join(", ")
-                        : m.director}
-                    </td>
-                    <td className="text-white">{m.year}</td>
-                    <td className="text-white">
-                      {Array.isArray(m.genre) ? m.genre.join(", ") : m.genre}
-                    </td>
-                    <td className="text-white">
-                      {Array.isArray(m.stars) ? m.stars.join(", ") : m.stars}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
             </table>
           </div>
-          <div className="join text-white">
+          <div className="mt-5">
+          <div className="join text-white btn-sm text-sm">
             {currentPage > 1 && (
               <button
-                className="btn join-item text-white"
+                className="btn join-item text-white btn-sm text-sm"
                 onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))}
               >
                 Previous Page
@@ -120,7 +110,7 @@ const MoviesPage = () => {
             )}
             {pageNumbers.map((number) => (
               <button
-                className="btn join-item text-white"
+                className="btn join-item text-white btn-sm text-sm"
                 key={number}
                 onClick={() => setCurrentPage(number)}
                 disabled={number === currentPage}
@@ -130,7 +120,7 @@ const MoviesPage = () => {
             ))}
             {currentPage < totalPages && (
               <button
-                className="btn join-item text-white"
+                className="btn join-item text-white btn-sm text-sm" 
                 onClick={() =>
                   setCurrentPage((page) => Math.min(page + 1, totalPages))
                 }
@@ -138,6 +128,7 @@ const MoviesPage = () => {
                 Next Page
               </button>
             )}
+          </div>
           </div>
         </>
       )}
