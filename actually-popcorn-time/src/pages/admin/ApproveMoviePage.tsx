@@ -1,7 +1,7 @@
 import { Key, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GeneralLayout from "../../layouts/GeneralLayout";
 import { API_URL } from "../../constants";
+import AdminLayout from "../../layouts/AdminLayout";
 
 export interface Movie {
   id: number;
@@ -74,7 +74,7 @@ const AdminApprovalPage = () => {
   };
 
   return (
-    <GeneralLayout title="Admin: Approve Movies">
+    <AdminLayout title="Admin: Approve Movies">
       <div className="flex w-4/5 justify-center overflow-x-auto text-primary">
         {movies.length === 0 ? (
           <div className="mt-10 text-primary">No movies to approve</div>
@@ -124,7 +124,7 @@ const AdminApprovalPage = () => {
           </table>
         )}
       </div>
-    </GeneralLayout>
+    </AdminLayout>
   );
 };
 

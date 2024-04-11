@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import GeneralLayout from "../layouts/GeneralLayout";
+import UserLayout from "../layouts/UserLayout";
 import { useNavigate } from "react-router-dom";
 import MovieForm from "../components/forms/MovieForm";
 import Toast from "../components/Toast";
@@ -16,7 +16,7 @@ const AddMoviePage: React.FC = () => {
   };
 
   return (
-    <GeneralLayout title="Add a New Movie">
+    <UserLayout title="Add a New Movie">
       <MovieForm onSuccess={handleSuccess} />
       {showSuccessToast && (
         <Toast
@@ -38,7 +38,7 @@ const AddMoviePage: React.FC = () => {
           ]}
         />
       )}
-    </GeneralLayout>
+    </UserLayout>
   );
 };
 

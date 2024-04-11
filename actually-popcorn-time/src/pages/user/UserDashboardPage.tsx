@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import GeneralLayout from "../../layouts/GeneralLayout";
+import UserLayout from "../../layouts/UserLayout";
 import { API_URL } from "../../constants";
 import { Movie } from "../../pages/MoviesPage";
 import Loader from "../../components/Loader";
@@ -73,7 +73,7 @@ const UserDashboardPage = () => {
   console.log(watchlistMovies);
 
   return (
-    <GeneralLayout title={`Welcome back, ${sessionStorage.getItem("name")}`}>
+    <UserLayout title={`Welcome back, ${sessionStorage.getItem("name")}`}>
       <div className="flex flex-col">
         <h2 className="my-8 text-3xl text-white">Favorite Movies</h2>
         {loading ? (
@@ -139,7 +139,7 @@ const UserDashboardPage = () => {
           </>
         )}
       </div>
-    </GeneralLayout>
+    </UserLayout>
   );
 };
 

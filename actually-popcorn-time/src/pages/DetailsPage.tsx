@@ -1,4 +1,4 @@
-import GeneralLayout from "../layouts/GeneralLayout";
+import UserLayout from "../layouts/UserLayout";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MovieDetailLayout from "../layouts/MovieDetailLayout";
@@ -69,7 +69,7 @@ const DetailsPage = () => {
   }
 
   return (
-    <GeneralLayout title={""}>
+    <UserLayout title={""}>
       {/* Displaying the movie details */}
       {movie ? (
         <>
@@ -94,7 +94,7 @@ const DetailsPage = () => {
         </div>
       )}
       {showReviews && movie && <ReviewTable ratings={ratings} movie={movie} />}
-    </GeneralLayout>
+    </UserLayout>
   );
 };
 

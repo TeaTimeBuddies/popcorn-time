@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import GeneralLayout from "../../layouts/GeneralLayout";
+import AdminLayout from "../../layouts/AdminLayout";
 import { API_URL } from "../../constants";
 interface User {
   is_approved: any;
@@ -72,7 +72,7 @@ const ApproveUsersPage = () => {
   };
 
   return (
-    <GeneralLayout title="User Approval">
+    <AdminLayout title="User Approval">
       <div className="flex w-4/5 justify-center overflow-x-auto">
         {users.length === 0 ? (
           <div className="mt-10 text-primary">No users to approve</div>
@@ -122,7 +122,7 @@ const ApproveUsersPage = () => {
           </table>
         )}
       </div>
-    </GeneralLayout>
+    </AdminLayout>
   );
 };
 

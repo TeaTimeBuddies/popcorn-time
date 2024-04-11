@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import GeneralLayout from "../layouts/GeneralLayout";
+import UserLayout from "../layouts/UserLayout";
 import CommentPageLayout from "../layouts/CommentPageLayout";
 import useFetchWithToken from "../hooks/useToken";
 import Loader from "../components/Loader";
@@ -71,7 +71,7 @@ const CommentPage = () => {
   }, [fetchedComments, commentsError]);
 
   return (
-    <GeneralLayout title={"Comment Page"}>
+    <UserLayout title={"Comment Page"}>
       {reviewError || commentsError ? (
         <p>Error loading comments. Please try again later.</p>
       ) : review && comments ? (
@@ -79,7 +79,7 @@ const CommentPage = () => {
       ) : (
         <Loader text="Comment loading" />
       )}
-    </GeneralLayout>
+    </UserLayout>
   );
 };
 

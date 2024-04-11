@@ -13,7 +13,7 @@ const AdminLayout = ({ title, children }: AdminLayoutProps) => {
   const isAdmin = useAdmin();
 
   useEffect(() => {
-    if (!isAdmin) {
+    if (isAdmin == "0") {
       navigate("/404");
     }
   }, [isAdmin, navigate]);

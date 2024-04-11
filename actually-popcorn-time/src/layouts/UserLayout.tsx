@@ -7,7 +7,6 @@ import { useEffect } from "react";
 type UserLayoutProps = {
   title?: string;
   children?: ReactNode;
-  userId: number;
 };
 
 const UserLayout = ({ title, children }: UserLayoutProps) => {

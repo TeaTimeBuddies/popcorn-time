@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import GeneralLayout from "../layouts/GeneralLayout";
+import UserLayout from "../layouts/UserLayout";
 import { Link } from "react-router-dom";
 import { API_URL } from "../constants";
 import useFetchWithToken from "../hooks/useToken";
@@ -61,7 +61,7 @@ const MoviesPage = () => {
   };
 
   return (
-    <GeneralLayout>
+    <UserLayout>
       {movies.length == 0 ? (
         <Loader text="Loading Movies" />
       ) : (
@@ -132,7 +132,7 @@ const MoviesPage = () => {
           </div>
         </>
       )}
-    </GeneralLayout>
+    </UserLayout>
   );
 };
 
