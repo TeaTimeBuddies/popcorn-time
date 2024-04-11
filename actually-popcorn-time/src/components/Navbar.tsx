@@ -17,6 +17,10 @@ const navBarItems: NavBarItem[] = [
   { name: "Login", route: "/login" },
   { name: "Register", route: "/register" },
   { name: "Approve movies", route: "/movies/approve" },
+  {
+    name: "Approve users",
+    route: "/users/approve",
+  },
 ];
 const NavBar = () => {
   return (

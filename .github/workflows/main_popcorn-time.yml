@@ -104,18 +104,6 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_BEC36A2C075F40D0BAF1D739ECCA4B98 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_969DD1DDBCFD40B6BB577BA761DA8090 }}
 
-      - name: "Check SQLite Database File"
-        run: |
-          if [ -f "${{ env.DB_DATABASE }}" ]; then
-            echo "Database file exists at ${{ env.DB_DATABASE }}"
-            ls -l ${{ env.DB_DATABASE }}
-          else
-            echo "Database file does not exist at ${{ env.DB_DATABASE }}"
-            exit 1
-          fi
-        env:
-          DB_DATABASE: database/movies.sqlite
-
       - name: "Deploy to Azure Web App"
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
@@ -123,6 +111,3 @@ jobs:
           app-name: "popcorn-time"
           slot-name: "Production"
           package: .
-        env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: database/movies.sqlite

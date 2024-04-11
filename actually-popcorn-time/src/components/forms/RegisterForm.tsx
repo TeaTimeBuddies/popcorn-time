@@ -50,11 +50,13 @@ const RegisterForm = ({ onSuccess, onErrors }: RegisterFormProps) => {
         name: user.name,
         email: user.email,
         password: user.password,
+        is_approved: false,
       }),
     })
       .then((response) => {
         if (!response.ok) {
           setErrors(["Failed to register user."]);
+          console.log(response);
         }
         return response.json();
       })
@@ -65,23 +67,15 @@ const RegisterForm = ({ onSuccess, onErrors }: RegisterFormProps) => {
           onSuccess();
         }
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
         setErrors(() => [`There was an error processing your request`]);
         onErrors(errors.join("\n"));
-        console.error("Registration error:");
+        console.error("Registration error:", error);
       });
   };
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const { name, value } = event.target;
-
-    if (name === "email") {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(value)) {
-        setErrors((prevErrors) => [...prevErrors, "Invalid email format"]);
-        onErrors(errors.join("\n"));
-      }
-    }
 
     setUser((prevUser) => ({
       ...prevUser,
