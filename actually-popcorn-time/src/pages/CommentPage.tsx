@@ -77,7 +77,7 @@ const CommentPage = () => {
       ) : review && comments ? (
         <CommentPageLayout ratings={review[0]} comments={comments} />
       ) : (
-        <Loader text="Comment loading" />
+        <Loader text="Loading comments" />
       )}
     </UserLayout>
   );
