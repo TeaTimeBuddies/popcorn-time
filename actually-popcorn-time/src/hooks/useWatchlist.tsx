@@ -17,14 +17,14 @@ export const useWatchlist = (movieId: string): UseWatchlistReturn => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`, 
+            Authorization: `Bearer ${token}`,
           },
         }
       );
       console.log("token in useWatchlist", token);
       const data = await response.json();
       setIsWatchlisted(data.isWatchlisted);
-      console.log("status for watchlist button", data.isWatchlisted)
+      console.log("status for watchlist button", data.isWatchlisted);
     } catch (error) {
       console.error("Error checking watchlist status:", error);
     }
@@ -39,14 +39,14 @@ export const useWatchlist = (movieId: string): UseWatchlistReturn => {
       const method = isWatchlisted ? "DELETE" : "POST";
       await fetch(`${API_URL}user/watchlist/${movieId}`, {
         method: method,
-        headers: { "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        
       });
 
-        setIsWatchlisted(!isWatchlisted);
-        console.log("status for watchlist button adding/deleting", isWatchlisted)
+      setIsWatchlisted(!isWatchlisted);
+      console.log("status for watchlist button adding/deleting", isWatchlisted);
     } catch (error) {
       console.error("Error toggling watchlist:", error);
     }

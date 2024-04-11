@@ -70,8 +70,7 @@ const NavBar = () => {
           ))}
         </ul>
       </div>
-      <div className="navbar-end">
-      </div>
+      <div className="navbar-end"></div>
     </div>
   );
 };
