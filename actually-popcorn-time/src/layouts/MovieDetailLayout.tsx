@@ -1,14 +1,34 @@
 import ActionButton from "../components/ActionButton";
-import FavoritesButton from "../components/FavoritesButton";
 import WatchlistActionButton from "../components/WatchlistButton";
 import { useNavigate } from "react-router-dom";
 import { Movie } from "../pages/MoviesPage";
+import { API_URL } from "../constants";
+import { useState, useCallback } from "react";
 
 type MovieDetailLayoutProps = {
   movie?: Movie;
   movieRating?: number;
   onClickReviews: () => void;
   openReview: () => void;
+};
+
+const token = sessionStorage.getItem("token");
+const addMovieFavorite = async (movieId: number) => {
+  const response = await fetch(`${API_URL}user/watchlist`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        movie_id: movieId,
+        user_id: sessionStorage.getItem("user_id"),
+      })
+    }
+  );
+
+  console.log(response);
 };
 
 const MovieDetailLayout = ({
@@ -108,7 +128,15 @@ const MovieDetailLayout = ({
             <div className="flex items-center gap-2">
               {movie && (
                 <div className="flex items-center gap-2">
-                  <FavoritesButton movieId={movie.id.toString()} />
+                  <button
+                    onClick={() => addMovieFavorite(movie?.id)}
+                    className="material-icons"
+                    // aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
+                    aria-label="Remove from favorites"
+                  >
+                    {/*isFavorited ? "favorite" : "favorite_border"*/}
+                    {"favorite_border"}
+                    </button>
                 </div>
               )}
             </div>

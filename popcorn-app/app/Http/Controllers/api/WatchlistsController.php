@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Watchlists;
 use App\Models\Movie;
 use Illuminate\Http\Request;
-use App\Models\User;
 
 class WatchlistsController extends Controller
 {
@@ -27,10 +26,11 @@ class WatchlistsController extends Controller
             'user_id' => $request->user_id,
             'movie_id' => $request->movie_id,
         ]);
+
         return response()->json(
             [
                 'success' => 'Rating added successfully',
-                'rating' => $watchlist,
+                'watchlist' => $watchlist,
             ],
             200
         );
@@ -39,9 +39,9 @@ class WatchlistsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(Watchlists $watchlists)
     {
-        $watchlists = Watchlists::all();
+        //
     }
 
     /**
@@ -73,20 +73,5 @@ class WatchlistsController extends Controller
         }
 
         return $movies;
-    }
-
-    public function addToWatchList($movieId)
-    {
-        $watchlist = Watchlists::create([
-            'user_id' => auth()->user()->id,
-            'movie_id' => $movieId,
-        ]);
-        return response()->json(
-            [
-                'success' => 'Movie added to watchlist successfully',
-                'watchlist' => $watchlist,
-            ],
-            200
-        );
     }
 }
