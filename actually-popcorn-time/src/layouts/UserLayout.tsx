@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
 import NavBar from "../components/Navbar";
 import { useUser } from "../hooks/useUser";
-import { redirect } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 type UserLayoutProps = {
     title?: string;
@@ -10,12 +11,20 @@ type UserLayoutProps = {
 };
 
 const UserLayout = ({ title, children, userId }: UserLayoutProps) => {
-
+    const navigate = useNavigate();
     const { isUser } = useUser(userId);
+
+    useEffect(() => {
+        if (!isUser) {
+            navigate("/404");
+        }
+    }, [isUser, navigate]);
+
     if (!isUser) {
-        return redirect("/404");
+        return null;
     }
-    return (
+
+        return (
     <div className="flex h-full min-h-screen w-full flex-col items-center bg-app100">
     <NavBar />
     <div className="mt-20">
@@ -26,6 +35,6 @@ const UserLayout = ({ title, children, userId }: UserLayoutProps) => {
     </div>
     </div>
 );
-};
+    }
 
 export default UserLayout;

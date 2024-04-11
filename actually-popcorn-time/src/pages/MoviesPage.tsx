@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import GeneralLayout from "../layouts/GeneralLayout";
+import UserLayout from "../layouts/UserLayout";
 import { Link } from "react-router-dom";
 import { API_URL } from "../constants";
 import useFetchWithToken from "../hooks/useToken";
@@ -15,6 +15,7 @@ export interface Movie {
 }
 
 const TableHeaders = ["", "Title", "Director", "Year", "Genre", "Stars"];
+const userId = Number(sessionStorage.getItem("userId")); 
 
 const MoviesPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -80,7 +81,7 @@ const MoviesPage = () => {
   };
 
   return (
-    <GeneralLayout>
+    <UserLayout userId={userId}>
       <div className="">
         <table className="table">
           <thead>
@@ -150,7 +151,7 @@ const MoviesPage = () => {
           </button>
         )}
       </div>
-    </GeneralLayout>
+    </UserLayout>
   );
 };
 
