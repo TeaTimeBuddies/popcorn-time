@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import GeneralLayout from "../../layouts/GeneralLayout";
 import { API_URL } from "../../constants";
-import { useNavigate } from "react-router-dom";
-import useFetchWithToken from "../../hooks/useToken";
 import { Movie } from "../../pages/MoviesPage";
 import Loader from "../../components/Loader";
 
@@ -11,9 +9,11 @@ const UserDashboardPage = () => {
 
   const [favoriteMovies, setFavoriteMovies] = useState<Movie[]>([]);
   const [watchlistMovies, setWatchlistMovies] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchFavorites = async () => {
+      setLoading(true);
       const userID = sessionStorage.getItem("user_id");
       const apiCall = `${API_URL}user/${userID}/favorites`;
       console.log(apiCall);
@@ -36,10 +36,12 @@ const UserDashboardPage = () => {
         }));
 
         setFavoriteMovies(movies);
+        setLoading(false);
       }
     };
 
     const fetchWatchlist = async () => {
+      setLoading(true);
       const userID = sessionStorage.getItem("user_id");
       const response = await fetch(`${API_URL}user/${userID}/watchlist`, {
         method: "GET",
@@ -59,6 +61,7 @@ const UserDashboardPage = () => {
         }));
 
         setWatchlistMovies(movies);
+        setLoading(false);
       }
     };
 
@@ -70,67 +73,70 @@ const UserDashboardPage = () => {
   console.log(watchlistMovies);
 
   return (
-    <GeneralLayout title={"User Dashboard"}>
+    <GeneralLayout title={`Welcome back, ${sessionStorage.getItem("name")}`}>
       <div className="flex flex-col">
-        <h1 className="text-5xl text-white">
-          Hello, {sessionStorage.getItem("name")}!
-        </h1>
-        <h2 className="mt-8 text-3xl text-white">Favorite Movies</h2>
-        {favoriteMovies ? (
-          <div>
-            <table>
-              <thead>
-                <tr>
-                  <th className="text-primary">Title</th>
-                  <th className="text-primary">Director</th>
-                  <th className="text-primary">Genre</th>
-                  <th className="text-primary">Stars</th>
-                </tr>
-              </thead>
-              <tbody>
-                {favoriteMovies.map((fav: Movie) => (
-                  <tr key={fav.id}>
-                    <td>{fav.title}</td>
-                    <td>{fav.director}</td>
-                    <td>{fav.genre}</td>
-                    <td>{fav.stars}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        <h2 className="my-8 text-3xl text-white">Favorite Movies</h2>
+        {loading ? (
+          <Loader text="Loading movies" />
         ) : (
-          // While favoriteMovies is null, show loading message
-          <Loader text="Movie loading" />
+          <>
+            {favoriteMovies.length == 0 ? (
+              <div className="my-10 text-primary">
+                No movies added to watchlist yet
+              </div>
+            ) : (
+              <div
+                id="card"
+                className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+              >
+                {favoriteMovies.map((fav: Movie) => (
+                  <a href={`/details/${fav.id}`} className="text-action">
+                    <div className="card glass w-48">
+                      <figure>
+                        <img src={fav.image} alt="car!" />
+                      </figure>
+                      <div className="card-body flex h-32 flex-col items-center justify-center">
+                        <h2 className="card-title text-center">{fav.title}</h2>
+                        <p>{fav.year}</p>
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            )}
+          </>
         )}
 
-        <h2 className="mt-8 text-3xl text-white">Watchlist Movies</h2>
-        {watchlistMovies ? (
-          <div>
-            <table>
-              <thead>
-                <tr>
-                  <th className="text-primary">Title</th>
-                  <th className="text-primary">Director</th>
-                  <th className="text-primary">Genre</th>
-                  <th className="text-primary">Stars</th>
-                </tr>
-              </thead>
-              <tbody>
-                {watchlistMovies.map((watch: Movie) => (
-                  <tr key={watch.id}>
-                    <td>{watch.title}</td>
-                    <td>{watch.director}</td>
-                    <td>{watch.genre}</td>
-                    <td>{watch.stars}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        <h2 className="my-8 text-3xl text-white">Watchlist Movies</h2>
+        {loading ? (
+          <Loader text="Loading movies" />
         ) : (
-          // While favoriteMovies is null, show loading message
-          <Loader text="Movie loading" />
+          <>
+            {watchlistMovies.length == 0 ? (
+              <div className="my-10 text-primary">
+                No movies added to watchlist yet
+              </div>
+            ) : (
+              <div
+                id="card"
+                className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+              >
+                {watchlistMovies.map((m: Movie) => (
+                  <a href={`/details/${m.id}`} className="text-action">
+                    <div className="card glass w-48">
+                      <figure>
+                        <img src={m.image} alt="car!" />
+                      </figure>
+                      <div className="card-body flex h-32 flex-col items-center justify-center">
+                        <h2 className="card-title text-center">{m.title}</h2>
+                        <p>{m.year}</p>
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
     </GeneralLayout>
