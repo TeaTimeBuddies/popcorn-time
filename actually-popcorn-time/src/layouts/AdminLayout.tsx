@@ -14,7 +14,10 @@ const AdminLayout = ({ title, children }: AdminLayoutProps) => {
 
   useEffect(() => {
     if (isAdmin == "0") {
-      navigate("/404");
+      navigate("/Unauthorized");
+    }
+    if (isAdmin === null) {
+      navigate("/Unauthorized");
     }
   }, [isAdmin, navigate]);
     return (
