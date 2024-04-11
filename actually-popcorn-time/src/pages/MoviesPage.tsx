@@ -77,7 +77,7 @@ const MoviesPage = () => {
               </thead>
               <tbody>
                 {movies.map((m: Movie) => (
-                  <tr key={m.id}>
+                  <tr key={m.id} className="hover:bg-primary cursor-pointer">
                     <td className="flex gap-1">
                       <button
                         className="btn btn-xs flex items-center p-1"
@@ -92,16 +92,16 @@ const MoviesPage = () => {
                     <td className="font-medium text-action">
                       <Link to={`/details/${m.id}`}>{m.title}</Link>
                     </td>
-                    <td>
+                    <td className="text-white">
                       {Array.isArray(m.director)
                         ? m.director.join(", ")
                         : m.director}
                     </td>
-                    <td>{m.year}</td>
-                    <td>
+                    <td className="text-white">{m.year}</td>
+                    <td className="text-white">
                       {Array.isArray(m.genre) ? m.genre.join(", ") : m.genre}
                     </td>
-                    <td>
+                    <td className="text-white">
                       {Array.isArray(m.stars) ? m.stars.join(", ") : m.stars}
                     </td>
                   </tr>
@@ -109,10 +109,10 @@ const MoviesPage = () => {
               </tbody>
             </table>
           </div>
-          <div className="join">
+          <div className="join text-white">
             {currentPage > 1 && (
               <button
-                className="btn join-item"
+                className="btn join-item text-white"
                 onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))}
               >
                 Previous Page
@@ -120,7 +120,7 @@ const MoviesPage = () => {
             )}
             {pageNumbers.map((number) => (
               <button
-                className="btn join-item"
+                className="btn join-item text-white"
                 key={number}
                 onClick={() => setCurrentPage(number)}
                 disabled={number === currentPage}
@@ -130,7 +130,7 @@ const MoviesPage = () => {
             ))}
             {currentPage < totalPages && (
               <button
-                className="btn join-item"
+                className="btn join-item text-white"
                 onClick={() =>
                   setCurrentPage((page) => Math.min(page + 1, totalPages))
                 }
