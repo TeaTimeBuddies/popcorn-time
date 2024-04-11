@@ -48,7 +48,7 @@ const MovieDetailLayout = ({
             {movie?.genre.map((genre: string) => (
               <span
                 key={genre}
-                className="text-s me-2 rounded-full bg-app200 px-5 py-1.5 font-medium text-primary dark:bg-gray-700 dark:text-gray-300"
+                className="text-s me-2 rounded-full px-5 py-1.5 font-medium bg-primary text-white dark:bg-primary dark:text-white"
               >
                 {genre}
               </span>

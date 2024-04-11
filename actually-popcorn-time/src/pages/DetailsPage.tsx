@@ -84,7 +84,7 @@ const DetailsPage = () => {
         </>
       ) : (
         // While movie is null, show loading message
-        <Loader text="Movie loading..." />
+        <Loader text="Loading movie..." />
       )}
       {movie && showReviewForm && (
         <div className="fixed inset-0 z-50 flex h-full w-full items-center justify-center ">
