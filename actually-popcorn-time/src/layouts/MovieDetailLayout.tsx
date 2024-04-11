@@ -3,7 +3,7 @@ import WatchlistActionButton from "../components/WatchlistButton";
 import { useNavigate } from "react-router-dom";
 import { Movie } from "../pages/MoviesPage";
 import { API_URL } from "../constants";
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 type MovieDetailLayoutProps = {
   movie?: Movie;
@@ -12,6 +12,15 @@ type MovieDetailLayoutProps = {
   openReview: () => void;
 };
 
+const MovieDetailLayout = ({
+  movie,
+  movieRating,
+  onClickReviews,
+  openReview,
+}: MovieDetailLayoutProps) => {
+  const navigate = useNavigate();
+
+const [isFavorited, setIsFavorited] = useState<boolean>(false);
 const token = sessionStorage.getItem("token");
 const addMovieWatchlist = async (movieId: number) => {
   const response = await fetch(`${API_URL}user/watchlist`,
@@ -49,13 +58,32 @@ const addMovieFavorites = async (movieId: number) => {
   console.log(response);
 };
 
-const MovieDetailLayout = ({
-  movie,
-  movieRating,
-  onClickReviews,
-  openReview,
-}: MovieDetailLayoutProps) => {
-  const navigate = useNavigate();
+const findIfFavorite = async (movieId: number) => {
+  const response = await fetch(`${API_URL}user/watchlist/check/${movieId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (response.ok){
+    const data = await response.json();
+    console.log(data);
+    setIsFavorited(data.isFavorited)
+  }
+
+};
+
+  useEffect(() => {
+    if (movie) {
+      findIfFavorite(movie.id);
+    }
+  }, []);
+
+
   return (
 <div className="flex flex-col items-center justify-center max-w-screen-lg pt-10 text-white h-3/4 w-full mt-10">
   <div className="flex gap-1 font-sans">
@@ -154,7 +182,7 @@ const MovieDetailLayout = ({
                     aria-label="Remove from favorites"
                   >
                     {/*isFavorited ? "favorite" : "favorite_border"*/}
-                    {"favorite_border"}
+                    {isFavorited ? "favorite" : "favorite_border"}
                   </button>
                 </div>
 
