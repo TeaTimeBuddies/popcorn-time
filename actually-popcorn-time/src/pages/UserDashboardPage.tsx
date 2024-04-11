@@ -15,7 +15,7 @@ const UserDashboardPage = () => {
     isLoading: favoriteLoading,
   } = useFetchWithToken(`${apiUrl}user/favorites/${id}`);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
-  useEffect(( ) => {
+  useEffect(() => {
     if (fetchedMovies) {
       console.error(favoriteError);
       const favoriteMovies = fetchedMovies.map((movie: any) => ({
@@ -34,9 +34,7 @@ const UserDashboardPage = () => {
     if (favoriteError) {
       console.error(favoriteError);
     }
-
   }, [favoriteError, favoriteError]);
-
 
   const {
     data: fetchedWatchlist,
@@ -44,7 +42,7 @@ const UserDashboardPage = () => {
     isLoading: watchlistLoading,
   } = useFetchWithToken(`${apiUrl}user/watchlist/${id}`);
   const [watchlistMovies, setWatchlistMovies] = useState([]);
-  
+
   useEffect(() => {
     if (fetchedWatchlist) {
       console.error(watchlistError);
@@ -66,17 +64,18 @@ const UserDashboardPage = () => {
     }
   }, [watchlistError, watchlistError]);
 
-return (
-  <GeneralLayout title={"User Dashboard"}>
-    {favoriteError && <div>Error occurred while fetching data</div>}
-    {favoriteLoading && <div>Loading...</div>}
-    <h2 className="mt-8 text-3xl">Favorite Movies</h2>
-    <ul>
-      {Array.isArray(favoriteMovies) &&
-        favoriteMovies.map((movie: any) => (
-          <li key={movie.id}>{movie.title}</li>
-        ))}
-    </ul>
+  return (
+    <GeneralLayout title={"User Dashboard"}>
+      {favoriteError && <div>Error occurred while fetching data</div>}
+      {favoriteLoading && <div>Loading...</div>}
+      <h2 className="mt-8 text-3xl">Favorite Movies</h2>
+      <ul>
+        {Array.isArray(favoriteMovies) &&
+          favoriteMovies.map((movie: any) => (
+            <li key={movie.id}>{movie.title}</li>
+          ))}
+      </ul>
     </GeneralLayout>
-)};
+  );
+};
 export default UserDashboardPage;

@@ -15,22 +15,6 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
-    public function validateUser()
-    {
-        if (Auth::check()) {
-            return response()->json([
-                'status' => 'success',
-                'message' => 'You are logged in.',
-                'user' => Auth::user(),
-            ]);
-        } else {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'You are not logged in!',
-            ]);
-        }
-    }
-
     public function login(Request $request)
     {
         $request->validate([

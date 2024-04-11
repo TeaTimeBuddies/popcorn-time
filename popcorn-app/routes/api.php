@@ -12,9 +12,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-//Validation
-Route::post('/validate/${userId}', [AuthController::class, 'validateUser']);
-
 // Login
 Route::post('/user', [UserController::class, 'processLogin'])->name('login');
 Route::get('/user', [UserController::class, 'index']);

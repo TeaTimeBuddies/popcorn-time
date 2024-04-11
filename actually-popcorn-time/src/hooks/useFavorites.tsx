@@ -17,14 +17,14 @@ export const useFavorites = (movieId: string): UseFavoritesReturn => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
       console.log("token in useFavorites", token);
       const data = await response.json();
       setIsFavorited(data.isFavorited);
-      console.log("status for favorite button", data.isFavorited)
+      console.log("status for favorite button", data.isFavorited);
     } catch (error) {
       console.error("Error checking favorite status:", error);
     }
@@ -39,14 +39,14 @@ export const useFavorites = (movieId: string): UseFavoritesReturn => {
       const method = isFavorited ? "DELETE" : "POST";
       await fetch(`${API_URL}user/favorites/${movieId}`, {
         method: method,
-        headers: { "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-
       });
 
       setIsFavorited(!isFavorited);
-      console.log("status for favorite button adding/deleting", isFavorited)
+      console.log("status for favorite button adding/deleting", isFavorited);
     } catch (error) {
       console.error("Error toggling favorite:", error);
     }

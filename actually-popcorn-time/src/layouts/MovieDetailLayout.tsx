@@ -33,7 +33,6 @@ const MovieDetailLayout = ({
             loading="lazy"
           />
         </div>
-
         {/* Movie Title */}
         <div className="flex-auto p-6">
           <div className="flex justify-center">

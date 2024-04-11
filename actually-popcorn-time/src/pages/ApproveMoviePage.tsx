@@ -70,16 +70,23 @@ const AdminApprovalPage = () => {
         <div>
           <h2>Unapproved Movies</h2>
           <ul>
-            {Array.isArray(movies) ? movies.map((movie) => (
-              <li key={movie.id}>
-                {movie.title} - {movie.director} - {movie.genre} - {movie.stars}{" "}
-                - {movie.year}
-                <button className="mx-2" onClick={() => approveMovie(movie.id)}>
-                  Approve
-                </button>
-                <button onClick={() => rejectMovie(movie.id)}>Reject</button>
-              </li>
-            )) : null}
+            {Array.isArray(movies)
+              ? movies.map((movie) => (
+                  <li key={movie.id}>
+                    {movie.title} - {movie.director} - {movie.genre} -{" "}
+                    {movie.stars} - {movie.year}
+                    <button
+                      className="mx-2"
+                      onClick={() => approveMovie(movie.id)}
+                    >
+                      Approve
+                    </button>
+                    <button onClick={() => rejectMovie(movie.id)}>
+                      Reject
+                    </button>
+                  </li>
+                ))
+              : null}
           </ul>
         </div>
       </GeneralLayout>
