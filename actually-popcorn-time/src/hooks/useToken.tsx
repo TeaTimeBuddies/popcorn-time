@@ -30,7 +30,7 @@ const useFetchWithToken = (
         setData(data);
         setIsLoading(false);
       } catch (error) {
-        setError(error);
+        // setError(error);
         setIsLoading(false);
       }
     };
