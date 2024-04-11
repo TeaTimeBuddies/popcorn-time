@@ -73,7 +73,7 @@ const ApproveUsersPage = () => {
 
   return (
     <AdminLayout title="User Approval">
-      <div className="flex w-4/5 justify-center overflow-x-auto">
+      <div className="flex w-full justify-center overflow-x-auto">
         {users.length === 0 ? (
           <div className="mt-10 text-primary">No users to approve</div>
         ) : (

@@ -75,7 +75,7 @@ const AdminApprovalPage = () => {
 
   return (
     <AdminLayout title="Admin: Approve Movies">
-      <div className="flex w-4/5 justify-center overflow-x-auto text-primary">
+      <div className="flex w-full justify-center overflow-x-auto text-primary">
         {movies.length === 0 ? (
           <div className="mt-10 text-primary">No movies to approve</div>
         ) : (
