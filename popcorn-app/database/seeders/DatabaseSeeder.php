@@ -23,6 +23,14 @@ class DatabaseSeeder extends Seeder
             'is_approved' => true,
         ]);
 
+        User::factory()->create([
+            'name' => 'Conrad',
+            'email' => 'conrad@ilovemovies.com',
+            'password' => bcrypt('password'),
+            'is_admin' => false,
+            'is_approved' => true,
+        ]);
+
         $this->call(MovieSeeder::class);
         $this->call(CommentSeeder::class);
         $this->call(RatingSeeder::class);

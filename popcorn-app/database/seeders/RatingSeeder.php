@@ -16,7 +16,7 @@ class RatingSeeder extends Seeder
         Ratings::create([
             'user_id' => 1,
             'movie_id' => 1,
-            'username' => 'Test User',
+            'username' => 'Aric',
             'rating' => 4,
             'review' => 'This movie was pretty good',
             'comments_count' => 1,
