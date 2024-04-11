@@ -5,10 +5,6 @@ import { useNavigate } from "react-router-dom";
 import useFetchWithToken from "../../hooks/useToken";
 import { Movie } from "../../pages/MoviesPage";
 
-interface UserDashboardPageProps {
-  name: string;
-}
-
 const UserDashboardPage: React.FC<UserDashboardPageProps> = ({ name }) => {
   const token = sessionStorage.getItem("token");
 
@@ -70,9 +66,10 @@ const UserDashboardPage: React.FC<UserDashboardPageProps> = ({ name }) => {
   }, []);
 
   console.log(favoriteMovies);
+  console.log(watchlistMovies);
 
   return (
-    <GeneralLayout>
+    <GeneralLayout title={"User Dashboard"}>
       <div className="flex flex-col">
         <h1 className="text-5xl">Hello, {name}!</h1>
         <h2 className="mt-8 text-3xl">Favorite Movies</h2>
