@@ -1,8 +1,8 @@
-import { Movie } from "../pages/MoviesPage";
 import ActionButton from "../components/ActionButton";
 import FavoritesButton from "../components/FavoritesButton";
 import WatchlistActionButton from "../components/WatchlistButton";
 import { useNavigate } from "react-router-dom";
+import { Movie } from "../pages/MoviesPage";
 
 type MovieDetailLayoutProps = {
   movie?: Movie;
@@ -119,7 +119,7 @@ const MovieDetailLayout = ({
             />
           </div>
           <div className=" flex items-center gap-6">
-            <button
+            {/* <button
              // className="bg-action btn-sm hover:primary border-4 text-primary font-bold py-2 px-4 border-primary hover:border-action mt-4"
             className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded-full"
 
@@ -127,11 +127,19 @@ const MovieDetailLayout = ({
               onClick={() => {
                 onClickReviews();
               }}
-            >Reviews</button>
+            >Reviews</button> */}
             <ActionButton
-              className="btn-sm mt-4"
-              buttonText="LEAVE REVIEW"
-              icon="stylus"
+              className="btn mt-6"
+              buttonText="VIEW REVIEWS"
+              // icon="play_arrow"
+              onClick={() => {
+                onClickReviews();
+              }}
+            ></ActionButton>
+            <ActionButton
+              className="btn mt-6"
+              buttonText="WRITE REVIEW"
+              // icon="stylus"
               onClick={openReview}
             ></ActionButton>
           </div>

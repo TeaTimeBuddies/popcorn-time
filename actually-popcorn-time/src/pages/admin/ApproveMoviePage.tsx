@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Key, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GeneralLayout from "../../layouts/GeneralLayout";
 import { API_URL } from "../../constants";
@@ -10,6 +10,8 @@ export interface Movie {
   genre: string;
   stars: string;
   year: number;
+  image: string;
+  isApproved: boolean;
 }
 
 const AdminApprovalPage = () => {
@@ -24,7 +26,15 @@ const AdminApprovalPage = () => {
       },
     })
       .then((response) => response.json())
-      .then((data) => setMovies(data.data))
+      .then((data) => {
+        setMovies(
+          data.data.map((movie: any) => ({
+            ...movie,
+            isApproved: movie.is_approved,
+          }))
+        );
+        console.log(data.data);
+      })
       .catch((error) => console.error("There was an error!", error));
   }, []);
 
@@ -56,45 +66,66 @@ const AdminApprovalPage = () => {
     })
       .then((response) => {
         if (response.ok) {
+          setMovies(movies.filter((movie) => movie.id !== id));
           navigate("/movies/approve");
         }
       })
       .catch((error) => console.error("There was an error!", error));
   };
 
-  const $admin = sessionStorage.getItem("is_admin");
-  if ($admin == "1") {
-    // If the user is an admin
-    return (
-      <GeneralLayout title="Admin: Approve Movies">
-        <div>
-          <h2>Unapproved Movies</h2>
-          <ul>
-            {Array.isArray(movies)
-              ? movies.map((movie) => (
-                  <li key={movie.id}>
-                    {movie.title} - {movie.director} - {movie.genre} -{" "}
-                    {movie.stars} - {movie.year}
-                    <button
-                      className="mx-2"
-                      onClick={() => approveMovie(movie.id)}
-                    >
-                      Approve
-                    </button>
-                    <button onClick={() => rejectMovie(movie.id)}>
-                      Reject
-                    </button>
-                  </li>
-                ))
-              : null}
-          </ul>
-        </div>
-      </GeneralLayout>
-    );
-  } else {
-    // If user is not admin, redirect
-    navigate("/");
-  }
+  return (
+    <GeneralLayout title="Admin: Approve Movies">
+      <div className="flex w-4/5 justify-center overflow-x-auto text-primary">
+        {movies.length === 0 ? (
+          <div className="mt-10 text-primary">No movies to approve</div>
+        ) : (
+          <table className="table">
+            {/* head */}
+            <thead className="text-primary">
+              <tr>
+                <th>Title</th>
+                <th>Directors</th>
+                <th>Genres</th>
+                <th>Starring</th>
+                <th>Year</th>
+                <th>Image</th>
+
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {movies.map((m: Movie, index: Key) => (
+                <tr key={index}>
+                  <td>{m.title}</td>
+                  <td>{m.director.toString()}</td>
+                  <td>{m.genre.toString()}</td>
+                  <td>{m.stars.toString()}</td>
+                  <td>{m.year}</td>
+                  <td>{m?.image}</td>
+                  <td>
+                    <div className="flex gap-3">
+                      <button
+                        className="btn btn-xs"
+                        onClick={() => approveMovie(m.id)}
+                      >
+                        Approve
+                      </button>
+                      <button
+                        className="btn btn-xs"
+                        onClick={() => rejectMovie(m.id)}
+                      >
+                        Reject
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </GeneralLayout>
+  );
 };
 
 export default AdminApprovalPage;

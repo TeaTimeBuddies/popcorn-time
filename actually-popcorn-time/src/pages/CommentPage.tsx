@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import GeneralLayout from "../layouts/GeneralLayout";
 import CommentPageLayout from "../layouts/CommentPageLayout";
 import useFetchWithToken from "../hooks/useToken";
+import Loader from "../components/Loader";
 
 const CommentPage = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -76,7 +77,7 @@ const CommentPage = () => {
       ) : review && comments ? (
         <CommentPageLayout ratings={review[0]} comments={comments} />
       ) : (
-        <p>Comment Loading...</p>
+        <Loader text="Comment loading" />
       )}
     </GeneralLayout>
   );

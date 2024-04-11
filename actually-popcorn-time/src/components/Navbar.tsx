@@ -96,7 +96,7 @@ const NavBar = () => {
       {isApproved && (
         <div className="navbar-end">
           <div className="dropdown dropdown-end">
-            <button tabIndex={0} className="btn btn-ghost btn-sm">
+            <button tabIndex={0} className="btn btn-ghost btn-sm text-primary">
               Hi, {sessionStorage.getItem("name")}
             </button>
             <ul

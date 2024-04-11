@@ -12,7 +12,7 @@ const GeneralLayout = ({ title, children }: GeneralLayoutProps) => {
       <NavBar />
       <div className="mt-20 flex h-full w-full flex-col items-center">
         {title && (
-          <h1 className="text-center text-6xl text-blue-500">{title}</h1>
+          <h1 className="text-center text-6xl text-action">{title}</h1>
         )}
         {children}
       </div>

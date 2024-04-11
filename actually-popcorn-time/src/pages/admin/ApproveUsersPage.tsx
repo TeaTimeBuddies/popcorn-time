@@ -72,49 +72,55 @@ const ApproveUsersPage = () => {
   };
 
   return (
-    <GeneralLayout>
+    <GeneralLayout title="User Approval">
       <div className="flex w-4/5 justify-center overflow-x-auto">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Approved</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((u, index) => (
-              <tr key={index}>
-                <td>{u.name}</td>
-                <td>{u.email}</td>
-                <td>{u.isApproved ? "Yes" : "No"}</td>
-                <td>
-                  <div className="flex gap-3">
-                    <button
-                      type="button"
-                      className={`btn ${u.isApproved ? "btn-warning" : "btn-success"} btn-sm flex items-center justify-center`}
-                      onClick={() => handleApprove(u.id.toString())}
-                    >
-                      <span className="material-symbols-outlined">
-                        {u.isApproved ? "close" : "done"}
-                      </span>
-                    </button>
-
-                    <button
-                      onClick={() => handleDelete(u.id.toString())}
-                      type="button"
-                      className="justify-cente btn btn-error btn-sm flex items-center"
-                    >
-                      <span className="material-symbols-outlined">delete</span>
-                    </button>
-                  </div>
-                </td>
+        {users.length === 0 ? (
+          <div className="mt-10 text-primary">No users to approve</div>
+        ) : (
+          <table className="table">
+            {/* head */}
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Approved</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((u, index) => (
+                <tr key={index}>
+                  <td>{u.name}</td>
+                  <td>{u.email}</td>
+                  <td>{u.isApproved ? "Yes" : "No"}</td>
+                  <td>
+                    <div className="flex gap-3">
+                      <button
+                        type="button"
+                        className={`btn ${u.isApproved ? "btn-warning" : "btn-success"} btn-sm flex items-center justify-center`}
+                        onClick={() => handleApprove(u.id.toString())}
+                      >
+                        <span className="material-symbols-outlined">
+                          {u.isApproved ? "close" : "done"}
+                        </span>
+                      </button>
+
+                      <button
+                        onClick={() => handleDelete(u.id.toString())}
+                        type="button"
+                        className="justify-cente btn btn-error btn-sm flex items-center"
+                      >
+                        <span className="material-symbols-outlined">
+                          delete
+                        </span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </GeneralLayout>
   );
