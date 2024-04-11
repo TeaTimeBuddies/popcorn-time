@@ -21,7 +21,7 @@ const MovieDetailLayout = ({
   return (
     <div className="m-10 flex h-4/5 w-4/5 flex-col items-center justify-center p-10 text-white">
       <div className="flex gap-10 font-sans">
-        {/* Movie Image */}``
+        {/* Movie Image */}
         <div className="relative w-56">
           <img
             src={
