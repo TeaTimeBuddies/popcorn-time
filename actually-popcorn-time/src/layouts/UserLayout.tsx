@@ -10,20 +10,15 @@ type UserLayoutProps = {
   userId: number;
 };
 
-const UserLayout = ({ title, children, userId }: UserLayoutProps) => {
+const UserLayout = ({ title, children }: UserLayoutProps) => {
   const navigate = useNavigate();
-  const { isUser } = useUser(userId);
+  const isUser = useUser();
 
   useEffect(() => {
     if (!isUser) {
       navigate("/404");
     }
   }, [isUser, navigate]);
-
-  if (!isUser) {
-    return null;
-  }
-
   return (
     <div className="flex h-full min-h-screen w-full flex-col items-center bg-app100">
       <NavBar />
@@ -35,6 +30,6 @@ const UserLayout = ({ title, children, userId }: UserLayoutProps) => {
       </div>
     </div>
   );
-};
+}
 
 export default UserLayout;
