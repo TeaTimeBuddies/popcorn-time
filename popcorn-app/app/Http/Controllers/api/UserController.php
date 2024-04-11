@@ -26,8 +26,6 @@ class UserController extends Controller
         return $users;
     }
 
-  
-
     /**
      * Show the form for creating a new resource.
      */
@@ -281,16 +279,11 @@ class UserController extends Controller
     public function toggleApprove($id)
     {
         $user = User::findOrFail($id);
-        $user->approved = !$user->approved;
+        $user->is_approved = !$user->is_approved;
         $user->save();
 
-        return redirect()
-            ->route('approvals')
-            ->with(
-                'success',
-                $user->approved
-                    ? 'User has been approved.'
-                    : 'User has been unapproved.'
-            );
+        return $user->is_approved
+            ? response()->json(['message' => 'User approved'])
+            : response()->json(['message' => 'User disapproved']);
     }
 }

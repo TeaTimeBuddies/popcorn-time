@@ -41,8 +41,6 @@ const RegisterForm = ({ onSuccess, onErrors }: RegisterFormProps) => {
       return;
     }
 
-
-
     fetch(`${API_URL}signup`, {
       method: "POST",
       headers: {

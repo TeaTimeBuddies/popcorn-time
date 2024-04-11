@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Make sure to import useNavigate
+import { useNavigate } from "react-router-dom";
 import GeneralLayout from "../layouts/GeneralLayout";
 import RegisterForm from "../components/forms/RegisterForm";
-import SuccessToast from "../components/Toast";
 import Toast from "../components/Toast";
 
 const RegisterPage: React.FC = () => {
