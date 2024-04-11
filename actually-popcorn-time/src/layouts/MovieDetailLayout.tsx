@@ -20,7 +20,8 @@ const MovieDetailLayout = ({
 }: MovieDetailLayoutProps) => {
   const navigate = useNavigate();
 
-const [isFavorited, setIsFavorited] = useState<boolean>(false);
+  const [isFavorited, setIsFavorited] = useState<boolean>(false);
+  const [isWatchlisted, setIsWatchlisted] = useState<boolean>(false);
 const token = sessionStorage.getItem("token");
 const addMovieWatchlist = async (movieId: number) => {
   const response = await fetch(`${API_URL}user/watchlist`,
@@ -38,6 +39,34 @@ const addMovieWatchlist = async (movieId: number) => {
   );
 
   console.log(response);
+  
+  if (response.ok){
+    const data = await response.json();
+    console.log(data);
+    setIsWatchlisted(true)
+  }
+
+};
+
+const removeMovieWatchlist = async (movieId: number) => {
+  const response = await fetch(`${API_URL}user/watchlist/${movieId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  console.log(response);
+
+  if (response.ok){
+    const data = await response.json();
+    console.log(data);
+    setIsWatchlisted(false)
+  }
+
 };
 
 const addMovieFavorites = async (movieId: number) => {
@@ -91,13 +120,16 @@ const removeMovieFavorites = async (movieId: number) => {
 };
 
 const findIfFavorite = async (movieId: number) => {
-  const response = await fetch(`${API_URL}user/watchlist/check/${movieId}`,
+  const response = await fetch(`${API_URL}user/favorites/check/${movieId}`,
     {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      body: JSON.stringify({
+        user_id: sessionStorage.getItem("user_id"),
+      }),
     }
   );
 
@@ -109,9 +141,32 @@ const findIfFavorite = async (movieId: number) => {
 
 };
 
+const findIfWatchlist = async (movieId: number) => {
+  const response = await fetch(`${API_URL}user/watchlist/check/${movieId}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        user_id: sessionStorage.getItem("user_id"),
+      }),
+    }
+  );
+
+  if (response.ok){
+    const data = await response.json();
+    console.log(data);
+    setIsWatchlisted(data.isWatchlisted)
+  }
+
+};
+
   useEffect(() => {
     if (movie) {
       findIfFavorite(movie.id);
+      findIfWatchlist(movie.id);
     }
   }, []);
 
@@ -230,11 +285,17 @@ const findIfFavorite = async (movieId: number) => {
               <button
                 type="button"
                 className={`btn flex items-center gap-1`}
-                onClick={() => addMovieWatchlist(movie?.id)}
+                onClick={() => {
+                  if (isWatchlisted) {
+                    removeMovieWatchlist(movie?.id)
+                  } else {
+                    addMovieWatchlist(movie?.id)
+                  }
+                }}
               >
                 {"TO WATCHLIST"}
                 <span className="material-symbols-outlined text-lg text-primary">
-                  {"add"}
+                  {isWatchlisted ? "remove" : "add"}
                 </span>
               </button>
 

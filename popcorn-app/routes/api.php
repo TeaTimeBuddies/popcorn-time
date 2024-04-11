@@ -93,7 +93,7 @@ Route::middleware('auth:sanctum')->group(function () {
         UserController::class,
         'removeFavorite',
     ]);
-    Route::get('/user/favorites/check/{movieId}', [
+    Route::post('/user/favorites/check/{movieId}', [
         UserController::class,
         'checkFavorite',
     ]);
@@ -123,9 +123,9 @@ Route::middleware('auth:sanctum')->group(function () {
         UserController::class,
         'removeWatchlist',
     ]);
-    Route::get('/user/watchlist/check/{movieId}', [
+    Route::post('/user/watchlist/check/{movieId}', [
         UserController::class,
-        'checkFavorite',
+        'checkWatchlist',
     ]);
 
 });

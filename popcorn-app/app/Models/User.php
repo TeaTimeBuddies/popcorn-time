@@ -52,11 +52,11 @@ class User extends Authenticatable
         );
     }
 
-    public function watchlist()
+    public function watchlists()
     {
         return $this->belongsToMany(
             Movie::class,
-            'watchlist',
+            'watchlists',
             'user_id',
             'movie_id'
         );
