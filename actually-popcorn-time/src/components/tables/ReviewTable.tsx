@@ -13,8 +13,8 @@ const ReviewTable = ({ ratings, movie }: ReviewTableProps) => {
     <>
       {/* Displaying the movie ratings */}
       {ratings.length > 0 ? (
-        <table className="table table-lg">
-          <thead>
+        <table className="table table-md text-primary">
+          <thead className="text-primary">
             <tr>
               {RatingHeaders.map((header) => (
                 <th key={header}>{header}</th>
@@ -34,7 +34,7 @@ const ReviewTable = ({ ratings, movie }: ReviewTableProps) => {
                     <div className="flex items-center justify-center">
                       <p className="w-5 text-center">{r.comments_count}</p>
                       <svg
-                        className="h-6 w-6 text-gray-800 dark:text-white"
+                        className="h-6 w-6 text-primary"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
