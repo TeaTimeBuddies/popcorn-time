@@ -23,7 +23,7 @@ const UserLayout = ({ title, children }: UserLayoutProps) => {
       <NavBar />
       <div className="mt-20">
         {title && (
-          <h1 className="text-center text-6xl text-blue-500">{title}</h1>
+          <h1 className="text-center text-6xl text-action">{title}</h1>
         )}
         {children}
       </div>
