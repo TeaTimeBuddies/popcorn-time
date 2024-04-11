@@ -100,7 +100,7 @@ const MovieDetailLayout = ({
               )}
               <span className="text-action">{movieRating ? movieRating.toFixed(2): ""}</span>
             </div>
-            <span><span className="font-bold">DIRECTOR:</span><span>{movie?.director}</span></span>
+            <span><span className="font-bold">DIRECTOR: </span><span>{movie?.director}</span></span>
             <span><span className="font-bold">STARS: </span><span>{movie?.stars}</span></span>
           </div>
           {/* Favourite Button */}

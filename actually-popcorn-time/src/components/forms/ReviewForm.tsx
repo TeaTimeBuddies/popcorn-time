@@ -53,9 +53,9 @@ const ReviewForm = ({ id, onClose }: ReviewFormProps) => {
       {/* Inserting new rating and review */}
 
       <form onSubmit={store}>
-        <div className="flex flex-col items-center gap-3">
+        <div className="flex flex-col items-center gap-3 bg-primary">
           <textarea
-            className="textarea textarea-bordered"
+            className="textarea textarea-bordered text-white"
             placeholder="Leave a review"
             onChange={(e) => setReview(e.target.value)}
             value={review}
@@ -63,7 +63,7 @@ const ReviewForm = ({ id, onClose }: ReviewFormProps) => {
             cols={50}
           ></textarea>
           <select
-            className="select select-bordered w-full max-w-xs"
+            className="select select-bordered w-full max-w-xs text-white"
             value={rating}
             onChange={(e) => setRating(e.target.value)}
             required
@@ -90,7 +90,7 @@ const ReviewForm = ({ id, onClose }: ReviewFormProps) => {
               )}
             </ActionButton>
             <ActionButton
-              className="btn-sm col-span-2 col-start-2 border-secondary bg-secondary"
+              className="btn-sm col-span-2 col-start-2"
               buttonText="Cancel"
               type="button"
               onClick={onClose}
