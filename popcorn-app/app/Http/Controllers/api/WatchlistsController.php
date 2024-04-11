@@ -49,17 +49,18 @@ class WatchlistsController extends Controller
         //
     }
 
-    public function getWatchlist($userID){
+    public function getWatchlist($userID)
+    {
         $fetchedUserID = Watchlists::where('user_id', $userID)->get();
-        
+
         $movies = [];
         foreach ($fetchedUserID as $watchlist) {
-        $movie = Movie::where('id', $watchlist->movie_id)->first();
+            $movie = Movie::where('id', $watchlist->movie_id)->first();
             if ($movie) {
                 $movies[] = $movie;
             }
         }
 
-        return $movies; 
+        return $movies;
     }
 }

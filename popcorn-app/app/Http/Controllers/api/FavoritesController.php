@@ -49,13 +49,13 @@ class FavoritesController extends Controller
         //
     }
 
-
-    public function getFavorites($userID){
+    public function getFavorites($userID)
+    {
         $fetchedUserID = Favorites::where('user_id', $userID)->get();
 
         $movies = [];
         foreach ($fetchedUserID as $favorite) {
-        $movie = Movie::where('id', $favorite->movie_id)->first();
+            $movie = Movie::where('id', $favorite->movie_id)->first();
             if ($movie) {
                 $movies[] = $movie;
             }
