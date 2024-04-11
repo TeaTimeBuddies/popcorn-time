@@ -51,6 +51,7 @@ const LoginForm = ({ onErrors }: LoginFormProps) => {
         sessionStorage.setItem("is_admin", user.is_admin.toString());
         sessionStorage.setItem("is_approved", user.is_approved.toString());
         sessionStorage.setItem("token", token);
+        sessionStorage.setItem("name", user.name);
         navigate("/user/dashboard");
       } else {
         throw new Error("Credentials are incorrect");

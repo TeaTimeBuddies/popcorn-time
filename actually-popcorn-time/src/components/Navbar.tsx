@@ -1,25 +1,26 @@
 import { Link } from "react-router-dom";
+import { useAdmin } from "../hooks/useAdmin";
+import { useUser } from "../hooks/useUser";
 
 type NavBarItem = {
   name: string;
   route: string;
+  adminOnly?: boolean;
 };
 
 const navBarItems: NavBarItem[] = [
-  { name: "Home Page", route: "/" },
+  { name: "Dashboard", route: "/user/dashboard" },
   { name: "About", route: "/about" },
   {
     name: "Movies",
     route: "/movies",
   },
   { name: "Add Movie", route: "/movies/add" },
-  { name: "User Dashboard", route: "/user/dashboard" },
-  { name: "Login", route: "/login" },
-  { name: "Register", route: "/register" },
-  { name: "Approve movies", route: "/movies/approve" },
+  { name: "Approve movies", route: "/movies/approve", adminOnly: true },
   {
     name: "Approve users",
     route: "/users/approve",
+    adminOnly: true,
   },
 ];
 
@@ -29,10 +30,13 @@ const logout = () => {
   sessionStorage.removeItem("is_admin");
   sessionStorage.removeItem("is_approved");
   sessionStorage.removeItem("token");
+  sessionStorage.removeItem("name");
   window.location.href = "/";
 };
 
 const NavBar = () => {
+  const isAdmin = useAdmin();
+  const isApproved = useUser();
   return (
     <div className="navbar fixed top-0 z-50 w-full bg-app100">
       <div className="navbar-start">
@@ -73,26 +77,45 @@ const NavBar = () => {
           PopcornTime
         </a>
       </div>
-      <div className="navbar-center hidden text-primary lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {navBarItems.map((item) => (
-            <li key={item.name}>
-              <Link to={item.route} className="btn btn-ghost">
-                {item.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="navbar-end">
-        <button
-          onClick={() => {
-            logout();
-          }}
-        >
-          Logout
-        </button>
-      </div>
+      {isAdmin && (
+        <div className="navbar-center hidden text-primary lg:flex">
+          <ul className="menu menu-horizontal px-1">
+            {navBarItems
+              .filter((item) => (isAdmin ? true : !item.adminOnly))
+              .map((item) => (
+                <li key={item.name}>
+                  <Link to={item.route} className="btn btn-ghost">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
+
+      {isApproved && (
+        <div className="navbar-end">
+          <div className="dropdown dropdown-end">
+            <button tabIndex={0} className="btn btn-ghost btn-sm">
+              Hi, {sessionStorage.getItem("name")}
+            </button>
+            <ul
+              tabIndex={0}
+              className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+            >
+              <li>
+                <button
+                  onClick={() => {
+                    logout();
+                  }}
+                >
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
