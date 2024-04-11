@@ -71,17 +71,17 @@ const UserDashboardPage = () => {
   return (
     <GeneralLayout title={"User Dashboard"}>
       <div className="flex flex-col">
-        <h1 className="text-5xl">Hello, {name}!</h1>
-        <h2 className="mt-8 text-3xl">Favorite Movies</h2>
+        <h1 className="text-5xl text-white">Hello, {name}!</h1>
+        <h2 className="mt-8 text-3xl text-white">Favorite Movies</h2>
         {favoriteMovies ? (
           <div>
             <table>
               <thead>
                 <tr>
-                  <th>Title</th>
-                  <th>Director</th>
-                  <th>Genre</th>
-                  <th>Stars</th>
+                  <th className="text-primary">Title</th>
+                  <th className="text-primary">Director</th>
+                  <th className="text-primary">Genre</th>
+                  <th className="text-primary">Stars</th>
                 </tr>
               </thead>
               <tbody>
@@ -101,16 +101,16 @@ const UserDashboardPage = () => {
           <p>Movie Loading...</p>
         )}
 
-        <h2 className="mt-8 text-3xl">Watchlist Movies</h2>
+        <h2 className="mt-8 text-3xl text-white">Watchlist Movies</h2>
         {watchlistMovies ? (
           <div>
             <table>
               <thead>
                 <tr>
-                  <th>Title</th>
-                  <th>Director</th>
-                  <th>Genre</th>
-                  <th>Stars</th>
+                  <th className="text-primary">Title</th>
+                  <th className="text-primary">Director</th>
+                  <th className="text-primary">Genre</th>
+                  <th className="text-primary">Stars</th>
                 </tr>
               </thead>
               <tbody>
