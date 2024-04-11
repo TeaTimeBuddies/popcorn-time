@@ -18,7 +18,16 @@ type CommentLayoutProps = {
   comments: Comment[];
 };
 
-const chatColours = ["chat-bubble-secondary", "chat-bubble-accent"];
+interface chatColour {
+  backgroundColour: string;
+  textColour: string;
+}
+
+const chatColours: chatColour[] = [
+  { backgroundColour: "chat-bubble-secondary", textColour: "text-black" },
+  { backgroundColour: "chat-bubble-accent", textColour: "text-black" },
+  { backgroundColour: "chat-bubble-warning", textColour: "text-black" },
+];
 
 const CommentPageLayout = ({ ratings, comments }: CommentLayoutProps) => {
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -67,7 +76,7 @@ const CommentPageLayout = ({ ratings, comments }: CommentLayoutProps) => {
   };
 
   return (
-    <div className="w-11/12 py-10">
+    <div className="flex w-11/12 flex-col gap-8 py-10">
       <div className="chat chat-start">
         <div className="chat-header text-action">{ratings?.username}</div>
         <div className="chat-bubble chat-bubble-primary flex flex-col">
@@ -82,17 +91,19 @@ const CommentPageLayout = ({ ratings, comments }: CommentLayoutProps) => {
           <span className="text-white">Thoughts : {ratings?.review}</span>
         </div>
       </div>
-
-      {comments.map((c: Comment) => (
-        <div key={c.id} className="chat chat-end">
-          <div className="chat-header text-action">{c.username}</div>
-          <div className="chat-bubble chat-bubble-accent flex flex-col">
-            <div className="flex">
+      <div className="flex flex-col">
+        {comments.map((c: Comment) => (
+          <div key={c.id} className="chat chat-end">
+            <div className="chat-header text-action">{c.username}</div>
+            <div
+              className={`chat-bubble ${chatColours[c.id % chatColours.length].backgroundColour} flex flex-col`}
+            >
+              <div className="flex"></div>
+              <span className="text-black">{c?.comment}</span>
             </div>
-            <span className="text-white">{c?.comment}</span>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
       <form onSubmit={store}>
         <label className="text-white">
           Write a Comment:
@@ -105,9 +116,8 @@ const CommentPageLayout = ({ ratings, comments }: CommentLayoutProps) => {
             cols={50}
           />
         </label>
-        <br />
         <ActionButton
-          className="btn- btn btn-sm"
+          className="btn- btn btn-sm mt-4"
           type="submit"
           buttonText={"Submit Comment"}
         ></ActionButton>
