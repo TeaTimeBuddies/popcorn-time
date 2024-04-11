@@ -73,16 +73,11 @@ const AdminApprovalPage = () => {
       .catch((error) => console.error("There was an error!", error));
   };
 
-  // console.log(movies[0].image)
-
-  const admin = sessionStorage.getItem("is_admin");
-
-  // If the user is an admin
   return (
     <GeneralLayout title="Admin: Approve Movies">
       <div className="flex w-4/5 justify-center overflow-x-auto text-primary">
         {movies.length === 0 ? (
-          <div className="text-primary mt-10">No movies to approve</div>
+          <div className="mt-10 text-primary">No movies to approve</div>
         ) : (
           <table className="table">
             {/* head */}

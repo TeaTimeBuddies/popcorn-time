@@ -59,9 +59,12 @@ const ReviewTable = ({ ratings, movie }: ReviewTableProps) => {
           </tbody>
         </table>
       ) : movie ? (
-        <p>No Ratings Yet</p>
+        <div className="mt-10 text-primary">No ratings yet</div>
       ) : (
-        <p>Ratings Loading...</p>
+        <div className="flex gap-2">
+          <span className="text-primary">Loading Ratings...</span>
+          <span className="loading loading-ring loading-lg"></span>
+        </div>
       )}
     </>
   );

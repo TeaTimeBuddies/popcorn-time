@@ -4,6 +4,7 @@ import { API_URL } from "../../constants";
 import { useNavigate } from "react-router-dom";
 import useFetchWithToken from "../../hooks/useToken";
 import { Movie } from "../../pages/MoviesPage";
+import Loader from "../../components/Loader";
 
 const UserDashboardPage = () => {
   const token = sessionStorage.getItem("token");
@@ -71,7 +72,9 @@ const UserDashboardPage = () => {
   return (
     <GeneralLayout title={"User Dashboard"}>
       <div className="flex flex-col">
-        <h1 className="text-5xl text-white">Hello, {name}!</h1>
+        <h1 className="text-5xl text-white">
+          Hello, {sessionStorage.getItem("name")}!
+        </h1>
         <h2 className="mt-8 text-3xl text-white">Favorite Movies</h2>
         {favoriteMovies ? (
           <div>
@@ -98,7 +101,7 @@ const UserDashboardPage = () => {
           </div>
         ) : (
           // While favoriteMovies is null, show loading message
-          <p>Movie Loading...</p>
+          <Loader text="Movie loading" />
         )}
 
         <h2 className="mt-8 text-3xl text-white">Watchlist Movies</h2>
@@ -127,7 +130,7 @@ const UserDashboardPage = () => {
           </div>
         ) : (
           // While favoriteMovies is null, show loading message
-          <p>Movie Loading...</p>
+          <Loader text="Movie loading" />
         )}
       </div>
     </GeneralLayout>

@@ -6,6 +6,7 @@ import ReviewTable from "../components/tables/ReviewTable";
 import ReviewForm from "../components/forms/ReviewForm";
 import { API_URL } from "../constants";
 import useFetchWithToken from "../hooks/useToken";
+import Loader from "../components/Loader";
 
 export interface Rating {
   id: number;
@@ -83,7 +84,7 @@ const DetailsPage = () => {
         </>
       ) : (
         // While movie is null, show loading message
-        <p>Movie Loading...</p>
+        <Loader text="Movie loading..." />
       )}
       {movie && showReviewForm && (
         <div className="fixed inset-0 z-50 flex h-full w-full items-center justify-center ">
