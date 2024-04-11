@@ -56,6 +56,38 @@ const addMovieFavorites = async (movieId: number) => {
   );
 
   console.log(response);
+
+  if (response.ok){
+    const data = await response.json();
+    console.log(data);
+    setIsFavorited(true)
+  }
+
+};
+
+const removeMovieFavorites = async (movieId: number) => {
+  const response = await fetch(`${API_URL}user/favorites/${movieId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        movie_id: movieId,
+        user_id: sessionStorage.getItem("user_id"),
+      })
+    }
+  );
+
+  console.log(response);
+
+  if (response.ok){
+    const data = await response.json();
+    console.log(data);
+    setIsFavorited(false)
+  }
+
 };
 
 const findIfFavorite = async (movieId: number) => {
@@ -176,7 +208,13 @@ const findIfFavorite = async (movieId: number) => {
 
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() => addMovieFavorites(movie?.id)}
+                    onClick={() => {
+                      if (isFavorited) {
+                        removeMovieFavorites(movie?.id)
+                      } else {
+                        addMovieFavorites(movie?.id)
+                      }
+                  }}
                     className="material-icons"
                     // aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
                     aria-label="Remove from favorites"

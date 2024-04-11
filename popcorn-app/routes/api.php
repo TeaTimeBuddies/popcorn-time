@@ -121,7 +121,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::delete('/user/watchlist/{movieId}', [
         UserController::class,
-        'removeFavorite',
+        'removeWatchlist',
     ]);
     Route::get('/user/watchlist/check/{movieId}', [
         UserController::class,
