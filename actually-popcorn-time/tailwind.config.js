@@ -9,7 +9,7 @@ export default {
       colors: {
         app100: '#22262A', // background for app
         app200: '#DE0001', 
-        app300: '#F52870', // internal backgrounds 
+        app300: '#F52870', // internal backgrounds, pink 
         action: '#FFF797', // buttons, yellow background 
         primary: '#F52870', // primary text color
         secondary: '#000C66',

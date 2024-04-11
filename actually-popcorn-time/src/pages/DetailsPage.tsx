@@ -88,7 +88,7 @@ const DetailsPage = () => {
       )}
       {movie && showReviewForm && (
         <div className="fixed inset-0 z-50 flex h-full w-full items-center justify-center ">
-          <div className="rounded-md bg-app200 p-10 shadow-lg">
+          <div className="rounded-md bg-primary p-10 shadow-lg">
             <ReviewForm id={id} onClose={() => setShowReviewForm(false)} />
           </div>
         </div>
