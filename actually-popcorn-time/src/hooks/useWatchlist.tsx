@@ -43,6 +43,10 @@ export const useWatchlist = (movieId: string): UseWatchlistReturn => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        body: JSON.stringify({ 
+          movieId: movieId,
+          user_id: sessionStorage.getItem("userId"),
+        }),
       });
 
       setIsWatchlisted(!isWatchlisted);
