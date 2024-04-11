@@ -19,24 +19,26 @@ const MovieDetailLayout = ({
 }: MovieDetailLayoutProps) => {
   const navigate = useNavigate();
   return (
-    <div className="m-10 flex h-4/5 w-4/5 flex-col items-center justify-center p-10 text-white">
-      <div className="flex gap-10 font-sans">
-        {/* Movie Image */}
-        <div className="relative w-56">
+<div className="flex flex-col items-center justify-center max-w-screen-lg pt-10 text-white h-3/4 w-full mt-10">
+  <div className="flex gap-1 font-sans">
+    {/* Movie Image*/}
+    <div className="relative w-96 h-auto">
           <img
             src={
               movie?.image ??
               "https://assets-prd.ignimgs.com/2024/01/24/dune2-insta-vert-montage-1638x2048-intl-1706086846940.jpg"
             }
             alt=""
-            className="absolute inset-0 h-full w-full rounded-3xl object-cover"
+            className="absolute inset-0 max-h-full max-w-full rounded-xl object-cover"
             loading="lazy"
           />
         </div>
+        <div className="flex-auto p-6">
         {/* Movie Title */}
+            <div className="flex flex-col items-start ">
         <div className="flex-auto p-6">
           <div className="flex justify-center">
-            <div className="order-1 mt-2 w-full flex-none text-4xl font-bold text-primary">
+            <div className="order-1 mt-2 w-full flex-none text-5xl font-medium text-primary mb-5">
               {movie?.title}
             </div>
           </div>
@@ -52,14 +54,13 @@ const MovieDetailLayout = ({
               </span>
             ))}
           </div>
-
           {/* Movie Details */}
           <div className="mb-5 mt-2 flex flex-col gap-2 pb-6 text-white">
             <div className="flex items-center gap-2">
-              <span> RATING: </span>
+              <span className="font-bold"> RATING: </span>
               {/* Movie Ratings */}
               {movieRating ? (
-                <div className="flex items-baseline text-white">
+                <div className="flex items-baseline text-white text-medium">
                   {Array.from({ length: 5 }).map((_, i) =>
                     i + 1 <= movieRating ? (
                       // Filled Star
@@ -97,10 +98,10 @@ const MovieDetailLayout = ({
               ) : (
                 <p>No Ratings Yet</p>
               )}
-              <span className="text-action">{movieRating?.toFixed(2)}</span>
+              <span className="text-action">{movieRating ? movieRating.toFixed(2): ""}</span>
             </div>
-            <span>DIRECTOR: {movie?.director}</span>
-            <span>STARS: {movie?.stars}</span>
+            <span><span className="font-bold">DIRECTOR:</span><span>{movie?.director}</span></span>
+            <span><span className="font-bold">STARS: </span><span>{movie?.stars}</span></span>
           </div>
           {/* Favourite Button */}
           <div className="flex items-center gap-6">
@@ -135,6 +136,8 @@ const MovieDetailLayout = ({
             ></ActionButton>
           </div>
         </div>
+        </div>
+      </div>
       </div>
     </div>
   );
