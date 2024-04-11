@@ -1,19 +1,22 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import NavBar from "../components/Navbar";
 import { useAdmin } from "../hooks/useAdmin";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type AdminLayoutProps = {
   title?: string;
   children?: ReactNode;
-  userId: number;
 };
 
-const AdminLayout = ({ title, children, userId }: AdminLayoutProps) => {
-  const { isAdmin } = useAdmin(userId);
-  if (!isAdmin) {
-    return redirect("/404");
-  } else {
+const AdminLayout = ({ title, children }: AdminLayoutProps) => {
+  const navigate = useNavigate();
+  const isAdmin = useAdmin();
+
+  useEffect(() => {
+    if (!isAdmin) {
+      navigate("/404");
+    }
+  }, [isAdmin, navigate]);
     return (
       <div className="flex h-full min-h-screen w-full flex-col items-center bg-app100">
         <NavBar />
@@ -26,6 +29,6 @@ const AdminLayout = ({ title, children, userId }: AdminLayoutProps) => {
       </div>
     );
   }
-};
+
 
 export default AdminLayout;
