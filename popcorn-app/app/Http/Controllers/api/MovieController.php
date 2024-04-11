@@ -52,6 +52,7 @@ class MovieController extends Controller
             'year' => 'required',
             'stars' => 'required',
             'genre' => 'required',
+            'image' => 'required',
         ]);
 
         return Movie::create([
@@ -60,6 +61,7 @@ class MovieController extends Controller
             'year' => request('year'),
             'stars' => request('stars'),
             'genre' => request('genre'),
+            'image' => request('image'),
         ]);
     }
 
@@ -88,6 +90,7 @@ class MovieController extends Controller
             'year' => 'required',
             'stars' => 'required',
             'genre' => 'required',
+            'image' => 'required',
         ]);
 
         $movie = Movie::find($id);
@@ -102,6 +105,7 @@ class MovieController extends Controller
             'year' => $request->get('year'),
             'stars' => $request->get('stars'),
             'genre' => $request->get('genre'),
+            'image' => $request->get('image'),
         ]);
 
         return ['success' => $isSuccess];

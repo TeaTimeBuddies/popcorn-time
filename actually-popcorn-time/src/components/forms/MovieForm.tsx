@@ -8,6 +8,7 @@ export interface MovieForm {
   genre: string;
   stars: string;
   year: number;
+  image: string;
   [key: string]: string | number;
 }
 
@@ -22,6 +23,7 @@ const MovieForm = ({ onSuccess }: MovieFormProps) => {
     genre: "",
     stars: "",
     year: new Date().getFullYear(),
+    image: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -49,8 +51,18 @@ const MovieForm = ({ onSuccess }: MovieFormProps) => {
           genre: movie.genre.split(",").map((g) => g.trim()),
           stars: movie.stars.split(",").map((s) => s.trim()),
           year: parseInt(movie.year.toString(), 10),
+          is_approved: false,
         }),
       });
+      const requestData = JSON.stringify({
+        ...movie,
+        genre: movie.genre.split(",").map((g) => g.trim()),
+        stars: movie.stars.split(",").map((s) => s.trim()),
+        year: parseInt(movie.year.toString(), 10),
+        is_approved: false,
+      });
+
+      console.log(requestData);
       if (!response.ok) {
         const data = await response.json();
         throw new Error(data.message || "Failed to add the movie.");
