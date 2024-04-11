@@ -98,31 +98,31 @@ Route::middleware('auth:sanctum')->group(function () {
         'checkFavorite',
     ]);
 
-    //Watchlist
-    Route::get('/user/watchlist/{userId}', [
-        UserController::class,
-        'getWatchlist',
-    ]);
-    Route::post('/user/watchlist/{movieId}', [
-        UserController::class,
-        'addFavorite',
-    ]);
-    Route::delete('/user/watchlist/{movieId}', [
-        UserController::class,
-        'removeFavorite',
-    ]);
-    Route::get('/user/watchlist/check/{movieId}', [
-        UserController::class,
-        'checkFavorite',
-    ]);
-
     // UserDashboard get methods - Favorites and Watchlist
     Route::get('/user/{userID}/favorites', [
         FavoritesController::class,
         'getFavorites',
     ]);
-    Route::get('/user/{userID}/watchlist', [
-        WatchlistsController::class,
-        'getWatchlist',
-    ]);
+
+
+//Watchlist
+Route::get('/user/watchlist/{userId}', [
+    WatchlistsController::class,
+    'getWatchlist',
+]);
+// Route::post('/user/watchlist/{movieId}', [
+//     UserController::class,
+//     'addWatchlist',
+// ]);
+Route::delete('/user/watchlist/{movieId}', [
+    UserController::class,
+    'removeFavorite',
+]);
+Route::get('/user/watchlist/check/{movieId}', [
+    UserController::class,
+    'checkFavorite',
+]);
+Route::post('/user/watchlist/${movieId}',
+[WatchlistsController::class, 'addToWatchList']);
+
 });
