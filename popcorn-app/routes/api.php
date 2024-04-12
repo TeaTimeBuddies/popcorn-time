@@ -15,26 +15,28 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // Login
-Route::post('/user', [UserController::class, 'processLogin'])->name('login');
+// Route::post('/user', [UserController::class, 'processLogin'])->name('login');
+Route::post('/user', [AuthController::class, 'login'])->name('login');
 Route::get('/user', [UserController::class, 'index']);
 
+Route::get('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
+
 //Signup
-Route::post('/signup', [UserController::class, 'processSignup']);
+// Route::post('/signup', [UserController::class, 'processSignup']);
+Route::post('/signup', [AuthController::class, 'register']);
 
 // Logout
-Route::post('/logout', [UserController::class, 'logout'])->middleware(
-    'auth:sanctum'
-);
+// Route::post('/logout', [UserController::class, 'logout'])->middleware(
+//     'auth:sanctum'
+// );
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
-// User
-// Route::middleware('auth:sanctum')->group(function () {
 
-// });
-Route::group([], function () {
-    Route::post('login', [AuthController::class, 'login']);
-    Route::post('register', [AuthController::class, 'register']);
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('refresh', [AuthController::class, 'refresh']);
+Route::controller(AuthController::class)->group(function () {
+    Route::post('login', 'login');
+    Route::post('register', 'register');
+    Route::post('logout', 'logout');
+    Route::post('refresh', 'refresh');
 });
 
 // jwt.auth
