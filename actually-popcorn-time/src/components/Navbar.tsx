@@ -24,6 +24,12 @@ const navBarItems: NavBarItem[] = [
   },
 ];
 
+const generalNavBarItems: NavBarItem[] = [
+  { name: "Login", route: "/login" },
+  { name: "Register", route: "/register" },
+  { name: "About", route: "/about" },
+];
+
 const logout = () => {
   sessionStorage.removeItem("user_id");
   sessionStorage.removeItem("email");
@@ -37,10 +43,22 @@ const logout = () => {
 const NavBar = () => {
   const isAdmin = useAdmin();
   const isApproved = useUser();
+  const generalNavBarButtons = () => {
+    return (
+      <>
+        {generalNavBarItems.map((item) => (
+          <li key={item.name}>
+            <Link to={item.route} className="btn btn-ghost">
+              {item.name}
+            </Link>
+          </li>
+        ))}
+      </>
+    );
+  };
   return (
     <div className="navbar fixed top-0 z-50 w-full bg-app100">
       <div className="navbar-start">
-      {isApproved && (
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -62,65 +80,67 @@ const NavBar = () => {
             tabIndex={0}
             className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-neutral p-2 text-primary shadow "
           >
-            {navBarItems
-            .filter((item) => (isAdmin ? true : !item.adminOnly))
-            .map((item) => (
-              
-              <li
-                key={item.name}
-                className="rounded-md text-primary hover:bg-app100"
-              >
-                <Link to={item.route} className="">
-                  {item.name}
-                </Link>
-              </li>
-            ))}
+            {isApproved
+              ? navBarItems
+                  .filter((item) => (isAdmin ? true : !item.adminOnly))
+                  .map((item) => (
+                    <li
+                      key={item.name}
+                      className="rounded-md text-primary hover:bg-app100"
+                    >
+                      <Link to={item.route} className="">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))
+              : generalNavBarButtons()}
           </ul>
-        </div>)}
-        
+        </div>
+
         <a className="btn btn-ghost text-2xl text-primary" href="/">
           PopcornTime
         </a>
       </div>
-      {isApproved && (
-        <div className="navbar-center hidden text-primary lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {navBarItems
-              .filter((item) => (isAdmin ? true : !item.adminOnly))
-              .map((item) => (
-                <li key={item.name}>
-                  <Link to={item.route} className="btn btn-ghost">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-          </ul>
-        </div>
-      )}
 
-      {isApproved && (
-        <div className="navbar-end">
-          <div className="dropdown dropdown-end">
+      <div className="navbar-center hidden text-primary lg:flex">
+        <ul className="menu menu-horizontal px-1">
+          {isApproved
+            ? navBarItems
+                .filter((item) => (isAdmin ? true : !item.adminOnly))
+                .map((item) => (
+                  <li key={item.name}>
+                    <Link to={item.route} className="btn btn-ghost">
+                      {item.name}
+                    </Link>
+                  </li>
+                ))
+            : generalNavBarButtons()}
+        </ul>
+      </div>
+
+      <div className="navbar-end">
+        <div className="dropdown dropdown-end">
+          {isApproved && (
             <button tabIndex={0} className="btn btn-ghost btn-sm text-primary">
               Hi, {sessionStorage.getItem("name")}
             </button>
-            <ul
-              tabIndex={0}
-              className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
-            >
-              <li>
-                <button
-                  onClick={() => {
-                    logout();
-                  }}
-                >
-                  Logout
-                </button>
-              </li>
-            </ul>
-          </div>
+          )}
+          <ul
+            tabIndex={0}
+            className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+          >
+            <li>
+              <button
+                onClick={() => {
+                  logout();
+                }}
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
         </div>
-      )}
+      </div>
     </div>
   );
 };
