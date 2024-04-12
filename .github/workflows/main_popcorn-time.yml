@@ -61,9 +61,6 @@ jobs:
           echo "++++ Give full permission to database folder"
           chmod -R 777 database
 
-      - name: Set permissions for SQLite file
-        run: chmod 777 /home/site/wwwroot/database/movies.sqlite
-
       - name: Migrate database (NEW)
         run: |
           pwd
@@ -74,7 +71,7 @@ jobs:
         run: |
           pwd
           ls
-          zip ../release.zip ./* database/movies.sqlite -r
+          zip ../release.zip ./* -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
